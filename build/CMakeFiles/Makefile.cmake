@@ -40,5 +40,9 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/libUnitTests.dir/DependInfo.cmake"
+  "CMakeFiles/libTypesOfData.dir/DependInfo.cmake"
+  "CMakeFiles/libGetHashCodes.dir/DependInfo.cmake"
+  "CMakeFiles/libFunctions.dir/DependInfo.cmake"
   "CMakeFiles/Graph.dir/DependInfo.cmake"
   )

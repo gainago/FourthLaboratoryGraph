@@ -92,6 +92,10 @@ Graph_EXTERNAL_OBJECTS =
 
 Graph: CMakeFiles/Graph.dir/Definition/main.cpp.o
 Graph: CMakeFiles/Graph.dir/build.make
+Graph: liblibUnitTests.so
+Graph: liblibTypesOfData.so
+Graph: liblibGetHashCodes.so
+Graph: liblibFunctions.so
 Graph: CMakeFiles/Graph.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Graph"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Graph.dir/link.txt --verbose=$(VERBOSE)

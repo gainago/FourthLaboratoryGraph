@@ -117,6 +117,58 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named libUnitTests
+
+# Build rule for target.
+libUnitTests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libUnitTests
+.PHONY : libUnitTests
+
+# fast build rule for target.
+libUnitTests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/build
+.PHONY : libUnitTests/fast
+
+#=============================================================================
+# Target rules for targets named libTypesOfData
+
+# Build rule for target.
+libTypesOfData: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libTypesOfData
+.PHONY : libTypesOfData
+
+# fast build rule for target.
+libTypesOfData/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/build
+.PHONY : libTypesOfData/fast
+
+#=============================================================================
+# Target rules for targets named libGetHashCodes
+
+# Build rule for target.
+libGetHashCodes: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libGetHashCodes
+.PHONY : libGetHashCodes
+
+# fast build rule for target.
+libGetHashCodes/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libGetHashCodes.dir/build.make CMakeFiles/libGetHashCodes.dir/build
+.PHONY : libGetHashCodes/fast
+
+#=============================================================================
+# Target rules for targets named libFunctions
+
+# Build rule for target.
+libFunctions: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libFunctions
+.PHONY : libFunctions
+
+# fast build rule for target.
+libFunctions/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/build
+.PHONY : libFunctions/fast
+
+#=============================================================================
 # Target rules for targets named Graph
 
 # Build rule for target.
@@ -128,6 +180,150 @@ Graph: cmake_check_build_system
 Graph/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Graph.dir/build.make CMakeFiles/Graph.dir/build
 .PHONY : Graph/fast
+
+Definition/Functions/Abs.o: Definition/Functions/Abs.cpp.o
+.PHONY : Definition/Functions/Abs.o
+
+# target to build an object file
+Definition/Functions/Abs.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/Definition/Functions/Abs.cpp.o
+.PHONY : Definition/Functions/Abs.cpp.o
+
+Definition/Functions/Abs.i: Definition/Functions/Abs.cpp.i
+.PHONY : Definition/Functions/Abs.i
+
+# target to preprocess a source file
+Definition/Functions/Abs.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/Definition/Functions/Abs.cpp.i
+.PHONY : Definition/Functions/Abs.cpp.i
+
+Definition/Functions/Abs.s: Definition/Functions/Abs.cpp.s
+.PHONY : Definition/Functions/Abs.s
+
+# target to generate assembly for a file
+Definition/Functions/Abs.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/Definition/Functions/Abs.cpp.s
+.PHONY : Definition/Functions/Abs.cpp.s
+
+Definition/Functions/SetRandomInt.o: Definition/Functions/SetRandomInt.cpp.o
+.PHONY : Definition/Functions/SetRandomInt.o
+
+# target to build an object file
+Definition/Functions/SetRandomInt.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/Definition/Functions/SetRandomInt.cpp.o
+.PHONY : Definition/Functions/SetRandomInt.cpp.o
+
+Definition/Functions/SetRandomInt.i: Definition/Functions/SetRandomInt.cpp.i
+.PHONY : Definition/Functions/SetRandomInt.i
+
+# target to preprocess a source file
+Definition/Functions/SetRandomInt.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/Definition/Functions/SetRandomInt.cpp.i
+.PHONY : Definition/Functions/SetRandomInt.cpp.i
+
+Definition/Functions/SetRandomInt.s: Definition/Functions/SetRandomInt.cpp.s
+.PHONY : Definition/Functions/SetRandomInt.s
+
+# target to generate assembly for a file
+Definition/Functions/SetRandomInt.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/Definition/Functions/SetRandomInt.cpp.s
+.PHONY : Definition/Functions/SetRandomInt.cpp.s
+
+Definition/GetHashCodes/GetHashCode.o: Definition/GetHashCodes/GetHashCode.cpp.o
+.PHONY : Definition/GetHashCodes/GetHashCode.o
+
+# target to build an object file
+Definition/GetHashCodes/GetHashCode.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libGetHashCodes.dir/build.make CMakeFiles/libGetHashCodes.dir/Definition/GetHashCodes/GetHashCode.cpp.o
+.PHONY : Definition/GetHashCodes/GetHashCode.cpp.o
+
+Definition/GetHashCodes/GetHashCode.i: Definition/GetHashCodes/GetHashCode.cpp.i
+.PHONY : Definition/GetHashCodes/GetHashCode.i
+
+# target to preprocess a source file
+Definition/GetHashCodes/GetHashCode.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libGetHashCodes.dir/build.make CMakeFiles/libGetHashCodes.dir/Definition/GetHashCodes/GetHashCode.cpp.i
+.PHONY : Definition/GetHashCodes/GetHashCode.cpp.i
+
+Definition/GetHashCodes/GetHashCode.s: Definition/GetHashCodes/GetHashCode.cpp.s
+.PHONY : Definition/GetHashCodes/GetHashCode.s
+
+# target to generate assembly for a file
+Definition/GetHashCodes/GetHashCode.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libGetHashCodes.dir/build.make CMakeFiles/libGetHashCodes.dir/Definition/GetHashCodes/GetHashCode.cpp.s
+.PHONY : Definition/GetHashCodes/GetHashCode.cpp.s
+
+Definition/TypesOfData/Comporators.o: Definition/TypesOfData/Comporators.cpp.o
+.PHONY : Definition/TypesOfData/Comporators.o
+
+# target to build an object file
+Definition/TypesOfData/Comporators.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Comporators.cpp.o
+.PHONY : Definition/TypesOfData/Comporators.cpp.o
+
+Definition/TypesOfData/Comporators.i: Definition/TypesOfData/Comporators.cpp.i
+.PHONY : Definition/TypesOfData/Comporators.i
+
+# target to preprocess a source file
+Definition/TypesOfData/Comporators.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Comporators.cpp.i
+.PHONY : Definition/TypesOfData/Comporators.cpp.i
+
+Definition/TypesOfData/Comporators.s: Definition/TypesOfData/Comporators.cpp.s
+.PHONY : Definition/TypesOfData/Comporators.s
+
+# target to generate assembly for a file
+Definition/TypesOfData/Comporators.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Comporators.cpp.s
+.PHONY : Definition/TypesOfData/Comporators.cpp.s
+
+Definition/TypesOfData/MyString.o: Definition/TypesOfData/MyString.cpp.o
+.PHONY : Definition/TypesOfData/MyString.o
+
+# target to build an object file
+Definition/TypesOfData/MyString.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/MyString.cpp.o
+.PHONY : Definition/TypesOfData/MyString.cpp.o
+
+Definition/TypesOfData/MyString.i: Definition/TypesOfData/MyString.cpp.i
+.PHONY : Definition/TypesOfData/MyString.i
+
+# target to preprocess a source file
+Definition/TypesOfData/MyString.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/MyString.cpp.i
+.PHONY : Definition/TypesOfData/MyString.cpp.i
+
+Definition/TypesOfData/MyString.s: Definition/TypesOfData/MyString.cpp.s
+.PHONY : Definition/TypesOfData/MyString.s
+
+# target to generate assembly for a file
+Definition/TypesOfData/MyString.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/MyString.cpp.s
+.PHONY : Definition/TypesOfData/MyString.cpp.s
+
+Definition/TypesOfData/Person.o: Definition/TypesOfData/Person.cpp.o
+.PHONY : Definition/TypesOfData/Person.o
+
+# target to build an object file
+Definition/TypesOfData/Person.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Person.cpp.o
+.PHONY : Definition/TypesOfData/Person.cpp.o
+
+Definition/TypesOfData/Person.i: Definition/TypesOfData/Person.cpp.i
+.PHONY : Definition/TypesOfData/Person.i
+
+# target to preprocess a source file
+Definition/TypesOfData/Person.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Person.cpp.i
+.PHONY : Definition/TypesOfData/Person.cpp.i
+
+Definition/TypesOfData/Person.s: Definition/TypesOfData/Person.cpp.s
+.PHONY : Definition/TypesOfData/Person.s
+
+# target to generate assembly for a file
+Definition/TypesOfData/Person.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Person.cpp.s
+.PHONY : Definition/TypesOfData/Person.cpp.s
 
 Definition/main.o: Definition/main.cpp.o
 .PHONY : Definition/main.o
@@ -153,6 +349,30 @@ Definition/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Graph.dir/build.make CMakeFiles/Graph.dir/Definition/main.cpp.s
 .PHONY : Definition/main.cpp.s
 
+Tests/Definition/UnitTests.o: Tests/Definition/UnitTests.cpp.o
+.PHONY : Tests/Definition/UnitTests.o
+
+# target to build an object file
+Tests/Definition/UnitTests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/Tests/Definition/UnitTests.cpp.o
+.PHONY : Tests/Definition/UnitTests.cpp.o
+
+Tests/Definition/UnitTests.i: Tests/Definition/UnitTests.cpp.i
+.PHONY : Tests/Definition/UnitTests.i
+
+# target to preprocess a source file
+Tests/Definition/UnitTests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/Tests/Definition/UnitTests.cpp.i
+.PHONY : Tests/Definition/UnitTests.cpp.i
+
+Tests/Definition/UnitTests.s: Tests/Definition/UnitTests.cpp.s
+.PHONY : Tests/Definition/UnitTests.s
+
+# target to generate assembly for a file
+Tests/Definition/UnitTests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/Tests/Definition/UnitTests.cpp.s
+.PHONY : Tests/Definition/UnitTests.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +382,34 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Graph"
+	@echo "... libFunctions"
+	@echo "... libGetHashCodes"
+	@echo "... libTypesOfData"
+	@echo "... libUnitTests"
+	@echo "... Definition/Functions/Abs.o"
+	@echo "... Definition/Functions/Abs.i"
+	@echo "... Definition/Functions/Abs.s"
+	@echo "... Definition/Functions/SetRandomInt.o"
+	@echo "... Definition/Functions/SetRandomInt.i"
+	@echo "... Definition/Functions/SetRandomInt.s"
+	@echo "... Definition/GetHashCodes/GetHashCode.o"
+	@echo "... Definition/GetHashCodes/GetHashCode.i"
+	@echo "... Definition/GetHashCodes/GetHashCode.s"
+	@echo "... Definition/TypesOfData/Comporators.o"
+	@echo "... Definition/TypesOfData/Comporators.i"
+	@echo "... Definition/TypesOfData/Comporators.s"
+	@echo "... Definition/TypesOfData/MyString.o"
+	@echo "... Definition/TypesOfData/MyString.i"
+	@echo "... Definition/TypesOfData/MyString.s"
+	@echo "... Definition/TypesOfData/Person.o"
+	@echo "... Definition/TypesOfData/Person.i"
+	@echo "... Definition/TypesOfData/Person.s"
 	@echo "... Definition/main.o"
 	@echo "... Definition/main.i"
 	@echo "... Definition/main.s"
+	@echo "... Tests/Definition/UnitTests.o"
+	@echo "... Tests/Definition/UnitTests.i"
+	@echo "... Tests/Definition/UnitTests.s"
 .PHONY : help
 
 

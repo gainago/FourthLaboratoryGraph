@@ -1,3 +1,7 @@
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles/libUnitTests.dir
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles/libTypesOfData.dir
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles/libGetHashCodes.dir
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles/libFunctions.dir
 /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles/Graph.dir
 /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles/edit_cache.dir
 /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles/rebuild_cache.dir

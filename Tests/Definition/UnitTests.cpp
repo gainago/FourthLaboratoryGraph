@@ -41,6 +41,7 @@ void TestGraphAddVertex()
         {
             
         }
+        
     }
     {
         Graph<MyString, int, double> graph(GetHashCodeMyString);
