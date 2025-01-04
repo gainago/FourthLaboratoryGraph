@@ -1,0 +1,3 @@
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles/Graph.dir
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles/edit_cache.dir
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles/rebuild_cache.dir

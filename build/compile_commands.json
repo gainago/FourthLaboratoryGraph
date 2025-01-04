@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build",
+  "command": "/usr/bin/g++  -I/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Dictionary -I/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Functions -I/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/GetHashCodes -I/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph -I/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence -I/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/SmartPointers -I/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData -g -std=gnu++20 -o CMakeFiles/Graph.dir/Definition/main.cpp.o -c /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Definition/main.cpp",
+  "file": "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Definition/main.cpp",
+  "output": "CMakeFiles/Graph.dir/Definition/main.cpp.o"
+}
+]
