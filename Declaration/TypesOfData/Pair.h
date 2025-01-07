@@ -10,7 +10,7 @@ namespace MyNamespace
         TypeSecond second_;
     public:
         // no way make pair without sending arguments
-        Pair(TypeFirst first = TypeFirst(), TypeSecond second = TypeSecond()) : first_(first), second_(second) {} 
+        Pair(TypeFirst const & first = TypeFirst(), TypeSecond const & second = TypeSecond()) : first_(first), second_(second) {} 
 
         Pair(Pair<TypeFirst, TypeSecond> const & otherPair) : first_(otherPair.GetFirst()), second_(otherPair.GetSecond()) {}
 

@@ -6,33 +6,40 @@
 #include "Dictionary.h"
 #include "Vertex.h"
 
-template< typename DataVertex, typename DataEdge> class Edge{
+template<typename TypeNameVertex, typename TypeDataVertex, typename TypeDataEdge> class Edge{
 
 private:
 
-    DataEdge data_;
-
-    WeakPtr< Vertex<DataVertex, DataEdge> > vertexFirst_;
-    WeakPtr< Vertex<DataVertex, DataEdge> > vertexSecond_;
+    TypeDataEdge data_;
+    bool isOriented_;
+    WeakPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > vertexStart_;
+    WeakPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > vertexEnd_;
 
 public:
 
-    Edge(SharedPtr< Vertex<DataVertex, DataEdge> > vertexFirst,
-         SharedPtr< Vertex<DataVertex, DataEdge> > vertexSecond,
-         DataEdge data = DataEdge()) : data_(data),
-                                    vertexFirst_(vertexFirst),
-                                    vertexSecond_(vertexSecond)
+    Edge(SharedPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > vertexStart,
+         SharedPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > vertexEnd,
+         TypeDataEdge data = TypeDataEdge(),
+         bool isOriented = 0) : data_(data),
+                            isOriented_(Oriented),
+                            vertexStart_(vertexStart),
+                            vertexEnd_(vertexEnd)
     {}
 
-    DataEdge& GetData() {return data_;}
-    DataEdge GetData() const {return data_;}
+    TypeDataEdge& GetData() {return data_;}
+    TypeDataEdge GetData() const {return data_;}
     
-    void SetData(DataEdge const & data){
+    void SetData(TypeDataEdge const & data){
         data_ = data;
     }
 
-    WeakPtr< Vertex<DataVertex, DataEdge> > GetFirstVertex() {return vertexFirst_;}
-    WeakPtr< Vertex<DataVertex, DataEdge> > GetSecondVertex() {return vertexSecond_;}
+    bool Oriented() const
+    {
+        return isOriented_;
+    }
+
+    WeakPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > GetVertexStart() {return vertexStart_;}
+    WeakPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > GetVertexEnd() {return vertexEnd_;}
 
 };
 

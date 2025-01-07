@@ -5,9 +5,8 @@
 #include "LinkedList.h"
 #include "Pair.h"
 
-#include <iostream>
 
-template< typename TypeKey, typename TypeValue> class Dictionary //вся работа с памятью делегирована на array
+template< typename TypeKey, typename TypeValue> class Dictionary 
 {
 private:
     int (*GetHashCode_)(TypeKey const &);
@@ -16,17 +15,18 @@ private:
     DynamicArray<LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> > > array_; //занимает 8 байт на стеке
     int size_;
 
-    bool isNeedRecapacityUp()//если есть вопрос то его с маленькой буквы
+    bool NeedRecapacityUp()
     {
         return size_ > fillFactor_*(array_.GetCapacity());
     }
 
-    bool isNeedRecapacityLess() //grow and shrink
+    bool NeedRecapacityLess() 
     {
         return size_ < fillFactor_*(array_.GetCapacity())/increaseFactor_;
     }
-
-    MyNamespace::Pair<bool, int> isListContains(int numberList, TypeKey const & key) const //можно сразу дать лист и не дергать гет масссива
+    
+    //не выйдет возвращать итератор для Remove потому что функция констентная
+    MyNamespace::Pair<bool, int> GetPositionInList(int numberList, TypeKey const & key) const
     {
        int position = 0;
                           
@@ -56,20 +56,26 @@ private:
     
 
 public:
-    //   итератор не очищает память после выполнения операций втавки удаления становятся непригодными для использования
+
     class Iterator{ 
         friend class Dictionary<TypeKey, TypeValue>;
     private:
 
         DynamicArray<LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> > >& basedArray_;
         int arrayIndex_;
-        typename LinkedList<MyNamespace::Pair< const TypeKey, TypeValue> >::Iterator listIterator_; // раз в массиве хранятся листы
-                                                                                             // и не получилось найти хотя бы один элемент
-                                                                                             //то значение true этого поля означает 
-                                                                                             //что это уже конец словаря
-        int isItEndIterator_; // это поле нужно чтобы при размере словаря итераторы работали нормально
+
+        // раз в массиве хранятся листы
+        // и не получилось найти хотя бы один элемент
+        //то значение true этого поля означает 
+        //что это уже конец словаря
+        typename LinkedList<MyNamespace::Pair< const TypeKey, TypeValue> >::Iterator listIterator_; 
+
+
+        // это поле нужно чтобы при размере словаря итераторы работали нормально, принимет два значения
+        bool isItEndIterator_;  
         
-        //сделать bool
+        
+        
     public:
 
         Iterator(DynamicArray<LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> > > & basedArray) 
@@ -108,8 +114,9 @@ public:
             }
 
             ++arrayIndex_;
+            //это и есть условие того что это не конец
 
-            for(; arrayIndex_ < basedArray_.GetCapacity(); arrayIndex_++) //переписать while
+            for(; arrayIndex_ < basedArray_.GetCapacity(); arrayIndex_++) // можно переписать while, но мне кажется что так лучше
             {
                 listIterator_ = (basedArray_[arrayIndex_]).Begin();
                 if(listIterator_ != (basedArray_[arrayIndex_]).End()){
@@ -166,81 +173,207 @@ public:
         return it;
     }
 
+
+        class ConstIterator{ 
+        friend class Dictionary<TypeKey, TypeValue>;
+    private:
+
+        DynamicArray<LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> > > const & basedArray_;
+        int arrayIndex_;
+
+        // раз в массиве хранятся листы
+        // и не получилось найти хотя бы один элемент
+        //то значение true этого поля означает 
+        //что это уже конец словаря
+        typename LinkedList<MyNamespace::Pair< const TypeKey, TypeValue> >::ConstIterator constListIterator_; 
+
+
+        // это поле нужно чтобы при размере словаря итераторы работали нормально, принимет два значения
+        bool isItEndIterator_;  
+        
+        
+        
+    public:
+
+        ConstIterator(DynamicArray<LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> > >  const & basedArray) 
+            :   basedArray_(basedArray), arrayIndex_(0), constListIterator_(nullptr) 
+            {
+                for(; arrayIndex_ < basedArray_.GetCapacity(); ++arrayIndex_){// size == 0
+
+                    constListIterator_ = (basedArray_.Get(arrayIndex_)).ConstBegin();
+
+                    if(constListIterator_ != (basedArray_.Get(arrayIndex_)).ConstEnd()){
+                        isItEndIterator_ = 0;
+                        return;
+                    }
+                }
+
+                isItEndIterator_ = 1;
+               
+            }
+        ConstIterator(ConstIterator const & other) : basedArray_(other.basedArray_), arrayIndex_(other.arrayIndex_)
+                                        , constListIterator_(other.constListIterator_), isItEndIterator_(other.isItEndIterator_)
+        {}
+
+        ConstIterator& operator++()
+        {
+            if(isItEndIterator_){
+                throw "invalid index";
+            }
+
+            if(constListIterator_ != (basedArray_.Get(arrayIndex_)).ConstEnd())
+            {
+                ++constListIterator_;
+
+                if(constListIterator_ != (basedArray_.Get(arrayIndex_)).ConstEnd()){
+                    return *this;
+                }
+            }
+
+            ++arrayIndex_;
+            //это и есть условие того что это не конец
+
+            for(; arrayIndex_ < basedArray_.GetCapacity(); arrayIndex_++) // можно переписать while, но мне кажется что так лучше
+            {
+                constListIterator_ = (basedArray_.Get(arrayIndex_)).ConstBegin();
+                if(constListIterator_ != (basedArray_.Get(arrayIndex_)).ConstEnd()){
+                    return *this;
+                }
+            }
+
+            isItEndIterator_ = 1;
+            return *this;
+
+        }
+
+        MyNamespace::Pair< const TypeKey, TypeValue> const & operator*() const
+        {
+            if(isItEndIterator_){
+                throw "invalid index";
+            }
+
+            return (*constListIterator_);
+
+        }
+
+        int GetArrayIndex() const
+        {
+            return arrayIndex_;
+        }
+
+        bool operator==(ConstIterator const & other) const
+        {
+            if(this->arrayIndex_ == other.arrayIndex_ && (&(this->basedArray_) == (&other.basedArray_))
+                && this->isItEndIterator_ == other.isItEndIterator_ && this->constListIterator_ == other.constListIterator_){
+                
+                return true;
+            } 
+
+            return false;
+        }
+
+        bool operator!=(ConstIterator const & other) const
+        {
+            return !(*this == other);
+        }
+        
+    };
+
+    ConstIterator ConstBegin() const{
+        return ConstIterator(array_);
+    }
+    ConstIterator ConstEnd() const { 
+        ConstIterator it(array_);
+        it.constListIterator_ = typename LinkedList<MyNamespace::Pair< const TypeKey, TypeValue> >::ConstIterator(nullptr);
+        it.arrayIndex_ = array_.GetCapacity();
+        it.isItEndIterator_ = 1;
+        return it;
+    }
+    
+
     Dictionary(int (*GetHashCode)(TypeKey const &), double fillFactor = 0.7, double increaseFactor = 2, int capacity = 0) : GetHashCode_(GetHashCode)
         , fillFactor_(fillFactor), increaseFactor_(increaseFactor), array_(capacity), size_(0) 
         {
-            if(increaseFactor <= 1 || fillFactor >= 1 || fillFactor_ <= 0  || capacity < 0 || GetHashCode == nullptr){
+            if(increaseFactor <= 1 || fillFactor > 1 || fillFactor_ <= 0  || capacity < 0 || GetHashCode == nullptr){
                 throw "invalid parameters";
             }
         }
 
-
-    ~Dictionary() {}
-
-    void Add(TypeKey const key, TypeValue value)
+    void Add(TypeKey const & key, TypeValue const & value)
     {
         if(array_.GetCapacity() == 0){
             array_.ReCapacity(1);
         }
 
-        if(isContains(key)){
+        if(Contains(key)){
             throw "the element with same key have already existed";
         }
 
         array_[GetHashCode_(key) % array_.GetCapacity()].Append(MyNamespace::Pair<TypeKey const, TypeValue>(key, value));
         ++size_;
 
-        if(isNeedRecapacityUp()){
+        if(NeedRecapacityUp()){
             if((double)array_.GetCapacity() > (double)__INT_MAX__/increaseFactor_){
                 throw " can not increase dictionary";
             }
-            Rebuild(array_.GetCapacity() * increaseFactor_);
+            Rebuild(array_.GetCapacity() * increaseFactor_ + 1);
         }
+        
     }
 
     void Remove(TypeKey const & key)
     {
         if(array_.GetCapacity() == 0){
-            throw "invalid size";
+            throw " Dictionary is empty";
         }
 
-        if(!isContains(key)){
-            throw "the dictionary do not contain this value";
-        }
-
-        array_[GetHashCode_(key) % array_.GetCapacity()]
-            .Remove(isListContains(GetHashCode_(key) % array_.GetCapacity(), key).GetSecond());
-        --size_;
-
-        if(isNeedRecapacityLess()){
+        typename LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> >::Iterator it = array_[GetHashCode_(key) % array_.GetCapacity()].Begin();
+        typename LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> >::Iterator itEnd = array_[GetHashCode_(key) % array_.GetCapacity()].End();
+        for(/*it*/; it != itEnd; ++it){
+            if((*it).GetFirst() == key){
+                array_[GetHashCode_(key) % array_.GetCapacity()].Erase(it);
+                --size_;
+                if(NeedRecapacityLess()){
             
-            Rebuild(array_.GetCapacity() / increaseFactor_);
+                    Rebuild(array_.GetCapacity() / increaseFactor_);
+                }   
+                return;
+            }
         }
+        throw "There is no element with this value";
+        
+        //array_[GetHashCode_(key) % array_.GetCapacity()]
+           // .Remove(isListContains(GetHashCode_(key) % array_.GetCapacity(), key).GetSecond());//второй и третий раз
+        
 
+        
     }
 
-    bool isContains(TypeKey const & key)const
+    bool Contains(TypeKey const & key )const 
     {
         if(array_.GetCapacity() == 0){
             return false;
         }
-        return (isListContains(GetHashCode_(key) % array_.GetCapacity(), key)).GetFirst();
+        return (GetPositionInList(GetHashCode_(key) % array_.GetCapacity(), key)).GetFirst();
     }
 
     TypeValue& Get(TypeKey const key)
     {
-        if(array_.GetCapacity() == 0){
-            throw "invalid size";
+        typename LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> >::Iterator it = array_[GetHashCode_(key) % array_.GetCapacity()].Begin();
+        typename LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> >::Iterator itEnd = array_[GetHashCode_(key) % array_.GetCapacity()].End();
+        
+        for(/*it*/; it != itEnd; ++it){
+            if((*it).GetFirst() == key){
+                return (*it).GetSecond();
+            }
         }
 
-        if(!isContains(key)){
-            throw "the dictionary do not contain this value";
-        }
+        throw "Dictionary is not contains element with this value";
+        
 
-        return ((array_[GetHashCode_(key) % array_.GetCapacity()])
-                    .Get(isListContains(GetHashCode_(key) % array_.GetCapacity(), key).GetSecond()))
-                        .GetSecond();
-            
+        //return ((array_[GetHashCode_(key) % array_.GetCapacity()])
+        //            .Get(isListContains(GetHashCode_(key) % array_.GetCapacity(), key).GetSecond()))
+        //                .GetSecond();//разбить с сохранением промежуточных значений  
     }
 
     int GetLength() const
@@ -248,7 +381,7 @@ public:
         return size_;
     }
 
-    int GetCapacity() const
+    int GetCapacity() const //функция не нужна, никакого смысла в ней нет
     {
         return array_.GetCapacity();
     }
@@ -262,6 +395,6 @@ public:
         size_--;
     }
 };
-// i j k плохие названия для переменных, потому что когда их много мы теряемся где мы находимся
+
 
 #endif //DICTIONARY_H

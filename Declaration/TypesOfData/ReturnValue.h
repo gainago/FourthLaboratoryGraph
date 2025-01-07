@@ -20,7 +20,7 @@ namespace MyNamespace
             return returnValue_.GetFirst();
         }
 
-        Value GetValue() const
+        Value const & GetValue() const
         {
             return returnValue_.GetSecond();
         }

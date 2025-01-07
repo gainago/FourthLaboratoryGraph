@@ -158,7 +158,7 @@ public:
                 currentNode_ = other.currentNode_;
             }
 
-            T operator*() const
+            T const & operator*() const
             {
                 if(currentNode_ == nullptr){
                     throw "invalid index";
@@ -177,6 +177,7 @@ public:
 
     ConstIterator ConstBegin() const { return ConstIterator(head_);}
     ConstIterator ConstEnd() const { return ConstIterator(nullptr);}
+    ConstIterator ConstBack() const { return ConstIterator(tail_);}
 
     void Erase(Iterator& it)
     {
@@ -252,16 +253,6 @@ public:
 
     T const &GetLast()
     {
-        /*Node *current = this->head_;
-        if (this->head_ == nullptr)
-        {
-            throw "Index out of range";
-        }
-        for (int i = 0; i < this->size_ - 1; i++)
-        {
-            current = current->pNext_;
-        }
-        return current->data_;*/
 
         if(this->tail_ == nullptr){
             throw "Index out of range";

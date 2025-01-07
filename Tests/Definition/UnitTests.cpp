@@ -4,6 +4,9 @@
 #include "Graph.h"
 #include "MyString.h"
 
+#include "PrintArray.h"
+#include "PrintAdjacencyMatrix.h"
+
 void TestGraphConstructor()
 {
     Graph<int, int, int> graph(GetHashCodeInt);
@@ -49,7 +52,7 @@ void TestGraphAddVertex()
         graph.AddVertex("First Vertex", 444);
         assert(graph.GetLength() == 1);
 
-        graph.AddVertex("Second DADR 0030430\pposod", 1234);
+        graph.AddVertex("Second DADR 0030430//posod", 1234);
         assert(graph.GetLength() == 2);
 
         graph.AddVertex("", 444);
@@ -57,7 +60,7 @@ void TestGraphAddVertex()
 
         assert(graph.Get("First Vertex").Get().GetData() == 444);
 
-        assert(graph.Get("Second DADR 0030430\pposod").Get().GetData() == 1234);
+        assert(graph.Get("Second DADR 0030430//posod").Get().GetData() == 1234);
 
         assert(graph.Get("").Get().GetData() == 444);
 
@@ -117,7 +120,7 @@ void TestGraphRemoveVertex()
 
         graph.AddVertex("Second", -9088);
 
-        graph.AddVertex("", 0);
+        graph.AddVertex("Third Vertex", 0);
 
         graph.Remove("First");
         assert(graph.GetLength() == 2);
@@ -142,5 +145,33 @@ void TestGraphRemoveVertex()
         {
             
         }
+
+        graph.AddVertex("Third", 223);
+
+        try{
+            graph.AddVertex("Third", 8800555); //we already have vertex with this key
+            assert(0); // we should get exeption
+        }
+        catch(...)
+        {
+
+        }
+    }
+}
+
+void TestPrintGraph()
+{
+    {
+        Graph<MyString, int, double> graph(GetHashCodeMyString);
+
+        graph.AddVertex("First", 8800555);
+
+        graph.AddVertex("Second", -9088);
+
+        graph.AddVertex("Third Vertex", 0);
+
+        PrintAdjacencyMatrix(graph);
+
+        
     }
 }

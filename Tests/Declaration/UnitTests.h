@@ -7,4 +7,6 @@ void TestGraphAddVertex();
 
 void TestGraphRemoveVertex();
 
+void TestPrintGraph();
+
 #endif //UNIT_TESTS_H

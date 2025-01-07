@@ -160,6 +160,13 @@ public:
         return *Data_ ;
     }
 
+    Type const & Get() const
+    {
+        if(Data_ == nullptr)
+            throw "nullptr";
+        return *Data_ ;
+    }
+
     int Use_count() const noexcept
     {
         if(Counters_ == nullptr)

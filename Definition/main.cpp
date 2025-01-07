@@ -7,4 +7,5 @@ int main(int argc, char** argv)
    TestGraphConstructor();
    TestGraphAddVertex();
    TestGraphRemoveVertex();
+   TestPrintGraph();
 }

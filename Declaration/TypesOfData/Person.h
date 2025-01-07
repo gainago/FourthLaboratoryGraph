@@ -17,7 +17,7 @@ private:
     MyString middleName;
     MyString lastName;
     int bornYear;
-    static int const maxLength = 40;    //count of symbols without '\0'
+    static int const maxLength = 40; //count of symbols without '\0'
 
 public:
     Person();
@@ -52,7 +52,7 @@ public:
 
     friend std::ostream &operator<<(std::ostream &out, const Person &person);
 
-    bool operator==(Person man);
+    bool operator==(Person const & other);
 
     ~Person();
 };

@@ -7,7 +7,7 @@
 
     Person::Person() : id(maxLength), firstName(maxLength), middleName(maxLength), lastName(maxLength), bornYear(2005) {}
 
-    Person::Person(PersonID id, MyString firstName, MyString middleName, MyString lastName, int birthAge)
+    Person::Person(PersonID id, MyString firstName, MyString middleName, MyString lastName, int bornYear)
     {
         if(id.GetLength() > maxLength || firstName.GetLength() > maxLength || middleName.GetLength() > maxLength)
             throw "length string more than MLENGTH";
@@ -15,7 +15,7 @@
         this->firstName = firstName;
         this->middleName = middleName;
         this->lastName = lastName;
-        bornYear = birthAge;
+        bornYear = bornYear;
     }
 
     Person::Person(const Person &person)
@@ -24,6 +24,8 @@
         this->firstName = person.firstName;
         this->middleName = person.middleName;
         this->lastName = person.lastName;
+        this->bornYear = person.bornYear;
+
     }
 
     MyString Person::GetId() const
@@ -114,10 +116,10 @@
         return out <<std::endl << person.id <<std::endl << person.firstName <<std::endl << person.middleName << std::endl << person.lastName << std::endl << person.bornYear << std::endl;
     }
 
-    bool Person::operator==(Person man)
+    bool Person::operator==(Person const & other)
     {
-        return ((id == man.GetId()) && (middleName == man.GetMiddleName()) && (firstName == man.GetFirstName()) &&
-            (lastName == man.GetLastName()));
+        return ((id == other.GetId()) && (middleName == other.GetMiddleName()) && (firstName == other.GetFirstName()) &&
+            (lastName == other.GetLastName()));
     }
 
     Person::~Person()
