@@ -27,7 +27,7 @@ int main(int argc, char** argv)
 
    graph.AddVertex("Third", 24);
 
-   graph.AddEdge("First Edge", false, graph.GetSharedPointerVertex("Second"), graph.GetSharedPointerVertex("Third"));
+   graph.AddEdge("First Edge", true, graph.GetSharedPointerVertex("First"), graph.GetSharedPointerVertex("First"), 256);
 
    PrintAdjacencyMatrix(graph);
 }

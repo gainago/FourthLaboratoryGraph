@@ -44,14 +44,16 @@ void PrintAdjacencyMatrix(Graph<TypeDataVertex, TypeDataEdge> const & graph)
                 if((*cItEdgeRow).Oriented() == 0){
                     if((*cItRow).GetID() == (*cItEdgeRow).GetStartVertexID()
                             && (*cItColumn).GetID() == (*cItEdgeRow).GetEndVertexID()){
-                                std::cout<< "Yes\t";
+                                //std::cout<< "Yes\t";
+                                std::cout << (*cItEdgeRow).GetDataEdge() << "\t";
                                 IsConnected = true;
                                 break;
                             }
                     
                     if((*cItRow).GetID() == (*cItEdgeRow).GetEndVertexID()
                             && (*cItColumn).GetID() == (*cItEdgeRow).GetStartVertexID()){
-                                std::cout<< "Yes\t";
+                                //std::cout<< "Yes\t";
+                                std::cout << (*cItEdgeRow).GetDataEdge() << "\t";
                                 IsConnected = true;
                                 break;
                             }
@@ -61,7 +63,8 @@ void PrintAdjacencyMatrix(Graph<TypeDataVertex, TypeDataEdge> const & graph)
                     if((*cItEdgeRow).GetStartVertexID() == (*cItRow).GetID()
                             && (*cItEdgeRow).GetEndVertexID() == (*cItColumn).GetID() ){
                         
-                        std::cout<< "Yes\t";
+                        //std::cout<< "Yes\t";
+                        std::cout << (*cItEdgeRow).GetDataEdge() << "\t";
                         IsConnected = true;
                         break;
                         

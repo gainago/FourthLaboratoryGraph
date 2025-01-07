@@ -42,6 +42,10 @@ public:
         ID vertexBeginID = (pVertexBegin.Get()).GetID();
         ID vertexEndID = (pVertexEnd.Get()).GetID();
 
+        // if(vertexBeginID == vertexEndID){
+        //     throw "you can not make loop";
+        // }
+
         SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > pEdge = 
             MakeShared<Edge<TypeDataVertex, TypeDataEdge> >(nameEdge, vertexBeginID, vertexEndID, isOriented, dataEdge);
         dictionaryEdge_.Add(nameEdge, pEdge);
@@ -50,7 +54,10 @@ public:
         Vertex<TypeDataVertex, TypeDataEdge> & vertexEnd = pVertexEnd.Get();
 
         vertexBegin.AddEdge(pEdge);
-        vertexEnd.AddEdge(pEdge);
+
+        if(vertexBeginID != vertexEndID){
+            vertexEnd.AddEdge(pEdge);
+        }
 
     }
 
