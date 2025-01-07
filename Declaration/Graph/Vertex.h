@@ -4,148 +4,153 @@
 #include "Dictionary.h"
 #include "SharedPtr.h"
 #include "GetHashCode.h"
+#include "MyString.h"
+#include "Edge.h"
 
-template <typename TypeNameVertex, typename TypeDataVertex, typename TypeDataEdge> class Edge;
-
-
-template <typename TypeNameVertex, typename TypeDataVertex, typename TypeDataEdge> class Vertex{
+template <typename TypeDataVertex, typename TypeDataEdge> class Vertex{
+//нам нужно различать два ребра с одинаковыми характеристиками(между одними и теми же вершинами, с одинаковыми значениями)
+typedef MyString ID;
 
 private:
-    TypeNameVertex name_;
-    TypeDataVertex data_;
-    Dictionary<int, SharedPtr<Edge<TypeNameVertex, TypeDataVertex, TypeDataEdge> > > dictionaryEdges_;
 
+    ID thisID_;
+    TypeDataVertex dataVertex_;
+    //храним не копию а указатель для того чтобы данные можно было менять из графа, без обращения к двум вершинам и т.д.
+    Dictionary<ID, SharedPtr<Edge<TypeDataVertex, TypeDataEdge> > > dictionaryEdges_;
 public:
 
-    Vertex(TypeNameVertex const & name, TypeDataVertex const & data = TypeDataVertex()) : name_(name),
-                                                                                    data_(data),
-                                                                                    dictionaryEdges_(GetHashCodeInt) {}
+    Vertex(ID thisID, TypeDataVertex dataVertex = TypeDataVertex()) : thisID_(thisID), dataVertex_(dataVertex),
+        dictionaryEdges_(GetHashCodeMyString)
+    {}
+    //запретил чтобы не создавалось ситуаций когда три вершины имеют одно и то же ребро
+    Vertex(Vertex<TypeDataVertex, TypeDataEdge> const & other) = delete;
 
-    TypeDataVertex& GetData() {return data_;}
-    TypeDataVertex GetData() const {return data_;}
-
-    TypeNameVertex& GetName() {return name_;}
-    TypeNameVertex GetName() const {return name_;}
-
-    void SetData(TypeDataVertex const & data)
+    ID & GetID()
     {
-        data_ = data;
+        return thisID_;
     }
 
-    void SetName(TypeNameVertex const & name)
+    ID const & GetID() const
     {
-        name_ = name;
+        return thisID_;
     }
 
-    int GetCountOfIncidentalEdges() const {return dictionaryEdges_.GetLength();}
-
-    typename Dictionary<int, SharedPtr<Edge<TypeNameVertex, TypeDataVertex, TypeDataEdge> > >::Iterator BeginIteratorOfIncidentalEdges()
+    TypeDataVertex & GetDataVertex()
     {
-        return dictionaryEdges_.Begin();
+        return dataVertex_;
     }
 
-    typename Dictionary<int, SharedPtr< Edge<TypeNameVertex, TypeDataVertex, TypeDataEdge> > >::Iterator EndIteratorOfIncidentalEdges()
+    TypeDataVertex const & GetDataVertex() const
     {
-        return dictionaryEdges_.End();
+        return dataVertex_;
+    }
+
+    bool Contains(ID idEdge) const
+    {
+        return dictionaryEdges_.Contains(idEdge);
+    }
+
+    void AddEdge(SharedPtr<Edge<TypeDataVertex, TypeDataEdge> > edge)
+    {
+        dictionaryEdges_.Add((edge.Get()).GetID(), edge);
+    }
+
+    void RemoveEdge(SharedPtr<Edge<TypeDataVertex, TypeDataEdge> > edge)
+    {
+        dictionaryEdges_.Remove((edge.Get()).GetID());
+    }
+
+    void RemoveEdge(ID edgeID)
+    {
+        dictionaryEdges_.Remove(edgeID);
+    }
+
+    Edge<TypeDataVertex, TypeDataEdge> & GetEdge(ID edgeID)
+    {
+        return (dictionaryEdges_.Get(edgeID)).Get();
+    }
+
+    Edge<TypeDataVertex, TypeDataEdge> const & GetEdge(ID edgeID) const
+    {
+        return (dictionaryEdges_.Get(edgeID)).Get();
     }
 
     class IteratorEdge{
     private:
-        typename Dictionary<int, SharedPtr<Edge<TypeNameVertex, TypeDataVertex, TypeDataEdge> > >::Iterator it_;
-
+        typename Dictionary<ID, SharedPtr<Edge<TypeDataVertex, TypeDataEdge> > >::Iterator it_;
     public:
-
-        IteratorEdge(typename Dictionary<int, SharedPtr<Edge<TypeNameVertex, TypeDataVertex, TypeDataEdge> > >::Iterator it) : it_(it) {}
-
+        IteratorEdge(typename Dictionary<ID, SharedPtr<Edge<TypeDataVertex, TypeDataEdge> > >::Iterator it) : it_(it) {}
         IteratorEdge(IteratorEdge const & other) : it_(other.it_) {}
 
-        void operator++()
+        void operator++() 
         {
             ++it_;
         }
-
-        bool operator==(IteratorEdge const & other)
+        Edge<TypeDataVertex, TypeDataEdge> & operator*() 
         {
-            return this->it_ == other.it_;
+            ((*it_).GetSecond()).Get();
         }
 
-        bool operator!=(IteratorEdge const & other)
+        bool operator==(IteratorEdge const & other) const
         {
-            return !((*this) == other);
+            return other.it_ == this->it_;
         }
 
-        void operator=(IteratorEdge const & other)
+        bool operator!=(IteratorEdge const & other) const
         {
-            this->it_ == other.it_;
-        }
-
-        MyNamespace::Pair< const int, SharedPtr<Edge<TypeNameVertex, TypeDataVertex, TypeDataEdge> > > & operator*()
-        {
-            return (*it_);
-        }
-
-
-
+            return !(*this == other);
+        } 
+        
     };
 
     IteratorEdge Begin()
     {
-        return IteratorEdge(dictionaryEdges_.Begin());
+        return dictionaryEdges_.Begin();
     }
 
     IteratorEdge End()
     {
-        return IteratorEdge(dictionaryEdges_.End());
+        return dictionaryEdges_.End();
     }
-
 
     class ConstIteratorEdge{
     private:
-        typename Dictionary<int, SharedPtr<Edge<TypeNameVertex, TypeDataVertex, TypeDataEdge> > >::ConstIterator it_;
-
+        typename Dictionary<ID, SharedPtr<Edge<TypeDataVertex, TypeDataEdge> > >::ConstIterator it_;
     public:
-
-        ConstIteratorEdge(typename Dictionary<int, SharedPtr<Edge<TypeNameVertex, TypeDataVertex, TypeDataEdge> > >::ConstIterator it) : it_(it) {}
-
+        ConstIteratorEdge(typename Dictionary<ID, SharedPtr<Edge<TypeDataVertex, TypeDataEdge> > >::ConstIterator it) : it_(it) {}
         ConstIteratorEdge(ConstIteratorEdge const & other) : it_(other.it_) {}
 
-        void operator++()
+        void operator++() 
         {
             ++it_;
+        }
+        Edge<TypeDataVertex, TypeDataEdge> const & operator*() const
+        {
+            return ((*it_).GetSecond()).Get();
         }
 
         bool operator==(ConstIteratorEdge const & other) const
         {
-            return this->it_ == other.it_;
+            return other.it_ == this->it_;
         }
 
         bool operator!=(ConstIteratorEdge const & other) const
         {
-            return !((*this) == other);
-        }
-
-        void operator=(ConstIteratorEdge const & other) const
-        {
-            this->it_ == other.it_;
-        }
-
-        MyNamespace::Pair< const int, SharedPtr<Edge<TypeNameVertex, TypeDataVertex, TypeDataEdge> > > const & operator*() const
-        {
-            return (*it_);
-        }
+            return !(*this == other);
+        } 
+        
     };
 
     ConstIteratorEdge ConstBegin() const
     {
-        return ConstIteratorEdge(dictionaryEdges_.ConstBegin());
+        return dictionaryEdges_.ConstBegin();
     }
 
     ConstIteratorEdge ConstEnd() const
     {
-        return ConstIteratorEdge(dictionaryEdges_.ConstEnd());
+        return dictionaryEdges_.ConstEnd();
     }
 
-    
 };
 
 #endif //VERTEX_H

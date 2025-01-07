@@ -174,7 +174,7 @@ public:
         return Counters_->GetCountShared();
     }
 
-    SharedPtr<Type> operator=(SharedPtr<Type> const & Other) // НЕ КОПИПАСТИТЬ а выносить в отдельные функции
+    SharedPtr<Type> operator=(SharedPtr<Type> const & Other)
     {
         if(this->Data_ == Other.Data_)
             return *this;
@@ -200,7 +200,20 @@ public:
         return this->Get();
     }
 
+    Type const & operator*() const 
+    {
+
+        return this->Get();
+    }
+
     Type* operator->() 
+    {
+        if(Counters_ == nullptr)
+            throw "nullptr";
+        return Data_;
+    }
+
+    Type const * operator->() const
     {
         if(Counters_ == nullptr)
             throw "nullptr";

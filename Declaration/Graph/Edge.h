@@ -1,47 +1,78 @@
 #ifndef EDGE_H
 #define EDGE_H
 
-#include "SharedPtr.h"
-#include "WeakPtr.h"
 #include "Dictionary.h"
-#include "Vertex.h"
+#include "MyString.h"
 
-template<typename TypeNameVertex, typename TypeDataVertex, typename TypeDataEdge> class Edge{
-
+template <typename TypeDataVertex, typename TypeDataEdge> class Edge{
+    typedef MyString ID;
 private:
 
-    TypeDataEdge data_;
+    ID thisID_;
+    ID startVertexID_;
+    ID endVertexID_;
     bool isOriented_;
-    WeakPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > vertexStart_;
-    WeakPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > vertexEnd_;
-
+    TypeDataEdge dataEdge_;
 public:
-
-    Edge(SharedPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > vertexStart,
-         SharedPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > vertexEnd,
-         TypeDataEdge data = TypeDataEdge(),
-         bool isOriented = 0) : data_(data),
-                            isOriented_(Oriented),
-                            vertexStart_(vertexStart),
-                            vertexEnd_(vertexEnd)
+//конструктор копирования в Edge позволителен, поскольку он не содерит никаких указателей,
+// хотя тогда у вершины и ребра отличающийся интерфейс, но не думаю что это плохо 
+    Edge(ID thisID, ID startVertexID, ID endVertexID, bool isOriented, TypeDataEdge dataEdge = TypeDataEdge()) : 
+        thisID_(thisID), startVertexID_(startVertexID), endVertexID_(endVertexID), isOriented_(isOriented), dataEdge_(dataEdge)
     {}
 
-    TypeDataEdge& GetData() {return data_;}
-    TypeDataEdge GetData() const {return data_;}
-    
-    void SetData(TypeDataEdge const & data){
-        data_ = data;
+    ID & GetID()
+    {
+        return thisID_;
     }
 
-    bool Oriented() const
+    ID const & GetID() const
+    {
+        return thisID_;
+    }
+
+    ID & GetStartVertexID()
+    {
+        return startVertexID_;
+    }
+
+    ID const & GetStartVertexID() const
+    {
+        return startVertexID_;
+    } 
+
+    ID & GetEndVertexID()
+    {
+        return endVertexID_;
+    }
+
+    ID const & GetEndVertexID() const
+    {
+        return endVertexID_;
+    }
+
+    bool & Oriented()
     {
         return isOriented_;
     }
 
-    WeakPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > GetVertexStart() {return vertexStart_;}
-    WeakPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > GetVertexEnd() {return vertexEnd_;}
+    bool const & Oriented() const
+    {
+        return isOriented_;
+    }
+
+    TypeDataEdge & GetDataEdge()
+    {
+        return dataEdge_;
+    }
+
+    TypeDataEdge const & GetDataEdge() const
+    {
+        return dataEdge_;
+    }
+
+
 
 };
 
 
-#endif //EDGE_H
+#endif //EDG_H

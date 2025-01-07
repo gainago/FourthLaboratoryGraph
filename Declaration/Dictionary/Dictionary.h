@@ -299,6 +299,23 @@ public:
             }
         }
 
+    Dictionary(Dictionary<TypeKey, TypeValue> && other)
+    {
+        this->GetHashCode_ = other.GetHashCode_;
+
+        this->fillFactor_ = other.fillFactor_;
+        this->increaseFactor_ = other.increaseFactor_;
+
+        this->array_.swap(other.array_);
+
+        this->size_ = other.size_;
+        other.size_ = 0;
+    }
+
+
+    //эта строчка не необходима, но по моему мнению заствляет думать об оптимальном копировании
+    Dictionary(Dictionary<TypeKey, TypeValue> const & other) = delete; 
+
     void Add(TypeKey const & key, TypeValue const & value)
     {
         if(array_.GetCapacity() == 0){
@@ -357,7 +374,7 @@ public:
         return (GetPositionInList(GetHashCode_(key) % array_.GetCapacity(), key)).GetFirst();
     }
 
-    TypeValue& Get(TypeKey const key)
+    TypeValue& Get(TypeKey const & key)
     {
         typename LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> >::Iterator it = array_[GetHashCode_(key) % array_.GetCapacity()].Begin();
         typename LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> >::Iterator itEnd = array_[GetHashCode_(key) % array_.GetCapacity()].End();
@@ -369,11 +386,20 @@ public:
         }
 
         throw "Dictionary is not contains element with this value";
-        
+    }
 
-        //return ((array_[GetHashCode_(key) % array_.GetCapacity()])
-        //            .Get(isListContains(GetHashCode_(key) % array_.GetCapacity(), key).GetSecond()))
-        //                .GetSecond();//разбить с сохранением промежуточных значений  
+    TypeValue const & Get(TypeKey const & key) const
+    {
+        typename LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> >::ConstIterator it = array_[GetHashCode_(key) % array_.GetCapacity()].ConstBegin();
+        typename LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> >::ConstIterator itEnd = array_[GetHashCode_(key) % array_.GetCapacity()].ConstEnd();
+        
+        for(/*it*/; it != itEnd; ++it){
+            if((*it).GetFirst() == key){
+                return (*it).GetSecond();
+            }
+        }
+
+        throw "Dictionary is not contains element with this value";
     }
 
     int GetLength() const

@@ -117,19 +117,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named libUnitTests
-
-# Build rule for target.
-libUnitTests: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libUnitTests
-.PHONY : libUnitTests
-
-# fast build rule for target.
-libUnitTests/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/build
-.PHONY : libUnitTests/fast
-
-#=============================================================================
 # Target rules for targets named libTypesOfData
 
 # Build rule for target.
@@ -253,6 +240,30 @@ Definition/TypesOfData/Comporators.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Comporators.cpp.s
 .PHONY : Definition/TypesOfData/Comporators.cpp.s
 
+Definition/TypesOfData/InputOutputMyString.o: Definition/TypesOfData/InputOutputMyString.cpp.o
+.PHONY : Definition/TypesOfData/InputOutputMyString.o
+
+# target to build an object file
+Definition/TypesOfData/InputOutputMyString.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/InputOutputMyString.cpp.o
+.PHONY : Definition/TypesOfData/InputOutputMyString.cpp.o
+
+Definition/TypesOfData/InputOutputMyString.i: Definition/TypesOfData/InputOutputMyString.cpp.i
+.PHONY : Definition/TypesOfData/InputOutputMyString.i
+
+# target to preprocess a source file
+Definition/TypesOfData/InputOutputMyString.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/InputOutputMyString.cpp.i
+.PHONY : Definition/TypesOfData/InputOutputMyString.cpp.i
+
+Definition/TypesOfData/InputOutputMyString.s: Definition/TypesOfData/InputOutputMyString.cpp.s
+.PHONY : Definition/TypesOfData/InputOutputMyString.s
+
+# target to generate assembly for a file
+Definition/TypesOfData/InputOutputMyString.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/InputOutputMyString.cpp.s
+.PHONY : Definition/TypesOfData/InputOutputMyString.cpp.s
+
 Definition/TypesOfData/MyString.o: Definition/TypesOfData/MyString.cpp.o
 .PHONY : Definition/TypesOfData/MyString.o
 
@@ -325,30 +336,6 @@ Definition/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Graph.dir/build.make CMakeFiles/Graph.dir/Definition/main.cpp.s
 .PHONY : Definition/main.cpp.s
 
-Tests/Definition/UnitTests.o: Tests/Definition/UnitTests.cpp.o
-.PHONY : Tests/Definition/UnitTests.o
-
-# target to build an object file
-Tests/Definition/UnitTests.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/Tests/Definition/UnitTests.cpp.o
-.PHONY : Tests/Definition/UnitTests.cpp.o
-
-Tests/Definition/UnitTests.i: Tests/Definition/UnitTests.cpp.i
-.PHONY : Tests/Definition/UnitTests.i
-
-# target to preprocess a source file
-Tests/Definition/UnitTests.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/Tests/Definition/UnitTests.cpp.i
-.PHONY : Tests/Definition/UnitTests.cpp.i
-
-Tests/Definition/UnitTests.s: Tests/Definition/UnitTests.cpp.s
-.PHONY : Tests/Definition/UnitTests.s
-
-# target to generate assembly for a file
-Tests/Definition/UnitTests.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/Tests/Definition/UnitTests.cpp.s
-.PHONY : Tests/Definition/UnitTests.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -361,7 +348,6 @@ help:
 	@echo "... libFunctions"
 	@echo "... libGetHashCodes"
 	@echo "... libTypesOfData"
-	@echo "... libUnitTests"
 	@echo "... Definition/Functions/Abs.o"
 	@echo "... Definition/Functions/Abs.i"
 	@echo "... Definition/Functions/Abs.s"
@@ -371,6 +357,9 @@ help:
 	@echo "... Definition/TypesOfData/Comporators.o"
 	@echo "... Definition/TypesOfData/Comporators.i"
 	@echo "... Definition/TypesOfData/Comporators.s"
+	@echo "... Definition/TypesOfData/InputOutputMyString.o"
+	@echo "... Definition/TypesOfData/InputOutputMyString.i"
+	@echo "... Definition/TypesOfData/InputOutputMyString.s"
 	@echo "... Definition/TypesOfData/MyString.o"
 	@echo "... Definition/TypesOfData/MyString.i"
 	@echo "... Definition/TypesOfData/MyString.s"
@@ -380,9 +369,6 @@ help:
 	@echo "... Definition/main.o"
 	@echo "... Definition/main.i"
 	@echo "... Definition/main.s"
-	@echo "... Tests/Definition/UnitTests.o"
-	@echo "... Tests/Definition/UnitTests.i"
-	@echo "... Tests/Definition/UnitTests.s"
 .PHONY : help
 
 

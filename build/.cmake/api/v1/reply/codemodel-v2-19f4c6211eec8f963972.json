@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Graph",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Graph::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Graph-Debug-92b2c41b8d58e122b9ab.json",
+					"name" : "Graph",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libFunctions::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libFunctions-Debug-ebfb16323e881c97fe4a.json",
+					"name" : "libFunctions",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libGetHashCodes::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libGetHashCodes-Debug-e0416fad4f2b5bf23fb7.json",
+					"name" : "libGetHashCodes",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libTypesOfData::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libTypesOfData-Debug-7cbe7e0ad2e2ad356148.json",
+					"name" : "libTypesOfData",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build",
+		"source" : "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

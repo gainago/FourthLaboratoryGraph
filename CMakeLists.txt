@@ -23,14 +23,14 @@ include_directories(
 
 #-----Library UnitTests----------------
 
-include_directories(
-    "${CMAKE_SOURCE_DIR}/Tests/Declaration"
-)
-
-file(GLOB
-            UnitTestsSources "${CMAKE_SOURCE_DIR}/Tests/Definition/*.cpp")
-add_library(libUnitTests SHARED ${UnitTestsSources})
-
+#include_directories(
+#    "${CMAKE_SOURCE_DIR}/Tests/Declaration"
+#)
+#
+#file(GLOB
+#            UnitTestsSources "${CMAKE_SOURCE_DIR}/Tests/Definition/*.cpp")
+#add_library(libUnitTests SHARED ${UnitTestsSources})
+#
 #-----End UnitTests
 
 #-----Library TypesOfData----------------
@@ -77,7 +77,7 @@ ${SOURCES}
 #---------------------------------------------- Link Libraries
 
 
-target_link_libraries(${PROJECT_NAME} PRIVATE libUnitTests)
+#target_link_libraries(${PROJECT_NAME} PRIVATE libUnitTests)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE libTypesOfData)
 

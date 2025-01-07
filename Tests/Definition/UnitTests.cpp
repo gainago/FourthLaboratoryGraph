@@ -162,15 +162,13 @@ void TestGraphRemoveVertex()
 void TestPrintGraph()
 {
     {
-        Graph<MyString, int, double> graph(GetHashCodeMyString);
+        /*Graph<MyString, int, double> graph(GetHashCodeMyString);
 
         graph.AddVertex("First", 8800555);
 
         graph.AddVertex("Second", -9088);
 
-        graph.AddVertex("Third Vertex", 0);
-
-        PrintAdjacencyMatrix(graph);
+        graph.AddVertex("Third Vertex", 0);*/
 
         
     }

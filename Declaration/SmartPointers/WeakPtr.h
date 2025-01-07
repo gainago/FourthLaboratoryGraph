@@ -89,6 +89,14 @@ public:
         return SharedPtr<Type>(Data_, Counters_);
     }
 
+    SharedPtr<Type> const lock() const
+    {
+        if(!this->IsAlive())
+            throw "object has beed deleted";
+        
+        return SharedPtr<Type>(Data_, Counters_);
+    }
+
 };
 
 #endif

@@ -5,41 +5,79 @@
 
 #include "Dictionary.h"
 #include "Graph.h"
+#include "InputOutputMyString.h"
 
-template <typename TypeNameVertex, typename TypeDataVertex, typename TypeDataEdge> 
-void PrintAdjacencyMatrix(Graph<TypeNameVertex, TypeDataVertex, TypeDataEdge> const & graph)
+template < typename TypeDataVertex, typename TypeDataEdge> 
+void PrintAdjacencyMatrix(Graph<TypeDataVertex, TypeDataEdge> const & graph)
 {
-    typename Graph<TypeNameVertex, TypeDataVertex, TypeDataEdge>::ConstIteratorVertex it = graph.ConstBegin();
-    typename Graph<TypeNameVertex, TypeDataVertex, TypeDataEdge>::ConstIteratorVertex itEnd = graph.ConstEnd();
+    typename Graph<TypeDataVertex, TypeDataEdge>::ConstIteratorVertex cIt = graph.ConstBegin();
+    typename Graph<TypeDataVertex, TypeDataEdge>::ConstIteratorVertex cItEnd = graph.ConstEnd();
 
-    std::cout << std::endl << "\t";
-
-    for(/*it*/; it != itEnd; ++it){
-        std::cout << (*it).GetFirst() << "\t";
+    std::cout << "\t";
+    for(/*cIt*/; cIt != cItEnd; ++cIt){
+        OutputMyString((*cIt).GetID());
+        std::cout << "\t";
     }
+    std::cout << std::endl;
 
-    typename Graph<TypeNameVertex, TypeDataVertex, TypeDataEdge>::ConstIteratorVertex itRows = graph.ConstBegin();
-    typename Graph<TypeNameVertex, TypeDataVertex, TypeDataEdge>::ConstIteratorVertex itColumns = graph.ConstBegin();
+    typename Graph<TypeDataVertex, TypeDataEdge>::ConstIteratorVertex cItRow = graph.ConstBegin();
+    
 
-    for(/*itRows*/; itRows != itEnd; ++itRows){
+    for(/*cItRow*/; cItRow != cItEnd; ++cItRow){
 
-        for(/*itColumns*/; itColumns != itEnd; ++itColumns){
+        OutputMyString((*cItRow).GetID());
+        std::cout << "\t";
 
-            SharedPtr<Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > const currentPointerColumnVertex = (*itColumns).GetSecond();
-            
-            typename Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge>::ConstIteratorEdge itEdge = (currentPointerColumnVertex.Get()).ConstBegin();
-            typename Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge>::ConstIteratorEdge itEdgeEnd = (currentPointerColumnVertex.Get()).ConstEnd();
-            
-            for(/*itEdge*/; itEdge != itEdgeEnd; ++itEdge){
+        typename Graph<TypeDataVertex, TypeDataEdge>::ConstIteratorVertex cItColumn = graph.ConstBegin();
+
+        for(/*cItColumn*/; cItColumn != cItEnd; ++cItColumn){
+
+            typename Vertex<TypeDataVertex, TypeDataEdge>::ConstIteratorEdge cItEdgeRow = (*cItRow).ConstBegin();
+            typename Vertex<TypeDataVertex, TypeDataEdge>::ConstIteratorEdge cItEdgeRowEnd = (*cItRow).ConstEnd();
+
+            bool IsConnected = 0;
+
+            for(/*cItEdgeRow*/; cItEdgeRow != cItEdgeRowEnd; ++cItEdgeRow){
                 
-                WeakPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > const vertexStart;
-                WeakPtr< Vertex<TypeNameVertex, TypeDataVertex, TypeDataEdge> > const vertexEnd;
+                //раз ребро не ориентированное, а список смежных ребер содержит имя cItRow в любом случае
+                //то достаточно посмотреть что хотя бы одно имя совпадает с cItColumn
+                if((*cItEdgeRow).Oriented() == 0){
+                    if((*cItRow).GetID() == (*cItEdgeRow).GetStartVertexID()
+                            && (*cItColumn).GetID() == (*cItEdgeRow).GetEndVertexID()){
+                                std::cout<< "Yes\t";
+                                IsConnected = true;
+                                break;
+                            }
+                    
+                    if((*cItRow).GetID() == (*cItEdgeRow).GetEndVertexID()
+                            && (*cItColumn).GetID() == (*cItEdgeRow).GetStartVertexID()){
+                                std::cout<< "Yes\t";
+                                IsConnected = true;
+                                break;
+                            }
+
+                }
+                if((*cItEdgeRow).Oriented() == 1){
+                    if((*cItEdgeRow).GetStartVertexID() == (*cItRow).GetID()
+                            && (*cItEdgeRow).GetEndVertexID() == (*cItColumn).GetID() ){
+                        
+                        std::cout<< "Yes\t";
+                        IsConnected = true;
+                        break;
+                        
+                    }
+                }
+            }
+
+            if(IsConnected == false){
+                std::cout << "No\t";
             }
         }
-
+        std::cout << std::endl;
     }
 
-    std::cout << std::endl;
+    
+
 }
 
 #endif //PRINT_ADJECENCY_MATRIX_H

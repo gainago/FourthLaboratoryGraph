@@ -63,7 +63,6 @@ CMAKE_BINARY_DIR = /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaborator
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/libUnitTests.dir/all
 all: CMakeFiles/libTypesOfData.dir/all
 all: CMakeFiles/libGetHashCodes.dir/all
 all: CMakeFiles/libFunctions.dir/all
@@ -75,38 +74,11 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/libUnitTests.dir/clean
 clean: CMakeFiles/libTypesOfData.dir/clean
 clean: CMakeFiles/libGetHashCodes.dir/clean
 clean: CMakeFiles/libFunctions.dir/clean
 clean: CMakeFiles/Graph.dir/clean
 .PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/libUnitTests.dir
-
-# All Build rule for target.
-CMakeFiles/libUnitTests.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles --progress-num=11,12 "Built target libUnitTests"
-.PHONY : CMakeFiles/libUnitTests.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/libUnitTests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/libUnitTests.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles 0
-.PHONY : CMakeFiles/libUnitTests.dir/rule
-
-# Convenience name for target.
-libUnitTests: CMakeFiles/libUnitTests.dir/rule
-.PHONY : libUnitTests
-
-# clean rule for target.
-CMakeFiles/libUnitTests.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libUnitTests.dir/build.make CMakeFiles/libUnitTests.dir/clean
-.PHONY : CMakeFiles/libUnitTests.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/libTypesOfData.dir
@@ -115,12 +87,12 @@ CMakeFiles/libUnitTests.dir/clean:
 CMakeFiles/libTypesOfData.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles --progress-num=7,8,9,10 "Built target libTypesOfData"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles --progress-num=7,8,9,10,11 "Built target libTypesOfData"
 .PHONY : CMakeFiles/libTypesOfData.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/libTypesOfData.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/libTypesOfData.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles 0
 .PHONY : CMakeFiles/libTypesOfData.dir/rule
@@ -190,7 +162,6 @@ CMakeFiles/libFunctions.dir/clean:
 # Target rules for target CMakeFiles/Graph.dir
 
 # All Build rule for target.
-CMakeFiles/Graph.dir/all: CMakeFiles/libUnitTests.dir/all
 CMakeFiles/Graph.dir/all: CMakeFiles/libTypesOfData.dir/all
 CMakeFiles/Graph.dir/all: CMakeFiles/libGetHashCodes.dir/all
 CMakeFiles/Graph.dir/all: CMakeFiles/libFunctions.dir/all
@@ -201,7 +172,7 @@ CMakeFiles/Graph.dir/all: CMakeFiles/libFunctions.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Graph.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Graph.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles 0
 .PHONY : CMakeFiles/Graph.dir/rule

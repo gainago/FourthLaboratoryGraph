@@ -1,7 +1,7 @@
 #ifndef PERSON_H
 #define PERSON_H
 
-#include <iostream>
+//#include <iostream>
 #include "MyString.h"
 
 
@@ -48,9 +48,9 @@ public:
 
     //void SetBornAge();
 
-    friend std::istream &operator>>(std::istream &in, Person &person);
+    // friend std::istream &operator>>(std::istream &in, Person &person);
 
-    friend std::ostream &operator<<(std::ostream &out, const Person &person);
+    // friend std::ostream &operator<<(std::ostream &out, const Person &person);
 
     bool operator==(Person const & other);
 
