@@ -6,14 +6,17 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/GetHashCodes/GetHashCode.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Edge.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Graph.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Path.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/PrintAdjacencyMatrix.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Vertex.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/DynamicArray.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/LinkedList.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/SmartPointers/SharedPtr.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/InputOutputMyString.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/Index.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/InputOutputIndex.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/MyString.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/Pair.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/ReturnValue.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -299,10 +302,6 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
 
-/usr/include/c++/13/debug/debug.h:
-
-/usr/include/c++/13/stdexcept:
-
 /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Dictionary/Dictionary.h:
 
 /usr/include/c++/13/bits/ostream_insert.h:
@@ -331,6 +330,8 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 
 /usr/include/c++/13/bits/exception_ptr.h:
 
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Path.h:
+
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
@@ -339,25 +340,15 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 
 /usr/include/c++/13/bits/exception.h:
 
-/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/Pair.h:
+/usr/include/c++/13/bits/move.h:
 
-/usr/include/x86_64-linux-gnu/bits/time64.h:
+/usr/include/x86_64-linux-gnu/bits/types.h:
 
-/usr/include/c++/13/bits/basic_ios.h:
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
-/usr/include/x86_64-linux-gnu/sys/types.h:
-
-/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/PrintAdjacencyMatrix.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
-
-/usr/include/c++/13/cstddef:
+/usr/include/c++/13/bits/cpp_type_traits.h:
 
 /usr/include/c++/13/bits/hash_bytes.h:
-
-/usr/include/c++/13/bits/ranges_util.h:
-
-/usr/include/asm-generic/errno-base.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
@@ -371,6 +362,14 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 
 /usr/include/c++/13/bits/ios_base.h:
 
+/usr/include/x86_64-linux-gnu/sys/types.h:
+
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/PrintAdjacencyMatrix.h:
+
+/usr/include/x86_64-linux-gnu/bits/time64.h:
+
+/usr/include/c++/13/bits/basic_ios.h:
+
 /usr/include/c++/13/bits/exception_defines.h:
 
 /usr/include/c++/13/bits/localefwd.h:
@@ -379,17 +378,17 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 
 /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/GetHashCodes/GetHashCode.h:
 
+/usr/include/time.h:
+
+/usr/include/c++/13/bits/memoryfwd.h:
+
 /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Vertex.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+/usr/include/x86_64-linux-gnu/bits/errno.h:
 
-/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/DynamicArray.h:
+/usr/include/wctype.h:
 
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
-
-/usr/include/c++/13/pstl/pstl_config.h:
-
-/usr/include/c++/13/bits/cxxabi_forced.h:
+/usr/include/c++/13/exception:
 
 /usr/include/alloca.h:
 
@@ -403,19 +402,43 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 
 /usr/include/c++/13/bits/invoke.h:
 
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/Index.h:
+
+/usr/include/c++/13/bits/locale_facets.tcc:
+
+/usr/include/c++/13/bits/requires_hosted.h:
+
+/usr/include/c++/13/bits/string_view.tcc:
+
+/usr/include/features.h:
+
 /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/SmartPointers/SharedPtr.h:
 
 /usr/include/c++/13/ext/type_traits.h:
 
 /usr/include/c++/13/iostream:
 
+/usr/include/c++/13/bits/cxxabi_forced.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/DynamicArray.h:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/c++/13/pstl/pstl_config.h:
+
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/Pair.h:
+
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/ReturnValue.h:
+
 /usr/include/c++/13/cwctype:
 
-/usr/include/c++/13/bits/predefined_ops.h:
+/usr/include/c++/13/debug/debug.h:
 
-/usr/include/c++/13/bits/ranges_cmp.h:
+/usr/include/c++/13/stdexcept:
 
-/usr/include/c++/13/iosfwd:
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/InputOutputIndex.h:
 
 /usr/include/c++/13/cwchar:
 
@@ -435,21 +458,15 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 
 /usr/include/c++/13/ios:
 
+/usr/include/c++/13/bits/concept_check.h:
+
+/usr/include/c++/13/bits/alloc_traits.h:
+
 /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Graph.h:
 
 /usr/include/c++/13/backward/binders.h:
 
 /usr/include/c++/13/bits/stringfwd.h:
-
-/usr/include/c++/13/bits/ranges_base.h:
-
-/usr/include/c++/13/istream:
-
-/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/LinkedList.h:
-
-/usr/include/c++/13/string_view:
-
-/usr/include/features-time64.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
@@ -463,35 +480,41 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 
 /usr/include/c++/13/bits/ptr_traits.h:
 
-/usr/include/c++/13/bits/alloc_traits.h:
-
-/usr/include/c++/13/bits/concept_check.h:
-
 /usr/include/c++/13/bits/locale_facets.h:
 
-/usr/include/c++/13/bits/memoryfwd.h:
+/usr/include/c++/13/bits/ranges_base.h:
 
-/usr/include/time.h:
+/usr/include/c++/13/istream:
 
-/usr/include/c++/13/bits/move.h:
+/usr/include/c++/13/string_view:
 
-/usr/include/x86_64-linux-gnu/bits/types.h:
+/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/LinkedList.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+/usr/include/features-time64.h:
 
-/usr/include/c++/13/bits/cpp_type_traits.h:
+/usr/include/c++/13/bits/predefined_ops.h:
+
+/usr/include/c++/13/iosfwd:
+
+/usr/include/c++/13/bits/ranges_cmp.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/c++/13/bits/ranges_util.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+
+/usr/include/c++/13/cstddef:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
 /usr/include/c++/13/bits/refwrap.h:
 
-/usr/include/c++/13/bits/locale_facets.tcc:
+/usr/include/c++/13/bits/postypes.h:
 
-/usr/include/c++/13/bits/requires_hosted.h:
+/usr/include/c++/13/bits/uses_allocator.h:
 
-/usr/include/c++/13/bits/string_view.tcc:
-
-/usr/include/features.h:
+/usr/include/c++/13/bits/std_abs.h:
 
 /usr/include/c++/13/bits/stl_algobase.h:
 
@@ -519,12 +542,6 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 
 /usr/include/c++/13/bits/stl_iterator_base_types.h:
 
-/usr/include/c++/13/bits/postypes.h:
-
-/usr/include/c++/13/bits/std_abs.h:
-
-/usr/include/c++/13/bits/uses_allocator.h:
-
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
 /usr/include/c++/13/bits/new_allocator.h:
@@ -538,8 +555,6 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 /usr/include/c++/13/ext/atomicity.h:
 
 /usr/include/c++/13/cctype:
-
-/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/InputOutputMyString.h:
 
 /usr/include/c++/13/clocale:
 
@@ -614,9 +629,3 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThir
 /usr/include/locale.h:
 
 /usr/include/pthread.h:
-
-/usr/include/x86_64-linux-gnu/bits/errno.h:
-
-/usr/include/c++/13/exception:
-
-/usr/include/wctype.h:

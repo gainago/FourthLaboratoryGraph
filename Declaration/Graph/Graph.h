@@ -1,21 +1,25 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include "MyString.h"
+#include "Index.h"
 #include "Dictionary.h"
 #include "Edge.h"
 #include "Vertex.h"
+#include "Path.h"
+#include "ReturnValue.h"
+
+
 
 template < typename TypeDataVertex, typename TypeDataEdge> class Graph{
     // нам нужно отличать каждую вершину и каждое ребро друг от друга, к примеру для алгоритмов нахождения расстояние
-    typedef MyString ID;
+    typedef Index ID;
 
 private:
     Dictionary<ID, SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > > dictionaryVertex_;
     Dictionary<ID, SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > > dictionaryEdge_;
 
 public:
-    Graph() : dictionaryVertex_(GetHashCodeMyString), dictionaryEdge_(GetHashCodeMyString) {}
+    Graph() : dictionaryVertex_(GetHashCodeIndex), dictionaryEdge_(GetHashCodeIndex) {}
 
     void AddVertex(ID idVertex, TypeDataVertex dataVertex = TypeDataVertex())
     {
@@ -34,20 +38,16 @@ public:
     }
 
     void AddEdge(ID nameEdge, bool isOriented,
-                    SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > pVertexBegin,
-                    SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > pVertexEnd, 
+                    ID idVertexStart,
+                    ID idVertexEnd, 
                     TypeDataEdge dataEdge = TypeDataEdge())
     {
-
-        ID vertexBeginID = (pVertexBegin.Get()).GetID();
-        ID vertexEndID = (pVertexEnd.Get()).GetID();
-
-        // if(vertexBeginID == vertexEndID){
-        //     throw "you can not make loop";
-        // }
+        
+        SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > pVertexBegin = this->GetSharedPointerVertex(idVertexStart);
+        SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > pVertexEnd = this->GetSharedPointerVertex(idVertexEnd);
 
         SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > pEdge = 
-            MakeShared<Edge<TypeDataVertex, TypeDataEdge> >(nameEdge, vertexBeginID, vertexEndID, isOriented, dataEdge);
+            MakeShared<Edge<TypeDataVertex, TypeDataEdge> >(nameEdge, idVertexStart, idVertexEnd, isOriented, dataEdge);
         dictionaryEdge_.Add(nameEdge, pEdge);
 
         Vertex<TypeDataVertex, TypeDataEdge> & vertexBegin = pVertexBegin.Get();
@@ -55,7 +55,7 @@ public:
 
         vertexBegin.AddEdge(pEdge);
 
-        if(vertexBeginID != vertexEndID){
+        if(idVertexStart != idVertexEnd){
             vertexEnd.AddEdge(pEdge);
         }
 
@@ -104,6 +104,11 @@ public:
 
         dictionaryVertex_.Remove(idVertex);
     }
+    
+    // Path<TypeDataVertex, TypeDataEdge> BreadthFirstSearch(ID idVertexStart, ID idVertexEnd)
+    // {
+
+    // }
 
     class IteratorVertex{
     private:
@@ -185,7 +190,35 @@ public:
         return dictionaryVertex_.ConstEnd();
     }
 
+private:
 
+    DynamicArray<SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > >
+                                                GetEdgesBetweenAdjacentVertices(ID idVertexFirst, ID idVertexSecond)
+    {
+        SharedPtr<Vertex< TypeDataVertex, TypeDataEdge> > pVertexFirst;
+        SharedPtr<Vertex< TypeDataVertex, TypeDataEdge> > pVertexSecond;
+
+        try{
+
+            pVertexFirst = this->GetSharedPointerVertex(idVertexFirst);
+            pVertexSecond = this->GetSharedPointerVertex(idVertexSecond);
+
+        }
+        catch(char const *)
+        {
+            return DynamicArray<SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > >();
+        }
+
+        typename Vertex<TypeDataVertex, TypeDataEdge>::IteratorEdge itEdge = pVertexFirst.Get().Begin();// помним что Vertex копировать нельзя
+        typename Vertex<TypeDataVertex, TypeDataEdge>::IteratorEdge itEdgeEnd = pVertexFirst.Get().End();
+
+        for(/*itEdge*/; itEdge != itEdgeEnd; ++itEdge){
+
+            
+
+        }
+
+    }
 
 
 };

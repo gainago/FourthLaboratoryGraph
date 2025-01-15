@@ -5,7 +5,7 @@
 
 #include "Dictionary.h"
 #include "Graph.h"
-#include "InputOutputMyString.h"
+#include "InputOutputIndex.h"
 
 template < typename TypeDataVertex, typename TypeDataEdge> 
 void PrintAdjacencyMatrix(Graph<TypeDataVertex, TypeDataEdge> const & graph)
@@ -15,8 +15,8 @@ void PrintAdjacencyMatrix(Graph<TypeDataVertex, TypeDataEdge> const & graph)
 
     std::cout << "\t";
     for(/*cIt*/; cIt != cItEnd; ++cIt){
-        OutputMyString((*cIt).GetID());
-        std::cout << "\t";
+        OutputIndex((*cIt).GetID());
+        std::cout << "(" << (*cIt).GetDataVertex() << ")" << "\t";
     }
     std::cout << std::endl;
 
@@ -25,8 +25,8 @@ void PrintAdjacencyMatrix(Graph<TypeDataVertex, TypeDataEdge> const & graph)
 
     for(/*cItRow*/; cItRow != cItEnd; ++cItRow){
 
-        OutputMyString((*cItRow).GetID());
-        std::cout << "\t";
+        OutputIndex((*cItRow).GetID());
+        std::cout << "(" << (*cItRow).GetDataVertex() << ")" << "\t";
 
         typename Graph<TypeDataVertex, TypeDataEdge>::ConstIteratorVertex cItColumn = graph.ConstBegin();
 
@@ -39,8 +39,6 @@ void PrintAdjacencyMatrix(Graph<TypeDataVertex, TypeDataEdge> const & graph)
 
             for(/*cItEdgeRow*/; cItEdgeRow != cItEdgeRowEnd; ++cItEdgeRow){
                 
-                //раз ребро не ориентированное, а список смежных ребер содержит имя cItRow в любом случае
-                //то достаточно посмотреть что хотя бы одно имя совпадает с cItColumn
                 if((*cItEdgeRow).Oriented() == 0){
                     if((*cItRow).GetID() == (*cItEdgeRow).GetStartVertexID()
                             && (*cItColumn).GetID() == (*cItEdgeRow).GetEndVertexID()){

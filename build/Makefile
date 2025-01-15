@@ -240,29 +240,53 @@ Definition/TypesOfData/Comporators.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Comporators.cpp.s
 .PHONY : Definition/TypesOfData/Comporators.cpp.s
 
-Definition/TypesOfData/InputOutputMyString.o: Definition/TypesOfData/InputOutputMyString.cpp.o
-.PHONY : Definition/TypesOfData/InputOutputMyString.o
+Definition/TypesOfData/Index.o: Definition/TypesOfData/Index.cpp.o
+.PHONY : Definition/TypesOfData/Index.o
 
 # target to build an object file
-Definition/TypesOfData/InputOutputMyString.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/InputOutputMyString.cpp.o
-.PHONY : Definition/TypesOfData/InputOutputMyString.cpp.o
+Definition/TypesOfData/Index.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Index.cpp.o
+.PHONY : Definition/TypesOfData/Index.cpp.o
 
-Definition/TypesOfData/InputOutputMyString.i: Definition/TypesOfData/InputOutputMyString.cpp.i
-.PHONY : Definition/TypesOfData/InputOutputMyString.i
+Definition/TypesOfData/Index.i: Definition/TypesOfData/Index.cpp.i
+.PHONY : Definition/TypesOfData/Index.i
 
 # target to preprocess a source file
-Definition/TypesOfData/InputOutputMyString.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/InputOutputMyString.cpp.i
-.PHONY : Definition/TypesOfData/InputOutputMyString.cpp.i
+Definition/TypesOfData/Index.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Index.cpp.i
+.PHONY : Definition/TypesOfData/Index.cpp.i
 
-Definition/TypesOfData/InputOutputMyString.s: Definition/TypesOfData/InputOutputMyString.cpp.s
-.PHONY : Definition/TypesOfData/InputOutputMyString.s
+Definition/TypesOfData/Index.s: Definition/TypesOfData/Index.cpp.s
+.PHONY : Definition/TypesOfData/Index.s
 
 # target to generate assembly for a file
-Definition/TypesOfData/InputOutputMyString.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/InputOutputMyString.cpp.s
-.PHONY : Definition/TypesOfData/InputOutputMyString.cpp.s
+Definition/TypesOfData/Index.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/Index.cpp.s
+.PHONY : Definition/TypesOfData/Index.cpp.s
+
+Definition/TypesOfData/InputOutputIndex.o: Definition/TypesOfData/InputOutputIndex.cpp.o
+.PHONY : Definition/TypesOfData/InputOutputIndex.o
+
+# target to build an object file
+Definition/TypesOfData/InputOutputIndex.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/InputOutputIndex.cpp.o
+.PHONY : Definition/TypesOfData/InputOutputIndex.cpp.o
+
+Definition/TypesOfData/InputOutputIndex.i: Definition/TypesOfData/InputOutputIndex.cpp.i
+.PHONY : Definition/TypesOfData/InputOutputIndex.i
+
+# target to preprocess a source file
+Definition/TypesOfData/InputOutputIndex.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/InputOutputIndex.cpp.i
+.PHONY : Definition/TypesOfData/InputOutputIndex.cpp.i
+
+Definition/TypesOfData/InputOutputIndex.s: Definition/TypesOfData/InputOutputIndex.cpp.s
+.PHONY : Definition/TypesOfData/InputOutputIndex.s
+
+# target to generate assembly for a file
+Definition/TypesOfData/InputOutputIndex.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libTypesOfData.dir/build.make CMakeFiles/libTypesOfData.dir/Definition/TypesOfData/InputOutputIndex.cpp.s
+.PHONY : Definition/TypesOfData/InputOutputIndex.cpp.s
 
 Definition/TypesOfData/MyString.o: Definition/TypesOfData/MyString.cpp.o
 .PHONY : Definition/TypesOfData/MyString.o
@@ -357,9 +381,12 @@ help:
 	@echo "... Definition/TypesOfData/Comporators.o"
 	@echo "... Definition/TypesOfData/Comporators.i"
 	@echo "... Definition/TypesOfData/Comporators.s"
-	@echo "... Definition/TypesOfData/InputOutputMyString.o"
-	@echo "... Definition/TypesOfData/InputOutputMyString.i"
-	@echo "... Definition/TypesOfData/InputOutputMyString.s"
+	@echo "... Definition/TypesOfData/Index.o"
+	@echo "... Definition/TypesOfData/Index.i"
+	@echo "... Definition/TypesOfData/Index.s"
+	@echo "... Definition/TypesOfData/InputOutputIndex.o"
+	@echo "... Definition/TypesOfData/InputOutputIndex.i"
+	@echo "... Definition/TypesOfData/InputOutputIndex.s"
 	@echo "... Definition/TypesOfData/MyString.o"
 	@echo "... Definition/TypesOfData/MyString.i"
 	@echo "... Definition/TypesOfData/MyString.s"

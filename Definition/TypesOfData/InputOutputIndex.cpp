@@ -1,9 +1,9 @@
 #include <iostream>
 #include "MyString.h"
-#include "InputOutputMyString.h"
+#include "InputOutputIndex.h"
 
 
-bool MyStringFunction::GetCharMassive(char* arr, int const sizeOfArr) // sizeOfArr is count of chars without '\0'
+bool IndexFunction::GetCharMassive(char* arr, int const sizeOfArr) // sizeOfArr is count of chars without '\0'
     {
         bool isReadAllString = 0;
 
@@ -35,14 +35,14 @@ bool MyStringFunction::GetCharMassive(char* arr, int const sizeOfArr) // sizeOfA
         return isReadAllString;
     }
 
-void OutputMyString(MyString const & string)
+void OutputIndex(Index const & index)
 {
-      std::cout<< string.GetChar();
+      std::cout<< index.GetChar();
 }
 
-MyString InputMyString()
+Index InputMyString()
 {
     char buffer[1001];
     MyStringFunction::GetCharMassive(buffer, 1000);
-    return MyString(buffer);
+    return Index(buffer);
 }

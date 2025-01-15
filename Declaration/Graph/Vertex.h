@@ -4,12 +4,14 @@
 #include "Dictionary.h"
 #include "SharedPtr.h"
 #include "GetHashCode.h"
-#include "MyString.h"
+#include "Index.h"
 #include "Edge.h"
+
+// TypeDataVertex должнысодержать дружественный метод oparator<< (выводится на экран)
 
 template <typename TypeDataVertex, typename TypeDataEdge> class Vertex{
 //нам нужно различать два ребра с одинаковыми характеристиками(между одними и теми же вершинами, с одинаковыми значениями)
-typedef MyString ID;
+typedef Index ID;
 
 private:
 
@@ -20,7 +22,7 @@ private:
 public:
 
     Vertex(ID thisID, TypeDataVertex dataVertex = TypeDataVertex()) : thisID_(thisID), dataVertex_(dataVertex),
-        dictionaryEdges_(GetHashCodeMyString)
+        dictionaryEdges_(GetHashCodeIndex)
     {}
     //запретил чтобы не создавалось ситуаций когда три вершины имеют одно и то же ребро
     Vertex(Vertex<TypeDataVertex, TypeDataEdge> const & other) = delete;

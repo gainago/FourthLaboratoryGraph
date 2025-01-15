@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SharedPtr.h>
 //#include "UnitTests.h"
-#include "InputOutputMyString.h"
+#include "InputOutputIndex.h"
 #include "Graph.h"
 #include "Vertex.h"
 #include "PrintAdjacencyMatrix.h"
@@ -21,13 +21,17 @@ int main(int argc, char** argv)
    // Vertex<int, int> & vertexRef = GetVertex();
    // OutputMyString( vertexRef.GetID());
 
-   Graph<int, int> graph;
-   graph.AddVertex("First", 24);
-   graph.AddVertex("Second", 24);
+   Graph<MyString, int> graph;
+   graph.AddVertex("First", "Gosha");
+   graph.AddVertex("Second", "Telyak");
 
-   graph.AddVertex("Third", 24);
+   graph.AddVertex("Third", "Gorbat");
 
-   graph.AddEdge("First Edge", true, graph.GetSharedPointerVertex("First"), graph.GetSharedPointerVertex("First"), 256);
+   graph.AddEdge("First Edge", true, "First", "First", 256);
+
+   graph.AddVertex("Fourth", "Vlada");
+
+   graph.AddEdge("Bad Edge", 0,"Second","First", 68);
 
    PrintAdjacencyMatrix(graph);
 }

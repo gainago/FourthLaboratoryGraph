@@ -2,17 +2,17 @@
 #define INPUT_OUTPUT_MYSTRING_H
 
 #include <iostream>
-#include "MyString.h"
+#include "Index.h"
 
 
- namespace MyStringFunction
+ namespace IndexFunction
 {
     //sizeOfArr is count of chars without '\0', return isReadAllString
     bool GetCharMassive(char* arr, int const sizeOfArr); 
 }
 
-void OutputMyString(MyString const & string);
+void OutputIndex(Index const & index);
 
-MyString InputMyString();
+Index InputIndex();
 
 #endif //INPUT_OUTPUT_MYSTRING_H

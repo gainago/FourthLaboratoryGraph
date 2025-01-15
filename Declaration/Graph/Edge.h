@@ -2,10 +2,12 @@
 #define EDGE_H
 
 #include "Dictionary.h"
-#include "MyString.h"
+#include "Index.h"
+
+//TypeDataEdge должна обладать оператором + и опрератором <
 
 template <typename TypeDataVertex, typename TypeDataEdge> class Edge{
-    typedef MyString ID;
+    typedef Index ID;
 private:
 
     ID thisID_;

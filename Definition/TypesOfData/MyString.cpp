@@ -1,30 +1,30 @@
-//#include <iostream>
+#include <iostream>
 #include "MyString.h"
 
-    // bool MyStringFunction::GetCharMassive(char* arr, int const sizeOfArr) // sizeOfArr is count of chars without '\0'
-    // {
-    //     bool isReadAllString = 0;
+    bool MyStringFunction::GetCharMassive(char* arr, int const sizeOfArr) // sizeOfArr is count of chars without '\0'
+    {
+        bool isReadAllString = 0;
 
-    //     for(int i = 0; i < sizeOfArr; i++)
-    //     {
-    //         int tmp  = getchar();
-    //         if(tmp == EOF || tmp == int('\n')){
-    //             //arr[i] = '\0'; //correctly realisation
-    //             //return;
-    //             isReadAllString = 1;
+        for(int i = 0; i < sizeOfArr; i++)
+        {
+            int tmp  = getchar();
+            if(tmp == EOF || tmp == int('\n')){
+                //arr[i] = '\0'; //correctly realisation
+                //return;
+                isReadAllString = 1;
                 
-    //             for(int j = i; j < sizeOfArr; j++) //but i need that
-    //             {
-    //                 arr[j] = ' ';
-    //             }
-    //             break;
-    //         }
-    //         arr[i] = (char)tmp;
-    //     }
-    //     arr[sizeOfArr] = '\0';
+                for(int j = i; j < sizeOfArr; j++) //but i need that
+                {
+                    arr[j] = ' ';
+                }
+                break;
+            }
+            arr[i] = (char)tmp;
+        }
+        arr[sizeOfArr] = '\0';
 
-    //     return isReadAllString;
-    // }
+        return isReadAllString;
+    }
 
     MyString::MyString()
     {
@@ -99,11 +99,6 @@
 
         return tmp;
 
-    }
-
-    char const * MyString::GetChar() const
-    {
-        return str_;
     }
 
     MyString MyString::IntToMyString(int const number)
@@ -221,9 +216,6 @@
         int i = 0;
         while (src[i] != '\0')
         {
-            /*if(dest[i] == '\0'){ // так нельзя потому что dest may be garbage
-                throw "size of dest can not be more than size of source";
-            }*/
             dest[i] = src[i];
             i++;
         }
@@ -267,6 +259,11 @@
         }
 
         return this->str_[index];
+    }
+
+    char const * MyString::GetChar() const
+    {
+        return str_;
     }
 
     MyString& MyString::operator=(const MyString& other)
@@ -330,33 +327,33 @@
         return newStr;
     }
 
-    // std::ostream & operator<<(std::ostream &out, const MyString& myString)
-    // {
-    //     return out << myString.str_;
-    // }
+    std::ostream & operator<<(std::ostream &out, const MyString& myString)
+    {
+        return out << myString.str_;
+    }
 
-    // std::istream & operator>>(std::istream &in, MyString& myString)
-    // {
-    //     char buffer[1001];
-    //     MyStringFunction::GetCharMassive(buffer, 1000);
-    //     //in >> buffer;
-    //     myString.length_ = myString.StrLen(buffer);
+    std::istream & operator>>(std::istream &in, MyString& myString)
+    {
+        char buffer[1001];
+        MyStringFunction::GetCharMassive(buffer, 1000);
+        //in >> buffer;
+        myString.length_ = myString.StrLen(buffer);
 
-    //     delete[] myString.str_;
+        delete[] myString.str_;
 
         
 
-    //     try{
-    //         myString.str_ = new char[myString.length_ + 1];
-    //     }
-    //     catch (...)
-    //     {
-    //         throw "failed memory allocation";
-    //     }
+        try{
+            myString.str_ = new char[myString.length_ + 1];
+        }
+        catch (...)
+        {
+            throw "failed memory allocation";
+        }
 
-    //     myString.StrCopy(myString.str_, buffer);
-    //     return in;
-    // }
+        myString.StrCopy(myString.str_, buffer);
+        return in;
+    }
 
     int MyString::GetLength() const
     {
