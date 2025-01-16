@@ -5,8 +5,12 @@ void TestGraphConstructor();
 
 void TestGraphAddVertex();
 
+void TestGraphAddEdge();
+
+void TestGraphRemoveEdge();
+
 void TestGraphRemoveVertex();
 
-void TestPrintGraph();
+void TestGraphRemoveVertexWithAdjacentEdges();
 
 #endif //UNIT_TESTS_H

@@ -90,7 +90,7 @@ public:
         }
         Edge<TypeDataVertex, TypeDataEdge> & operator*() 
         {
-            ((*it_).GetSecond()).Get();
+            return ((*it_).GetSecond()).Get();
         }
 
         bool operator==(IteratorEdge const & other) const

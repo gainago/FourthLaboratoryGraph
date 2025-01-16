@@ -1,7 +1,6 @@
-CMakeFiles/Graph.dir/Definition/main.cpp.o: \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Definition/main.cpp \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/iostream \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/requires_hosted.h \
+CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o: \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Tests/Definition/UnitTests.cpp \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/cassert \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/x86_64-linux-gnu/c++/13/bits/c++config.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
   /usr/include/features.h /usr/include/features-time64.h \
@@ -13,6 +12,20 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/pstl/pstl_config.h \
+  /usr/include/assert.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Graph.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/Index.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Dictionary/Dictionary.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/DynamicArray.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/LinkedList.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/Pair.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Edge.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Vertex.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/SmartPointers/SharedPtr.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/GetHashCodes/GetHashCode.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/MyString.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/iostream \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/requires_hosted.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/ostream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/ios \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/iosfwd \
@@ -192,19 +205,8 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/ostream.tcc \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/istream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/istream.tcc \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/SmartPointers/SharedPtr.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Tests/Declaration/UnitTests.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/InputOutputIndex.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/Index.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Graph.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Dictionary/Dictionary.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/DynamicArray.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/LinkedList.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/Pair.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Edge.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Vertex.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/GetHashCodes/GetHashCode.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/MyString.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Path.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/ReturnValue.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/PrintAdjacencyMatrix.h
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/PrintArray.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/PrintAdjacencyMatrix.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/InputOutputIndex.h

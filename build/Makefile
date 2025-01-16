@@ -360,6 +360,30 @@ Definition/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Graph.dir/build.make CMakeFiles/Graph.dir/Definition/main.cpp.s
 .PHONY : Definition/main.cpp.s
 
+Tests/Definition/UnitTests.o: Tests/Definition/UnitTests.cpp.o
+.PHONY : Tests/Definition/UnitTests.o
+
+# target to build an object file
+Tests/Definition/UnitTests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Graph.dir/build.make CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o
+.PHONY : Tests/Definition/UnitTests.cpp.o
+
+Tests/Definition/UnitTests.i: Tests/Definition/UnitTests.cpp.i
+.PHONY : Tests/Definition/UnitTests.i
+
+# target to preprocess a source file
+Tests/Definition/UnitTests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Graph.dir/build.make CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.i
+.PHONY : Tests/Definition/UnitTests.cpp.i
+
+Tests/Definition/UnitTests.s: Tests/Definition/UnitTests.cpp.s
+.PHONY : Tests/Definition/UnitTests.s
+
+# target to generate assembly for a file
+Tests/Definition/UnitTests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Graph.dir/build.make CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.s
+.PHONY : Tests/Definition/UnitTests.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -396,6 +420,9 @@ help:
 	@echo "... Definition/main.o"
 	@echo "... Definition/main.i"
 	@echo "... Definition/main.s"
+	@echo "... Tests/Definition/UnitTests.o"
+	@echo "... Tests/Definition/UnitTests.i"
+	@echo "... Tests/Definition/UnitTests.s"
 .PHONY : help
 
 

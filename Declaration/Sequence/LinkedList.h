@@ -53,7 +53,7 @@ public:
                 return *this; 
             }
 
-            bool operator==(LinkedList<T>::Iterator const & other)
+            bool operator==(LinkedList<T>::Iterator const & other) const
             {
                 return this->currentNode_ == other.currentNode_;
             }

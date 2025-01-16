@@ -7,9 +7,10 @@
 #include "Vertex.h"
 #include "Path.h"
 #include "ReturnValue.h"
+#include "LinkedList.h"
 
 
-
+//TypeDataVertex, TypeDataEdge
 template < typename TypeDataVertex, typename TypeDataEdge> class Graph{
     // нам нужно отличать каждую вершину и каждое ребро друг от друга, к примеру для алгоритмов нахождения расстояние
     typedef Index ID;
@@ -62,13 +63,13 @@ public:
     }
 
     SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > GetSharedPointerEdge(ID idEdge)
-    {
-        return dictionaryEdge_.Get(idEdge);
+    {   
+            return dictionaryEdge_.Get(idEdge);  
     }
 
     SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > const & GetSharedPointerEdge(ID idEdge) const
     {
-        return dictionaryEdge_.Get(idEdge);
+            return dictionaryEdge_.Get(idEdge);  
     }
 
     void RemoveEdge(ID idEdge)
@@ -99,12 +100,21 @@ public:
         typename Vertex<TypeDataVertex, TypeDataEdge>::IteratorEdge itEdgeEnd = vertexToDelete.End();
 
         for(/*itEdge*/; itEdge != itEdgeEnd; ++itEdge){
-            RemoveEdge((*itEdge).GetFirst());
+            RemoveEdge((*itEdge).GetID());
         }
 
         dictionaryVertex_.Remove(idVertex);
     }
     
+    int GetCountOfVertices() const
+    {
+        return dictionaryVertex_.GetLength();
+    }
+
+    int GetCountOfEdges() const
+    {
+        return dictionaryEdge_.GetLength();
+    }
     // Path<TypeDataVertex, TypeDataEdge> BreadthFirstSearch(ID idVertexStart, ID idVertexEnd)
     // {
 
@@ -190,13 +200,16 @@ public:
         return dictionaryVertex_.ConstEnd();
     }
 
-private:
+//private:
+    public:
 
-    DynamicArray<SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > >
-                                                GetEdgesBetweenAdjacentVertices(ID idVertexFirst, ID idVertexSecond)
+    LinkedList<SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > >
+                                                GetEdgesBetweenAdjacentVertices(ID const & idVertexFirst, ID const & idVertexSecond)
     {
         SharedPtr<Vertex< TypeDataVertex, TypeDataEdge> > pVertexFirst;
         SharedPtr<Vertex< TypeDataVertex, TypeDataEdge> > pVertexSecond;
+
+        LinkedList<SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > > listEdges;
 
         try{
 
@@ -206,7 +219,7 @@ private:
         }
         catch(char const *)
         {
-            return DynamicArray<SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > >();
+            return listEdges;
         }
 
         typename Vertex<TypeDataVertex, TypeDataEdge>::IteratorEdge itEdge = pVertexFirst.Get().Begin();// помним что Vertex копировать нельзя
@@ -214,9 +227,30 @@ private:
 
         for(/*itEdge*/; itEdge != itEdgeEnd; ++itEdge){
 
-            
+            if(*(itEdge).Oriented() == 0){
+                if(*(itEdge).GetStartVertexID() == idVertexFirst && *(itEdge).GetEndVertexID() == idVertexSecond){
+
+                    listEdges.Append(this->GetSharedPointerEdge(*(itEdge).GetID()));
+                    continue;
+                }
+
+                if(*(itEdge).GetStartVertexID() == idVertexSecond && *(itEdge).GetEndVertexID() == idVertexFirst){
+
+                    listEdges.Append(this->GetSharedPointerEdge(*(itEdge).GetID()));
+                    continue;
+                }
+            }
+            else {
+                if(*(itEdge).GetStartVertexID() == idVertexFirst && *(itEdge).GetEndVertexID() == idVertexSecond){
+
+                    listEdges.Append(this->GetSharedPointerEdge(*(itEdge).GetID()));
+                    continue;
+                }
+            }
 
         }
+
+        return listEdges;
 
     }
 

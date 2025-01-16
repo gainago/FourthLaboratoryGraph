@@ -1,0 +1,149 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "liblibFunctions.so"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 70,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 13,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -O2 -ggdb -g -std=gnu++20 -fPIC"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "libFunctions_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Dictionary"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Functions"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/GetHashCodes"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/SmartPointers"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Tests/Declaration"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "libFunctions::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "libFunctions",
+	"nameOnDisk" : "liblibFunctions.so",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Definition/Functions/Abs.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

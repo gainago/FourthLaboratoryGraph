@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -ggdb")
+
 file(GLOB
             SOURCES "${PROJECT_SOURCE_DIR}/Definition/*.cpp")
 include_directories(
@@ -23,14 +25,14 @@ include_directories(
 
 #-----Library UnitTests----------------
 
-#include_directories(
-#    "${CMAKE_SOURCE_DIR}/Tests/Declaration"
-#)
+include_directories(
+   "${CMAKE_SOURCE_DIR}/Tests/Declaration"
+)
 #
-#file(GLOB
-#            UnitTestsSources "${CMAKE_SOURCE_DIR}/Tests/Definition/*.cpp")
+file(GLOB
+            UnitTestsSources "${CMAKE_SOURCE_DIR}/Tests/Definition/*.cpp")
 #add_library(libUnitTests SHARED ${UnitTestsSources})
-#
+
 #-----End UnitTests
 
 #-----Library TypesOfData----------------
@@ -71,6 +73,7 @@ add_library(libFunctions SHARED ${FunctionsSources})
 
 add_executable( ${PROJECT_NAME}
 ${SOURCES}
+${UnitTestsSources}
 )
 
 

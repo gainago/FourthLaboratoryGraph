@@ -144,7 +144,7 @@ public:
             return arrayIndex_;
         }
 
-        bool operator==(Iterator const & other)
+        bool operator==(Iterator const & other) const
         {
             if(this->arrayIndex_ == other.arrayIndex_ && (&(this->basedArray_) == (&other.basedArray_))
                 && this->isItEndIterator_ == other.isItEndIterator_ && this->listIterator_ == other.listIterator_){

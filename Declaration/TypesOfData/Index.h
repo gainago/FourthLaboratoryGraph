@@ -1,7 +1,6 @@
 #ifndef INDEX_H
 #define INDEX_H
 
-#include <iostream>
 // length_ of string is count of symbols without a '\0'
 
 

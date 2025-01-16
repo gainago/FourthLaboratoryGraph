@@ -1,1 +1,1 @@
-/usr/bin/g++ CMakeFiles/Graph.dir/Definition/main.cpp.o -o Graph  -Wl,-rpath,/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build liblibTypesOfData.so liblibGetHashCodes.so liblibFunctions.so 
+/usr/bin/clang++-18  -O2 -ggdb -g CMakeFiles/Graph.dir/Definition/main.cpp.o CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o -o Graph  -Wl,-rpath,/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build liblibTypesOfData.so liblibGetHashCodes.so liblibFunctions.so 
