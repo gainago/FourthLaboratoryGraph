@@ -134,6 +134,21 @@ public:
         this->capacity_ = CurrentCapacity;
 
     }
+
+    bool operator==(DynamicArray<T> const & other) const
+    {
+        if(this->GetCapacity() != other.GetCapacity()){
+            return 0;
+        }
+
+        for(int index = 0; index < this->GetCapacity(); ++index){
+            if(this->Get(index) != other.Get(index)){
+                return 0;
+            }
+        }
+
+        return 1;
+    }
 };
 
 #endif

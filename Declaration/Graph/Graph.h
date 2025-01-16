@@ -72,7 +72,7 @@ public:
             return dictionaryEdge_.Get(idEdge);  
     }
 
-    void RemoveEdge(ID idEdge)
+    void RemoveEdge(ID const & idEdge)
     {
         SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > pEdgeToRemove = dictionaryEdge_.Get(idEdge);
         ID idStartVertex = pEdgeToRemove.Get().GetStartVertexID();//получили имена вершин котрые содержат это ребро
@@ -89,9 +89,11 @@ public:
         if(vertexEnd.Contains(idEdge)){//случай наличия петли
             vertexEnd.RemoveEdge(idEdge);
         }
+
+        dictionaryEdge_.Remove(idEdge);
     }
 
-    void RemoveVertex(ID idVertex)
+    void RemoveVertex(ID const & idVertex)
     {
         SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > pVertex = GetSharedPointerVertex(idVertex);
         Vertex<TypeDataVertex, TypeDataEdge> & vertexToDelete = pVertex.Get();
@@ -99,8 +101,10 @@ public:
         typename Vertex<TypeDataVertex, TypeDataEdge>::IteratorEdge itEdge = vertexToDelete.Begin();
         typename Vertex<TypeDataVertex, TypeDataEdge>::IteratorEdge itEdgeEnd = vertexToDelete.End();
 
-        for(/*itEdge*/; itEdge != itEdgeEnd; ++itEdge){
+        while(itEdge != itEdgeEnd){             //удаление по итератору у меня не поддерживается
             RemoveEdge((*itEdge).GetID());
+            itEdge = vertexToDelete.Begin();
+            itEdgeEnd = vertexToDelete.End();
         }
 
         dictionaryVertex_.Remove(idVertex);

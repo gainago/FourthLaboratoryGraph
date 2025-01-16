@@ -162,10 +162,8 @@ void TestGraphAddEdge()
             graph.GetSharedPointerEdge("Fourth Edge ID"); // we have not added edge with this index
             assert(0); // we should get exeption if we find non-existent edge
         }
-        catch(...)
-        {
-            
-        }
+        catch(...){}
+        
 
         try{ 
             graph.AddEdge("First Edge ID", 0, "Third Vertex ID", "Second Vertex ID", 2); // we already have edge with this ID
@@ -223,10 +221,8 @@ void TestGraphAddEdge()
             graph.GetSharedPointerEdge("Fourth Edge ID"); // we have not added edge with this index
             assert(0); // we should get exeption if we find non-existent edge
         }
-        catch(char const * message)
-        {
-            std::cout << message;
-        }
+        catch(...)
+        {}
 
         try{ 
             graph.AddEdge("First Edge ID", 0, "Third Edge ID", "Second Vertex ID", "A_BOB_US"); // we already have edge with this ID
@@ -529,7 +525,7 @@ void TestGraphRemoveVertexWithAdjacentEdges()
         //check that other edges and vertices had not deleted
         assert(graph.GetSharedPointerEdge("Third Edge ID").Get().GetDataEdge() == 100'500);
         assert(graph.GetSharedPointerVertex("Second Vertex ID").Get().GetDataVertex() == -9'088);
-        assert(graph.GetSharedPointerVertex("Fourth Edge ID").Get().GetDataVertex() == 0);
+        assert(graph.GetSharedPointerVertex("Third Vertex ID").Get().GetDataVertex() == 0);
 
 
     }
@@ -552,6 +548,85 @@ void TestGraphRemoveVertexWithAdjacentEdges()
 
             Index currentEdgeIndex((MyString::IntToMyString(i)).GetChar());
             graph.AddEdge(currentEdgeIndex, i%2, "Second Vertex ID", "Second Vertex ID", (333232 + i)/333);
+        }
+
+        assert(graph.GetCountOfEdges() == 20);
+
+        graph.RemoveVertex("First Vertex ID");
+
+        assert(graph.GetCountOfEdges() == 10);
+        assert(graph.GetCountOfVertices() == 1);
+
+        graph.RemoveVertex("Second Vertex ID");
+
+        assert(graph.GetCountOfEdges() == 0);
+        assert(graph.GetCountOfVertices() == 0);
+
+
+    }
+//custom data types
+    {
+        Graph<MyString, MyString> graph;
+    
+        graph.AddVertex("First Vertex ID", "First Vertex Data"); 
+        graph.AddVertex("Second Vertex ID", "Second Vertex Data");
+        graph.AddVertex("Third Vertex ID", "Third Vertex Data");
+
+        graph.AddEdge("First Edge ID", 0, "First Vertex ID", "Second Vertex ID", "First Edge Data");
+            //id: "First Edge ID", notOriented, idVertexStart: "First Vertex ID", idVertexEnd: "Second Vertex ID", value 200'000        
+        graph.AddEdge("Second Edge ID", 0, "First Vertex ID", "Third Vertex ID", "Second Edge Data");
+        graph.AddEdge("Third Edge ID", 1, "Third Vertex ID", "Third Vertex ID", "Third Edge Data");
+        graph.AddEdge("Fourth Edge ID", 0, "First Vertex ID", "First Vertex ID", "Fourth Edge Data");
+
+        //there are two edges from "First Vertex" to another vertices, and one edge from "First Vertex" to "First Vertex"
+        assert(graph.GetCountOfEdges() == 4);
+
+        graph.RemoveVertex("First Vertex ID");
+
+        assert(graph.GetCountOfEdges() == 1);//only one edge, from "Third Vertex ID" to "Third Vertex ID" exists
+
+        try{
+            graph.GetSharedPointerEdge("First Edge ID"); // should get exeption, because we can not have edge without source vertex
+            assert(0);
+        }
+        catch(...){}
+        try{
+            graph.GetSharedPointerEdge("Second Edge ID"); // should get exeption, because we can not have edge without source vertex
+            assert(0);
+        }
+        catch(...){}
+        try{
+            graph.GetSharedPointerEdge("Fourth Edge ID"); // should get exeption, because we can not have edge without source vertex
+            assert(0);
+        }
+        catch(...){}
+
+        //check that other edges and vertices had not deleted
+        assert(graph.GetSharedPointerEdge("Third Edge ID").Get().GetDataEdge() == "Third Edge Data");
+        assert(graph.GetSharedPointerVertex("Second Vertex ID").Get().GetDataVertex() == "Second Vertex Data");
+        assert(graph.GetSharedPointerVertex("Third Vertex ID").Get().GetDataVertex() == "Third Vertex Data");
+
+
+    }
+
+    {
+        Graph<MyString, MyString> graph;
+
+        graph.AddVertex("First Vertex ID", "First Vertex Data");
+        graph.AddVertex("Second Vertex ID", "Second Vertex Data");
+
+        for(int i = 0; i < 10; ++i){
+
+            Index currentEdgeIndex((MyString::IntToMyString(i)).GetChar());
+            graph.AddEdge(currentEdgeIndex, 1, "First Vertex ID", "First Vertex ID", MyString::IntToMyString((333232 + i)/333));
+        }
+
+        assert(graph.GetCountOfEdges() == 10);
+
+        for(int i = 10; i < 20; ++i){
+
+            Index currentEdgeIndex((MyString::IntToMyString(i)).GetChar());
+            graph.AddEdge(currentEdgeIndex, i%2, "Second Vertex ID", "Second Vertex ID", MyString::IntToMyString((333232 + i)/333));
         }
 
         assert(graph.GetCountOfEdges() == 20);

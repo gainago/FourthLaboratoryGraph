@@ -44,7 +44,8 @@ private:
     {
         DynamicArray<LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> > > newArray(newSize);
         Iterator it = this->Begin();
-        for(;it != this->End(); ++it)
+        Iterator itEnd = this->End();
+        for(;it != itEnd; ++it)
         {
             newArray[GetHashCode_((*it).GetFirst()) % newArray.GetCapacity()].Append(
                 MyNamespace::Pair<TypeKey const, TypeValue>((*it).GetFirst(), (*it).GetSecond()));
@@ -56,7 +57,7 @@ private:
     
 
 public:
-
+    //НЕЛЬЗЯ УДАЛЯТЬ ЗНАЧЕНИЯ ПО ИТЕРАТОРУ
     class Iterator{ 
         friend class Dictionary<TypeKey, TypeValue>;
     private:
@@ -127,6 +128,13 @@ public:
             isItEndIterator_ = 1;
             return *this;
 
+        }
+
+        void operator=(Iterator & other){
+            this->arrayIndex_ = other.arrayIndex_;
+            this->basedArray_ = other.basedArray_;
+            this->isItEndIterator_ = other.isItEndIterator_;
+            this->listIterator_ = other.listIterator_;
         }
 
         MyNamespace::Pair< const TypeKey, TypeValue>& operator*()
@@ -376,6 +384,11 @@ public:
 
     TypeValue& Get(TypeKey const & key)
     {
+
+        if(array_.GetCapacity() == 0){
+            throw " Dictionary is empty";
+        }
+
         typename LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> >::Iterator it = array_[GetHashCode_(key) % array_.GetCapacity()].Begin();
         typename LinkedList<MyNamespace::Pair<TypeKey const, TypeValue> >::Iterator itEnd = array_[GetHashCode_(key) % array_.GetCapacity()].End();
         

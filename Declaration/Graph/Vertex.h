@@ -62,7 +62,7 @@ public:
         dictionaryEdges_.Remove((edge.Get()).GetID());
     }
 
-    void RemoveEdge(ID edgeID)
+    void RemoveEdge(ID const & edgeID)
     {
         dictionaryEdges_.Remove(edgeID);
     }
@@ -88,6 +88,11 @@ public:
         {
             ++it_;
         }
+
+        void operator=(IteratorEdge other){
+            this->it_ = other.it_;
+        }
+
         Edge<TypeDataVertex, TypeDataEdge> & operator*() 
         {
             return ((*it_).GetSecond()).Get();

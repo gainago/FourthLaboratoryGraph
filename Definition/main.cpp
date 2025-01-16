@@ -9,9 +9,9 @@
 int main(int argc, char** argv)
 {
    TestGraphConstructor();
-    TestGraphAddVertex();
+   TestGraphAddVertex();
    TestGraphAddEdge();
-    TestGraphRemoveEdge();
+   TestGraphRemoveEdge();
    TestGraphRemoveVertex();
    TestGraphRemoveVertexWithAdjacentEdges();
 }

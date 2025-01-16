@@ -55,7 +55,7 @@ public:
 
             bool operator==(LinkedList<T>::Iterator const & other) const
             {
-                return this->currentNode_ == other.currentNode_;
+                return this->currentNode_== other.currentNode_;
             }
 
             bool operator!=(LinkedList<T>::Iterator const & other)
