@@ -13,4 +13,6 @@ void TestGraphRemoveVertex();
 
 void TestGraphRemoveVertexWithAdjacentEdges();
 
+void TestGraphGetEdgesBetweenAdjacentVertices();
+
 #endif //UNIT_TESTS_H

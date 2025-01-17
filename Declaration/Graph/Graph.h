@@ -8,6 +8,7 @@
 #include "Path.h"
 #include "ReturnValue.h"
 #include "LinkedList.h"
+//#include "iostream"
 
 
 //TypeDataVertex, TypeDataEdge
@@ -119,10 +120,10 @@ public:
     {
         return dictionaryEdge_.GetLength();
     }
-    // Path<TypeDataVertex, TypeDataEdge> BreadthFirstSearch(ID idVertexStart, ID idVertexEnd)
-    // {
+    Path<TypeDataVertex, TypeDataEdge> BreadthFirstSearch(ID idVertexStart, ID idVertexEnd) // ищет какой-нибудь путь между двумя вершинами
+    {
 
-    // }
+    }
 
     class IteratorVertex{
     private:
@@ -205,7 +206,7 @@ public:
     }
 
 //private:
-    public:
+public:
 
     LinkedList<SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > >
                                                 GetEdgesBetweenAdjacentVertices(ID const & idVertexFirst, ID const & idVertexSecond)
@@ -231,23 +232,24 @@ public:
 
         for(/*itEdge*/; itEdge != itEdgeEnd; ++itEdge){
 
-            if(*(itEdge).Oriented() == 0){
-                if(*(itEdge).GetStartVertexID() == idVertexFirst && *(itEdge).GetEndVertexID() == idVertexSecond){
+            if((*itEdge).Oriented() == 0){
+                if((*itEdge).GetStartVertexID() == idVertexFirst && (*itEdge).GetEndVertexID() == idVertexSecond){
 
-                    listEdges.Append(this->GetSharedPointerEdge(*(itEdge).GetID()));
+                    listEdges.Append(this->GetSharedPointerEdge((*itEdge).GetID()));
+                    //std::cout << MyString(((*itEdge).GetID()).GetChar()) << std::endl;
                     continue;
                 }
 
-                if(*(itEdge).GetStartVertexID() == idVertexSecond && *(itEdge).GetEndVertexID() == idVertexFirst){
+                if((*itEdge).GetStartVertexID() == idVertexSecond && (*itEdge).GetEndVertexID() == idVertexFirst){
 
-                    listEdges.Append(this->GetSharedPointerEdge(*(itEdge).GetID()));
+                    listEdges.Append(this->GetSharedPointerEdge((*itEdge).GetID()));
                     continue;
                 }
             }
             else {
-                if(*(itEdge).GetStartVertexID() == idVertexFirst && *(itEdge).GetEndVertexID() == idVertexSecond){
+                if((*itEdge).GetStartVertexID() == idVertexFirst && (*itEdge).GetEndVertexID() == idVertexSecond){
 
-                    listEdges.Append(this->GetSharedPointerEdge(*(itEdge).GetID()));
+                    listEdges.Append(this->GetSharedPointerEdge((*itEdge).GetID()));
                     continue;
                 }
             }

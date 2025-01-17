@@ -644,3 +644,62 @@ void TestGraphRemoveVertexWithAdjacentEdges()
 
     }
 }
+
+void TestGraphGetEdgesBetweenAdjacentVertices()
+{
+//built-in data types
+    {
+        Graph<int, int> graph;
+    
+        graph.AddVertex("First Vertex ID", 8'800'555); 
+        graph.AddVertex("Second Vertex ID", -9'088);
+        graph.AddVertex("Third Vertex ID", 0);
+
+        graph.AddEdge("First Edge ID", 0, "First Vertex ID", "Second Vertex ID", 200'000);
+            //id: "First Edge ID", notOriented, idVertexStart: "First Vertex ID", idVertexEnd: "Second Vertex ID", value 200'000        
+        graph.AddEdge("Second Edge ID", 0, "First Vertex ID", "Third Vertex ID", -300);
+        graph.AddEdge("Third Edge ID", 1, "Third Vertex ID", "Third Vertex ID", 100'500);
+        graph.AddEdge("Fourth Edge ID", 0, "First Vertex ID", "First Vertex ID", 200'000);
+        graph.AddEdge("Fiveth Edge ID", 1, "First Vertex ID", "Second Vertex ID", 987'654'321);
+        graph.AddEdge("Sixth Edge ID", 1, "Second Vertex ID", "First Vertex ID", +300);
+
+        //"First Edge": not-oriented edge from "First Vertex" to "Second Vertex"
+        //"Second Edge": not-oriented edge from "First Vertex" to "Third Vertex"
+        //"Third Edge": oriented edge from "Third Vertex" to "Third Vertex"
+        //"Fourth Edge": not-oriented edge from "First Vertex" to "First Vertex"
+        //"Fiveth Edge": oriented edge from "First Vertex" to "Second Vertex"
+        //"Sixth Edge": oriented edge from "Second Vertex" to "First Vertex"
+
+        //when i call GetEdgesBetweenAdjacentVertices("First Vertex", "Second Vertex")
+        //graph should receive: "First Edge", "Fiveth Edge".
+        
+        LinkedList<SharedPtr<Edge< int, int> > > listEdgesFirstSecond = graph.GetEdgesBetweenAdjacentVertices("First Vertex ID", "Second Vertex ID");
+        assert(listEdgesFirstSecond.GetLength() == 2);
+
+        assert((listEdgesFirstSecond.Get(0)).Get().GetID() == "First Edge ID" 
+                || (listEdgesFirstSecond.Get(0)).Get().GetID() == "Fiveth Edge ID");
+
+        assert((listEdgesFirstSecond.Get(1)).Get().GetID() == "First Edge ID" 
+                || (listEdgesFirstSecond.Get(1)).Get().GetID() == "Fiveth Edge ID");
+        
+        assert( (listEdgesFirstSecond.Get(0)).Get().GetID() != (listEdgesFirstSecond.Get(1)).Get().GetID() );
+
+
+        //when i call GetEdgesBetweenAdjacentVertices("First Vertex", "First Vertex")
+        //graph should receive: "Fourth Edge".
+
+        LinkedList<SharedPtr<Edge< int, int> > > listEdgesFirstFirst = graph.GetEdgesBetweenAdjacentVertices("First Vertex ID", "First Vertex ID");
+        assert(listEdgesFirstFirst.GetLength() == 1);
+
+        assert((listEdgesFirstFirst.Get(0)).Get().GetID() == "Fourth Edge ID");
+
+
+        //when i call GetEdgesBetweenAdjacentVertices("Second Vertex", "Second Vertex")
+        //graph should receive: .
+
+        LinkedList<SharedPtr<Edge< int, int> > > listEdgesSecondSecond = graph.GetEdgesBetweenAdjacentVertices("Second Vertex ID", "Second Vertex ID");
+        assert(listEdgesSecondSecond.GetLength() == 0);
+
+
+    }
+}

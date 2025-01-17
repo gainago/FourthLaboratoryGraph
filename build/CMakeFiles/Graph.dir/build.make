@@ -73,29 +73,29 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: CMakeFiles/Graph.dir/flags.make
 CMakeFiles/Graph.dir/Definition/main.cpp.o: /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Definition/main.cpp
 CMakeFiles/Graph.dir/Definition/main.cpp.o: CMakeFiles/Graph.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Graph.dir/Definition/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Graph.dir/Definition/main.cpp.o -MF CMakeFiles/Graph.dir/Definition/main.cpp.o.d -o CMakeFiles/Graph.dir/Definition/main.cpp.o -c /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Definition/main.cpp
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Graph.dir/Definition/main.cpp.o -MF CMakeFiles/Graph.dir/Definition/main.cpp.o.d -o CMakeFiles/Graph.dir/Definition/main.cpp.o -c /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Definition/main.cpp
 
 CMakeFiles/Graph.dir/Definition/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Graph.dir/Definition/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Definition/main.cpp > CMakeFiles/Graph.dir/Definition/main.cpp.i
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Definition/main.cpp > CMakeFiles/Graph.dir/Definition/main.cpp.i
 
 CMakeFiles/Graph.dir/Definition/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Graph.dir/Definition/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Definition/main.cpp -o CMakeFiles/Graph.dir/Definition/main.cpp.s
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Definition/main.cpp -o CMakeFiles/Graph.dir/Definition/main.cpp.s
 
 CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o: CMakeFiles/Graph.dir/flags.make
 CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o: /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Tests/Definition/UnitTests.cpp
 CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o: CMakeFiles/Graph.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o -MF CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o.d -o CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o -c /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Tests/Definition/UnitTests.cpp
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o -MF CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o.d -o CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o -c /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Tests/Definition/UnitTests.cpp
 
 CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Tests/Definition/UnitTests.cpp > CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.i
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Tests/Definition/UnitTests.cpp > CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.i
 
 CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Tests/Definition/UnitTests.cpp -o CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.s
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Tests/Definition/UnitTests.cpp -o CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.s
 
 # Object files for target Graph
 Graph_OBJECTS = \
