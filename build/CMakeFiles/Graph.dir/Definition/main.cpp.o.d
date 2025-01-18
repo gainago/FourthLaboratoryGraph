@@ -202,7 +202,8 @@ CMakeFiles/Graph.dir/Definition/main.cpp.o: \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Edge.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Vertex.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/GetHashCodes/GetHashCode.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/MyString.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Path.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/ReturnValue.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/PrintAdjacencyMatrix.h
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/PrintAdjacencyMatrix.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/GetHashCodes/GetHashCodeCustomDataTypes.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/MyString.h

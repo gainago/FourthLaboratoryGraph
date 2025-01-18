@@ -120,8 +120,147 @@ public:
     {
         return dictionaryEdge_.GetLength();
     }
-    Path<TypeDataVertex, TypeDataEdge> BreadthFirstSearch(ID idVertexStart, ID idVertexEnd) // ищет какой-нибудь путь между двумя вершинами
+
+    //возвращает вершины между начальной и конечной включая их
+    //не возвращает ребра между вершинами потому что ребра его интересуют только в контексте связности
+    MyNamespace::ReturnValue< Path<TypeDataVertex, TypeDataEdge> > BreadthFirstSearch(ID idVertexStart, ID idVertexEnd) // ищет какой-нибудь путь между двумя вершинами
     {
+        Dictionary<ID, bool> dictionaryVisitedVertices(GetHashCodeIndex);
+
+        //key = ID vertex destination, value = ID vertex previous destination; it helps us take a path
+        Dictionary<ID, ID> dictionaryPreviousVertex(GetHashCodeIndex); 
+        LinkedList<ID> queue;
+
+        if(idVertexStart == idVertexEnd){
+            Path<TypeDataVertex, TypeDataEdge> path;
+            path.listVertices_.Append(this->GetSharedPointerVertex(idVertexStart));
+            return MyNamespace::ReturnValue< Path<TypeDataVertex, TypeDataEdge> >(1, path);
+        }
+
+        this->GetSharedPointerVertex(idVertexStart); // check that vertices are exists
+        this->GetSharedPointerVertex(idVertexEnd);
+        
+
+        queue.Prepend(idVertexStart);
+        dictionaryVisitedVertices.Add(idVertexStart, 1);
+
+        while(queue.GetLength() > 0){
+            ID idCurrentVertex = queue.Get(0);
+            queue.Remove(0);
+
+            if(idCurrentVertex == idVertexEnd){
+                break;
+            }
+
+            LinkedList<SharedPtr<Vertex<TypeDataVertex, TypeDataEdge> > > listAdjacentVertices;
+
+            listAdjacentVertices = this->GetAdjacentVertices(idCurrentVertex);
+
+            typename LinkedList<SharedPtr<Vertex<TypeDataVertex, TypeDataEdge> > >::Iterator itAdjacentVertices = listAdjacentVertices.Begin();
+            typename LinkedList<SharedPtr<Vertex<TypeDataVertex, TypeDataEdge> > >::Iterator itAdjacentVerticesEnd = listAdjacentVertices.End();
+
+            for(/*itAdjacentVertices*/; itAdjacentVertices != itAdjacentVerticesEnd; ++itAdjacentVertices){
+                
+                ID idCurrentAdjacentVertex = (*itAdjacentVertices).Get().GetID();
+                if(!dictionaryVisitedVertices.Contains(idCurrentAdjacentVertex)){
+                    queue.Append(idCurrentAdjacentVertex);
+                    dictionaryVisitedVertices.Add(idCurrentAdjacentVertex, 1);
+                    dictionaryPreviousVertex.Add(idCurrentAdjacentVertex, idCurrentVertex);
+
+                }
+
+            }
+
+        }
+
+        if(!dictionaryPreviousVertex.Contains(idVertexEnd)){
+            return MyNamespace::ReturnValue< Path<TypeDataVertex, TypeDataEdge> >(0, Path<TypeDataVertex, TypeDataEdge>());
+        }
+
+        ID idPreviousVertex = idVertexEnd;
+
+        Path<TypeDataVertex, TypeDataEdge> path;
+
+        while(true){
+
+            path.listVertices_.Prepend(this->GetSharedPointerVertex(idPreviousVertex));
+
+            if(idPreviousVertex == idVertexStart){
+                break;
+            }
+
+            idPreviousVertex = dictionaryPreviousVertex.Get(idPreviousVertex);
+
+            
+        }
+
+        return MyNamespace::ReturnValue< Path<TypeDataVertex, TypeDataEdge> >(1, path);
+
+
+
+    }
+
+
+    //возвращает пару из словаря, позволяющего получить наилучший путь, и словаря показывающего наименьшую стоимость пути
+    //вычисление проводится относительно вершины с индексом idSourceVertex
+    //не защищен от переполнения TypeDataEdge в пользу минимальных требований в данному типу
+    //Обратите внимание что при наличии циклов, суммарно отрицательного веса, 
+    //или (что то же самое) при наличии неориентированных ребер отрицательного веса, алгоритм бросит исключение
+    MyNamespace::Pair<Dictionary<Index, Index>, Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > > 
+                                                        FordBellmanAlgorithm(Index idSourceVertex)
+    {
+        //Index - имя вершины, Pair.First() == false булевый параметр означающий вес равный бесконечности(устанавливается в самом начале)
+        //TypeDataEdge минимальная сумма весов ребер, от исходной вершины до текущей 
+        Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > dictionaryScales(GetHashCodeIndex);
+        //когда алгоритм найдет лучший путь до вершины, имя которое это первый параметр
+        //он заменит(или создаст) имя второй вершины, на имя текущей в алгоритме
+        Dictionary<Index, Index> dictionaryAncestor(GetHashCodeIndex);
+
+        typename Dictionary<ID, SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > >::ConstIterator cIt = dictionaryVertex_.ConstBegin();
+        typename Dictionary<ID, SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > >::ConstIterator cItEnd = dictionaryVertex_.ConstEnd();
+
+        for(/*cIt*/; cIt != cItEnd; ++cIt){
+            dictionaryScales.Add((*cIt).GetID(), MyNamespace::Pair<bool, TypeDataEdge>(0, TypeDataEdge()));
+        }
+
+        //установили значение исходной вершины
+        dictionaryScales.Get(idSourceVertex) = MyNamespace::Pair<bool, TypeDataEdge>(1, TypeDataEdge());
+
+        //теперь пройдемся dictionaryVertices_.GetLength() - 1 раз по всем ребрам, по известной теореме после i-того прохода
+        //наше, найденное расстояние от source до какой либо вершины
+        //будет не больше такого же расстояния для любого пути содержащего i ребер
+        //соответственно после dictionaryVertices_.GetLength() - 1 проходов 
+        //наше, найденное расстояние будет не больше расстояния для любого другого пути
+
+        for(int pass = 1; pass < dictionaryVertex_.GetLength(); ++pass){
+
+            //теперь пробегаемся по всем ребрам и смотрим, можно ли уменьшить вес текущего пути
+            typename Dictionary<ID, SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > >::ConstIterator cIt = dictionaryEdge_.ConstBegin();
+            typename Dictionary<ID, SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > >::ConstIterator cItEnd = dictionaryEdge_.ConstEnd();
+
+            for(/*cIt*/; cIt != cItEnd; ++cIt){
+
+                Edge<TypeDataVertex, TypeDataEdge> const & currentEdge = (*cIt).Get();
+
+                Index idStartVertex = currentEdge.GetStartVertexID();
+                Index idEndVertex = currentEdge.GetEndVertexID();
+
+                MyNamespace::Pair<bool, TypeDataEdge>& scaleStartVertex = dictionaryScales.Get(idStartVertex);
+                MyNamespace::Pair<bool, TypeDataEdge>& scaleEndVertex = dictionaryScales.Get(idEndVertex);
+
+                if(currentEdge.Oriented() == 0){
+
+                    //если пути до обеих вершин не равны бесконечности
+                    if(dictionaryScales.Get(idStartVertex).GetFirst() == 1 &&){
+
+                    }
+
+                }
+
+
+
+            }
+        }
 
     }
 
@@ -259,8 +398,114 @@ public:
         return listEdges;
 
     }
+//если соединен с собой то вернет в том числе и себя
+    LinkedList<SharedPtr<Vertex<TypeDataVertex, TypeDataEdge> > > GetAdjacentVertices(ID const & idVertex)
+    {
+        SharedPtr<Vertex< TypeDataVertex, TypeDataEdge> > pVertex;
+
+        LinkedList<SharedPtr<Vertex< TypeDataVertex, TypeDataEdge> > > listVertices;
+
+        try{
+
+            pVertex = this->GetSharedPointerVertex(idVertex);
+
+        }
+        catch(char const *)
+        {
+            return listVertices;
+        }
+
+        typename Vertex<TypeDataVertex, TypeDataEdge>::IteratorEdge itEdge = pVertex.Get().Begin();// помним что Vertex копировать нельзя
+        typename Vertex<TypeDataVertex, TypeDataEdge>::IteratorEdge itEdgeEnd = pVertex.Get().End();
+
+        ID currentAdjacentVertex;
+        
+
+        for(/*itEdge*/; itEdge != itEdgeEnd; ++itEdge){
+
+            bool foundPossibleVertex = 0;
+
+            if((*itEdge).Oriented() == 0){
+                if((*itEdge).GetStartVertexID() == idVertex && (*itEdge).GetEndVertexID() == idVertex){
+
+                    currentAdjacentVertex = (*itEdge).GetStartVertexID();
+                    foundPossibleVertex = 1;
+                    //listVertices.Append(this->GetSharedPointerEdge((*itEdge).GetID()));
+                    //std::cout << MyString(((*itEdge).GetID()).GetChar()) << std::endl;
+                   
+                }
+
+                if((*itEdge).GetStartVertexID() == idVertex && (*itEdge).GetEndVertexID() != idVertex){
+                    currentAdjacentVertex = (*itEdge).GetEndVertexID();
+                    foundPossibleVertex = 1;
+                    
+                }
+
+                if((*itEdge).GetStartVertexID() != idVertex && (*itEdge).GetEndVertexID() == idVertex){
+                    currentAdjacentVertex = (*itEdge).GetStartVertexID();
+                    foundPossibleVertex = 1;
+                    
+                }
+            }
+            else {
+                if((*itEdge).GetStartVertexID() == idVertex){
+
+                    currentAdjacentVertex = (*itEdge).GetEndVertexID();
+                    foundPossibleVertex = 1;
+                }
+            }
+
+            //пробежимся по листу чтобы проверить добавили ли мы уже указатель на текущую вершину
+            //(вдруг есть два ребра между одними и теми же вершинами)
+            if(foundPossibleVertex == 1){
+
+                bool needAppend = 1;
+
+                typename LinkedList<SharedPtr<Vertex< TypeDataVertex, TypeDataEdge> > >::Iterator it = listVertices.Begin();
+                typename LinkedList<SharedPtr<Vertex< TypeDataVertex, TypeDataEdge> > >::Iterator itEnd = listVertices.End();
+
+                for(/*it*/; it != itEnd; ++it){
+                    
+                    if((*it).Get().GetID() == currentAdjacentVertex){
+                        needAppend = 0;
+                        break;
+                    }
+                }
+                if(needAppend){
+                    listVertices.Append(this->GetSharedPointerVertex(currentAdjacentVertex));
+                }
+
+            }
+
+        }
+
+        return listVertices;
+
+    }
+
+    SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > 
+                                FindMininumEdge(LinkedList<SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > >& listEdges)
+    {
+
+        if(listEdges.GetLength() == 0){
+            throw "There are no edges";
+        }
+
+        typename LinkedList<SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > >::Iterator it = listEdges.Begin();
+        typename LinkedList<SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > >::Iterator itEnd = listEdges.End();
+
+        SharedPtr<Edge< TypeDataVertex, TypeDataEdge> > pMinimumEdge = *it;
+
+        for(/*it*/; it != itEnd; ++it){
+            if((*it).Get().GetDataEdge() < pMinimumEdge.Get().GetDataEdge()){
+                pMinimumEdge = (*it);
+            }
+        }
+
+        return pMinimumEdge;
 
 
+    }
 };
 
 

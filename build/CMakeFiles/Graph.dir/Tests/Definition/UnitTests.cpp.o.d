@@ -23,6 +23,8 @@ CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o: \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Vertex.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/SmartPointers/SharedPtr.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/GetHashCodes/GetHashCode.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Path.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/ReturnValue.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/MyString.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/iostream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/requires_hosted.h \
@@ -203,8 +205,7 @@ CMakeFiles/Graph.dir/Tests/Definition/UnitTests.cpp.o: \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/ostream.tcc \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/istream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/istream.tcc \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/Path.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/ReturnValue.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Sequence/PrintArray.h \
   /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/PrintAdjacencyMatrix.h \
-  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/InputOutputIndex.h
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/TypesOfData/InputOutputIndex.h \
+  /home/goshagaina/MEPHILabsMyselfThirdSemester/FourthLaboratoryGraph/Declaration/Graph/PrintPath.h

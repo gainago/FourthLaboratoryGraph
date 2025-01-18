@@ -2,20 +2,23 @@
 #define PATH_H
 
 #include "Edge.h"
-#include "DynamicArray.h"
+#include "Vertex.h"
+#include "LinkedList.h"
 
+//путь начинается и заканчивается вершиной, то есть длинна listVertices_.GetLength() = listEdges_.GetLength() + 1 
 template <typename TypeDataVertex, typename TypeDataEdge> class Path{
-private:
+public:
 
-    DynamicArray<Edge < TypeDataVertex, TypeDataEdge> > arrayPath_;
+    LinkedList<SharedPtr<Edge<TypeDataVertex, TypeDataEdge> > > listEdges_; //нуу спорно что это надо
+    LinkedList<SharedPtr<Vertex<TypeDataVertex, TypeDataEdge> > > listVertices_;
 
 public:
 
-        Path() : arrayPath_() {}
+        Path() : listVertices_() {}
 
         DynamicArray<Edge < TypeDataVertex, TypeDataEdge> > GetPath()
         {
-            return arrayPath_;
+            return listVertices_;
         } 
 };
 

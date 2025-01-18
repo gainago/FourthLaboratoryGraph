@@ -242,6 +242,29 @@ public:
         this->tail_ = nullptr;
     }
 
+    void operator=(LinkedList<T> const & other)
+    {
+        if(this == &other){
+            return;
+        }
+
+        Node const *current = other.head_;
+
+        for (int i = 0; i < other.size_; i++)
+        {
+            Append(current->data_);
+            current = current->pNext_;
+        }
+        this->size_ = other.size_;
+        
+        // typename LinkedList<T>::ConstIterator cIt = other.ConstBegin();
+        // typename LinkedList<T>::ConstIterator cItEnd = other.ConstEnd();
+        // for(/*cIt*/; cIt != cItEnd; ++cIt){
+        //     this->
+        // }
+
+    }
+
     T const & GetFirst()
     {
         if (this->head_ == nullptr)

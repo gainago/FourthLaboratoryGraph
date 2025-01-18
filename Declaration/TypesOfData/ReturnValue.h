@@ -25,6 +25,11 @@ namespace MyNamespace
             return returnValue_.GetSecond();
         }
 
+        Value & GetValue()
+        {
+            return returnValue_.GetSecond();
+        }
+
     };
 
 }

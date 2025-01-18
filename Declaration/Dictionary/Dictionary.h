@@ -321,8 +321,16 @@ public:
     }
 
 
-    //эта строчка не необходима, но по моему мнению заствляет думать об оптимальном копировании
-    Dictionary(Dictionary<TypeKey, TypeValue> const & other) = delete; 
+    
+    Dictionary(Dictionary<TypeKey, TypeValue> const & other)
+    {
+        typename Dictionary<TypeKey, TypeValue>::ConstIterator cIt = other.ConstBegin();
+        typename Dictionary<TypeKey, TypeValue>::ConstIterator cItEnd = other.ConstEnd();
+
+        for(/*cIt*/; cIt != cItEnd; ++cIt){
+            this->Add((*cIt).GetFirst(), (*cIt).GetSecond());
+        }
+    }
 
     void Add(TypeKey const & key, TypeValue const & value)
     {

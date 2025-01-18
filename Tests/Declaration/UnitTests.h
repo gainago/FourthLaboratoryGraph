@@ -15,4 +15,10 @@ void TestGraphRemoveVertexWithAdjacentEdges();
 
 void TestGraphGetEdgesBetweenAdjacentVertices();
 
+void TestGraphGetAdjacentVertices();
+
+void TestGraphFindMininumEdge();
+
+void TestGraphBreadthFirstSearch();
+
 #endif //UNIT_TESTS_H

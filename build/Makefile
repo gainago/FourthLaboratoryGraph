@@ -216,6 +216,30 @@ Definition/GetHashCodes/GetHashCode.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libGetHashCodes.dir/build.make CMakeFiles/libGetHashCodes.dir/Definition/GetHashCodes/GetHashCode.cpp.s
 .PHONY : Definition/GetHashCodes/GetHashCode.cpp.s
 
+Definition/GetHashCodes/GetHashCodeCustomDataTypes.o: Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.o
+.PHONY : Definition/GetHashCodes/GetHashCodeCustomDataTypes.o
+
+# target to build an object file
+Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libGetHashCodes.dir/build.make CMakeFiles/libGetHashCodes.dir/Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.o
+.PHONY : Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.o
+
+Definition/GetHashCodes/GetHashCodeCustomDataTypes.i: Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.i
+.PHONY : Definition/GetHashCodes/GetHashCodeCustomDataTypes.i
+
+# target to preprocess a source file
+Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libGetHashCodes.dir/build.make CMakeFiles/libGetHashCodes.dir/Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.i
+.PHONY : Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.i
+
+Definition/GetHashCodes/GetHashCodeCustomDataTypes.s: Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.s
+.PHONY : Definition/GetHashCodes/GetHashCodeCustomDataTypes.s
+
+# target to generate assembly for a file
+Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libGetHashCodes.dir/build.make CMakeFiles/libGetHashCodes.dir/Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.s
+.PHONY : Definition/GetHashCodes/GetHashCodeCustomDataTypes.cpp.s
+
 Definition/TypesOfData/Comporators.o: Definition/TypesOfData/Comporators.cpp.o
 .PHONY : Definition/TypesOfData/Comporators.o
 
@@ -402,6 +426,9 @@ help:
 	@echo "... Definition/GetHashCodes/GetHashCode.o"
 	@echo "... Definition/GetHashCodes/GetHashCode.i"
 	@echo "... Definition/GetHashCodes/GetHashCode.s"
+	@echo "... Definition/GetHashCodes/GetHashCodeCustomDataTypes.o"
+	@echo "... Definition/GetHashCodes/GetHashCodeCustomDataTypes.i"
+	@echo "... Definition/GetHashCodes/GetHashCodeCustomDataTypes.s"
 	@echo "... Definition/TypesOfData/Comporators.o"
 	@echo "... Definition/TypesOfData/Comporators.i"
 	@echo "... Definition/TypesOfData/Comporators.s"

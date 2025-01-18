@@ -7,10 +7,11 @@
 #include "Index.h"
 #include "Edge.h"
 
-// TypeDataVertex должнысодержать дружественный метод oparator<< (выводится на экран)
+// TypeDataVertex было бы хорошо снабдить дружнственным метод oparator<< (выводится на экран)
 
 template <typename TypeDataVertex, typename TypeDataEdge> class Vertex{
 //нам нужно различать два ребра с одинаковыми характеристиками(между одними и теми же вершинами, с одинаковыми значениями)
+//для этого используем ID
 typedef Index ID;
 
 private:

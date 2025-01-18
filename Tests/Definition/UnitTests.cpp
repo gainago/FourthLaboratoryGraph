@@ -7,6 +7,9 @@
 #include "PrintArray.h"
 #include "PrintAdjacencyMatrix.h"
 
+#include "ReturnValue.h"
+#include "PrintPath.h"
+
 void TestGraphConstructor()
 {
 //built-in data types
@@ -660,27 +663,27 @@ void TestGraphGetEdgesBetweenAdjacentVertices()
         graph.AddEdge("Second Edge ID", 0, "First Vertex ID", "Third Vertex ID", -300);
         graph.AddEdge("Third Edge ID", 1, "Third Vertex ID", "Third Vertex ID", 100'500);
         graph.AddEdge("Fourth Edge ID", 0, "First Vertex ID", "First Vertex ID", 200'000);
-        graph.AddEdge("Fiveth Edge ID", 1, "First Vertex ID", "Second Vertex ID", 987'654'321);
+        graph.AddEdge("Fifth Edge ID", 1, "First Vertex ID", "Second Vertex ID", 987'654'321);
         graph.AddEdge("Sixth Edge ID", 1, "Second Vertex ID", "First Vertex ID", +300);
 
         //"First Edge": not-oriented edge from "First Vertex" to "Second Vertex"
         //"Second Edge": not-oriented edge from "First Vertex" to "Third Vertex"
         //"Third Edge": oriented edge from "Third Vertex" to "Third Vertex"
         //"Fourth Edge": not-oriented edge from "First Vertex" to "First Vertex"
-        //"Fiveth Edge": oriented edge from "First Vertex" to "Second Vertex"
+        //"Fifth Edge": oriented edge from "First Vertex" to "Second Vertex"
         //"Sixth Edge": oriented edge from "Second Vertex" to "First Vertex"
 
         //when i call GetEdgesBetweenAdjacentVertices("First Vertex", "Second Vertex")
-        //graph should receive: "First Edge", "Fiveth Edge".
+        //graph should receive: "First Edge", "Fifth Edge".
         
         LinkedList<SharedPtr<Edge< int, int> > > listEdgesFirstSecond = graph.GetEdgesBetweenAdjacentVertices("First Vertex ID", "Second Vertex ID");
         assert(listEdgesFirstSecond.GetLength() == 2);
 
         assert((listEdgesFirstSecond.Get(0)).Get().GetID() == "First Edge ID" 
-                || (listEdgesFirstSecond.Get(0)).Get().GetID() == "Fiveth Edge ID");
+                || (listEdgesFirstSecond.Get(0)).Get().GetID() == "Fifth Edge ID");
 
         assert((listEdgesFirstSecond.Get(1)).Get().GetID() == "First Edge ID" 
-                || (listEdgesFirstSecond.Get(1)).Get().GetID() == "Fiveth Edge ID");
+                || (listEdgesFirstSecond.Get(1)).Get().GetID() == "Fifth Edge ID");
         
         assert( (listEdgesFirstSecond.Get(0)).Get().GetID() != (listEdgesFirstSecond.Get(1)).Get().GetID() );
 
@@ -700,6 +703,220 @@ void TestGraphGetEdgesBetweenAdjacentVertices()
         LinkedList<SharedPtr<Edge< int, int> > > listEdgesSecondSecond = graph.GetEdgesBetweenAdjacentVertices("Second Vertex ID", "Second Vertex ID");
         assert(listEdgesSecondSecond.GetLength() == 0);
 
+
+    }
+}
+
+void TestGraphGetAdjacentVertices()
+{
+//built-in data types
+    {
+        Graph<int, int> graph;
+    
+        graph.AddVertex("First Vertex ID", 8'800'555); 
+        graph.AddVertex("Second Vertex ID", -9'088);
+        graph.AddVertex("Third Vertex ID", 0);
+
+        graph.AddEdge("First Edge ID", 0, "First Vertex ID", "Second Vertex ID", 200'000);
+            //id: "First Edge ID", notOriented, idVertexStart: "First Vertex ID", idVertexEnd: "Second Vertex ID", value 200'000        
+        graph.AddEdge("Second Edge ID", 0, "First Vertex ID", "Third Vertex ID", -300);
+        graph.AddEdge("Third Edge ID", 1, "Third Vertex ID", "Third Vertex ID", 100'500);
+        graph.AddEdge("Fourth Edge ID", 0, "First Vertex ID", "First Vertex ID", 200'000);
+        graph.AddEdge("Fifth Edge ID", 1, "First Vertex ID", "Second Vertex ID", 987'654'321);
+        graph.AddEdge("Sixth Edge ID", 1, "Second Vertex ID", "First Vertex ID", +300);
+
+        //"First Edge": not-oriented edge from "First Vertex" to "Second Vertex"
+        //"Second Edge": not-oriented edge from "First Vertex" to "Third Vertex"
+        //"Third Edge": oriented edge from "Third Vertex" to "Third Vertex"
+        //"Fourth Edge": not-oriented edge from "First Vertex" to "First Vertex"
+        //"Fifth Edge": oriented edge from "First Vertex" to "Second Vertex"
+        //"Sixth Edge": oriented edge from "Second Vertex" to "First Vertex"
+
+        //when i call GetAdjacentVertices("First Vertex")
+        //graph should receive: "First Vertex ID", "Second Vertex ID", "Third Vertex ID".
+        
+        LinkedList<SharedPtr<Vertex<int, int> > > listFirst = graph.GetAdjacentVertices("First Vertex ID");
+
+        assert(listFirst.GetLength() == 3);
+
+
+        //when i call GetAdjacentVertices("Second Vertex")
+        //graph should receive: "First Vertex ID".
+        
+        LinkedList<SharedPtr<Vertex<int, int> > > listSecond = graph.GetAdjacentVertices("Second Vertex ID");
+
+        assert(listSecond.GetLength() == 1);
+
+        assert(listSecond.Get(0).Get().GetID() == "First Vertex ID");
+
+
+        //when i call GetAdjacentVertices("Third Vertex")
+        //graph should receive: "First Vertex ID", "Third Vertex ID".
+        
+        LinkedList<SharedPtr<Vertex<int, int> > > listThird = graph.GetAdjacentVertices("Third Vertex ID");
+
+        assert(listThird.GetLength() == 2);
+
+        assert((listThird.Get(0).Get().GetID() == "First Vertex ID") 
+                || (listThird.Get(1).Get().GetID() == "First Vertex ID"));
+
+        assert((listThird.Get(0).Get().GetID() == "Third Vertex ID") 
+                || (listThird.Get(1).Get().GetID() == "Third Vertex ID"));
+
+        assert(listThird.Get(0).Get().GetID() != listThird.Get(1).Get().GetID());
+
+
+        graph.AddVertex("Fourth Vertex ID", 999);
+
+        LinkedList<SharedPtr<Vertex<int, int> > > listFourth = graph.GetAdjacentVertices("Fourth Vertex ID");
+
+        assert(listFourth.GetLength() == 0);
+                
+        
+
+
+    }
+
+    {
+        Graph<int, int> graph;
+
+        graph.AddVertex("First Vertex ID", 1);
+        graph.AddVertex("Second Vertex ID", 1);
+
+        for(int i = 0; i < 10; ++i){
+
+            Index currentEdgeIndex((MyString::IntToMyString(i)).GetChar());
+            graph.AddEdge(currentEdgeIndex, 1, "First Vertex ID", "First Vertex ID", (333232 + i)/333);
+        }
+
+        assert(graph.GetCountOfEdges() == 10);
+
+        for(int i = 10; i < 20; ++i){
+
+            Index currentEdgeIndex((MyString::IntToMyString(i)).GetChar());
+            graph.AddEdge(currentEdgeIndex, i%2, "Second Vertex ID", "Second Vertex ID", (333232 + i)/333);
+        }
+
+        LinkedList<SharedPtr<Vertex<int, int> > > listSecond = graph.GetAdjacentVertices("Second Vertex ID");
+
+        assert(listSecond.GetLength() == 1);
+
+
+    }
+}
+
+void TestGraphFindMininumEdge()
+{
+    {
+        Graph<int, int> graph;
+
+        graph.AddVertex("First Vertex ID", 1);
+        graph.AddVertex("Second Vertex ID", 1);
+
+        for(int i = 0; i < 10; ++i){
+
+            Index currentEdgeIndex((MyString::IntToMyString(i)).GetChar());
+            graph.AddEdge(currentEdgeIndex, 1, "First Vertex ID", "First Vertex ID", i);
+        }
+
+
+        for(int i = 10; i < 20; ++i){
+
+            Index currentEdgeIndex((MyString::IntToMyString(i)).GetChar());
+            graph.AddEdge(currentEdgeIndex, i%2, "Second Vertex ID", "Second Vertex ID", i);
+        }
+
+        LinkedList<SharedPtr<Edge<int, int> > > listEdgesFirst = graph.GetEdgesBetweenAdjacentVertices("First Vertex ID", "First Vertex ID");
+        SharedPtr<Edge<int, int> > pMinimumEdgeFirst = graph.FindMininumEdge(listEdgesFirst);
+
+        assert(pMinimumEdgeFirst.Get().GetDataEdge() == 0);
+
+
+        LinkedList<SharedPtr<Edge<int, int> > > listEdgesSecond = graph.GetEdgesBetweenAdjacentVertices("Second Vertex ID", "Second Vertex ID");
+        SharedPtr<Edge<int, int> > pMinimumEdgeSecond = graph.FindMininumEdge(listEdgesSecond);
+
+        assert(pMinimumEdgeSecond.Get().GetDataEdge() == 10);
+
+
+
+        
+
+
+    }
+}
+
+
+//BFS finds path with minimum count of Edges  !!(It is do not minimizes summary of TypeEdgeData)!!
+void TestGraphBreadthFirstSearch() 
+{
+    {
+        Graph<int, int> graph;
+
+        graph.AddVertex("First Vertex ID", 1);
+        graph.AddVertex("Second Vertex ID", 2);
+        graph.AddVertex("Third Vertex ID", 3);
+        graph.AddVertex("Fourth Vertex ID", 4);
+        graph.AddVertex("Fifth Vertex ID", 5);
+        graph.AddVertex("Zero Vertex ID", 0);
+        graph.AddVertex("Sixth Vertex ID", 6);
+        graph.AddVertex("Seventh Vertex ID", 6);
+        graph.AddVertex("Eighth Vertex ID", 6);
+        graph.AddVertex("Ninth Vertex ID", 6);
+        graph.AddVertex("Tenth Vertex ID", 6);
+
+        graph.AddEdge("First Edge ID", 0, "Zero Vertex ID", "Second Vertex ID", 1);
+        graph.AddEdge("Second Edge ID", 0, "Zero Vertex ID", "First Vertex ID", 2);
+        graph.AddEdge("Third Edge ID", 0, "Second Vertex ID", "Fourth Vertex ID", 3);
+        graph.AddEdge("Fourth Edge ID", 0, "First Vertex ID", "Fifth Vertex ID", 4) ;
+        graph.AddEdge("Fifth Edge ID", 0, "First Vertex ID", "Third Vertex ID", 5);
+        graph.AddEdge("Sixth Edge ID", 0, "Fourth Vertex ID", "Sixth Vertex ID", 5);
+        graph.AddEdge("Seventh Edge ID", 0, "Fifth Vertex ID", "Ninth Vertex ID", 5);
+        graph.AddEdge("Eighth Edge ID", 0, "Seventh Vertex ID", "Eighth Vertex ID", 5);
+        graph.AddEdge("Ninth Edge ID", 0, "Fifth Vertex ID", "Seventh Vertex ID", 5);
+        graph.AddEdge("Tenth Edge ID", 0, "Ninth Vertex ID", "Eighth Vertex ID", 5);
+
+        
+
+        MyNamespace::ReturnValue<Path<int, int> > returnValueTenthTenth = graph.BreadthFirstSearch("Tenth Vertex ID", "Tenth Vertex ID");
+
+        assert(returnValueTenthTenth.IsCorrect());
+        assert(returnValueTenthTenth.GetValue().listVertices_.GetLength() == 1);
+        //------------------------------------
+
+        MyNamespace::ReturnValue<Path<int, int> > returnValueZeroSixth = graph.BreadthFirstSearch("Zero Vertex ID", "Sixth Vertex ID");
+
+        assert(returnValueZeroSixth.IsCorrect());
+        assert(returnValueZeroSixth.GetValue().listVertices_.GetLength() == 4);
+
+        //PrintPath<int, int>(returnValue.GetValue());
+        //------------------------------------
+
+        MyNamespace::ReturnValue<Path<int, int> > returnValueFourthFirst = graph.BreadthFirstSearch("Fourth Vertex ID", "First Vertex ID");
+
+        assert(returnValueFourthFirst.IsCorrect());
+        assert(returnValueFourthFirst.GetValue().listVertices_.GetLength() == 4);
+
+        //Add oriented Vertex from "Fourth Vertex ID" to "First Vertex ID"
+        graph.AddEdge("Eleventh Edge ID", 1, "Fourth Vertex ID", "First Vertex ID", 0);
+        MyNamespace::ReturnValue<Path<int, int> > returnValueFourthFirst2 = graph.BreadthFirstSearch("Fourth Vertex ID", "First Vertex ID");
+
+        assert(returnValueFourthFirst2.IsCorrect());
+        assert(returnValueFourthFirst2.GetValue().listVertices_.GetLength() == 2); // because now we have less way
+        //------------------------------------
+
+        MyNamespace::ReturnValue<Path<int, int> > returnValueFirstFourth = graph.BreadthFirstSearch("First Vertex ID", "Fourth Vertex ID");
+
+        assert(returnValueFirstFourth.IsCorrect());
+
+        //this way contains four vertices because Eleventh Edge is oriented end search can not go through this
+        assert(returnValueFirstFourth.GetValue().listVertices_.GetLength() == 4);
+
+        try{
+            MyNamespace::ReturnValue<Path<int, int> > returnValueTvelvethFourth 
+                        = graph.BreadthFirstSearch("Tvelveth Vertex ID", "Fourth Vertex ID");// there are no Vertex with id "Tvelveth Vertex ID"
+            assert(0);
+        }
+        catch(...) {}
 
     }
 }
