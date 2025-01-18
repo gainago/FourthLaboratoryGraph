@@ -845,7 +845,6 @@ void TestGraphFindMininumEdge()
     }
 }
 
-
 //BFS finds path with minimum count of Edges  !!(It is do not minimizes summary of TypeEdgeData)!!
 void TestGraphBreadthFirstSearch() 
 {
@@ -917,6 +916,32 @@ void TestGraphBreadthFirstSearch()
             assert(0);
         }
         catch(...) {}
+
+    }
+}
+
+void TestFordBellmanAlgorithm()
+{
+    {
+        
+        Graph<int, int> graph;
+
+        graph.AddVertex("First", 1);
+        graph.AddVertex("Second", 2);
+        graph.AddVertex("Third", 3);
+        graph.AddVertex("Fourth", 4);
+        graph.AddVertex("Fifth", 5);
+        graph.AddVertex("Zero", 0);
+
+        graph.AddEdge("First Edge ID", 0, "Zero", "Second", 1);
+        graph.AddEdge("Second Edge ID", 0, "Zero", "First", 2);
+        graph.AddEdge("Third Edge ID", 0, "Second", "Fourth", 3);
+        graph.AddEdge("Fourth Edge ID", 0, "First", "Fifth", 4) ;
+        graph.AddEdge("Fifth Edge ID", 0, "First", "Third", 5);
+        graph.AddEdge("Sixth Edge ID", 1, "Second", "Fifth", -7);
+
+        MyNamespace::ReturnValue<int> returnValueWay = graph.GetMinimumValueWay("Second", "Zero");
+
 
     }
 }

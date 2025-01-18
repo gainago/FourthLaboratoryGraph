@@ -21,4 +21,6 @@ void TestGraphFindMininumEdge();
 
 void TestGraphBreadthFirstSearch();
 
+void TestFordBellmanAlgorithm();
+
 #endif //UNIT_TESTS_H

@@ -8,7 +8,8 @@
 #include "Path.h"
 #include "ReturnValue.h"
 #include "LinkedList.h"
-//#include "iostream"
+#include "iostream"
+#include "InputOutputIndex.h"
 
 
 //TypeDataVertex, TypeDataEdge
@@ -121,6 +122,20 @@ public:
         return dictionaryEdge_.GetLength();
     }
 
+    MyNamespace::ReturnValue<TypeDataEdge> GetMinimumValueWay(Index idSourceVertex, Index idDestinationIndex)
+    {
+        MyNamespace::Pair<Dictionary<Index, Index>, Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > >
+                pairFromFardBellman = this->FordBellmanAlgorithm(idSourceVertex);
+        
+        bool isExistWay = (pairFromFardBellman.GetSecond()).Get(idDestinationIndex).GetFirst();
+        TypeDataEdge travelCost = (pairFromFardBellman.GetSecond()).Get(idDestinationIndex).GetSecond();
+        
+        
+        
+        return MyNamespace::ReturnValue<TypeDataEdge>(isExistWay, travelCost);
+
+    }
+
     //возвращает вершины между начальной и конечной включая их
     //не возвращает ребра между вершинами потому что ребра его интересуют только в контексте связности
     MyNamespace::ReturnValue< Path<TypeDataVertex, TypeDataEdge> > BreadthFirstSearch(ID idVertexStart, ID idVertexEnd) // ищет какой-нибудь путь между двумя вершинами
@@ -216,11 +231,11 @@ public:
         //он заменит(или создаст) имя второй вершины, на имя текущей в алгоритме
         Dictionary<Index, Index> dictionaryAncestor(GetHashCodeIndex);
 
-        typename Dictionary<ID, SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > >::ConstIterator cIt = dictionaryVertex_.ConstBegin();
-        typename Dictionary<ID, SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > >::ConstIterator cItEnd = dictionaryVertex_.ConstEnd();
+        typename Dictionary<ID, SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > >::ConstIterator cItVertex = dictionaryVertex_.ConstBegin();
+        typename Dictionary<ID, SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > >::ConstIterator cItVertexEnd = dictionaryVertex_.ConstEnd();
 
-        for(/*cIt*/; cIt != cItEnd; ++cIt){
-            dictionaryScales.Add((*cIt).GetID(), MyNamespace::Pair<bool, TypeDataEdge>(0, TypeDataEdge()));
+        for(/*cIt*/; cItVertex != cItVertexEnd; ++cItVertex){
+            dictionaryScales.Add((*cItVertex).GetSecond().Get().GetID(), MyNamespace::Pair<bool, TypeDataEdge>(0, TypeDataEdge()));
         }
 
         //установили значение исходной вершины
@@ -234,13 +249,38 @@ public:
 
         for(int pass = 1; pass < dictionaryVertex_.GetLength(); ++pass){
 
+            typename Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> >::Iterator itScales = dictionaryScales.Begin();
+            typename Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> >::Iterator itScalesEnd = dictionaryScales.End();
+
+            for(/*itScales*/; itScales != itScalesEnd; ++itScales){
+                OutputIndex( (*itScales).GetFirst()); std::cout << "\t";
+            }
+
+            std::cout << std::endl;
+
+            typename Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> >::Iterator itScales2 = dictionaryScales.Begin();
+
+            for(/*itScales*/; itScales2 != itScalesEnd; ++itScales2){
+                
+                if((*itScales2).GetSecond().GetFirst() == 0){
+                    std::cout << "NO\t";
+                }
+                else{
+                    std::cout << (*itScales2).GetSecond().GetSecond() << "\t";
+                }
+            }
+
+            std::cout << std::endl;
+
+            
+
             //теперь пробегаемся по всем ребрам и смотрим, можно ли уменьшить вес текущего пути
             typename Dictionary<ID, SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > >::ConstIterator cIt = dictionaryEdge_.ConstBegin();
             typename Dictionary<ID, SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > >::ConstIterator cItEnd = dictionaryEdge_.ConstEnd();
 
             for(/*cIt*/; cIt != cItEnd; ++cIt){
 
-                Edge<TypeDataVertex, TypeDataEdge> const & currentEdge = (*cIt).Get();
+                Edge<TypeDataVertex, TypeDataEdge> const & currentEdge = (*cIt).GetSecond().Get();
 
                 Index idStartVertex = currentEdge.GetStartVertexID();
                 Index idEndVertex = currentEdge.GetEndVertexID();
@@ -251,10 +291,113 @@ public:
                 if(currentEdge.Oriented() == 0){
 
                     //если пути до обеих вершин не равны бесконечности
-                    if(dictionaryScales.Get(idStartVertex).GetFirst() == 1 &&){
+                    if(scaleStartVertex.GetFirst() == 1 && scaleEndVertex.GetFirst() == 1){
 
+                        //если нашли лучший путь для второй вершины,
+                        //то заменяем ее вес на вес первой вершины + расстояние от первой до второй 
+                        if(scaleStartVertex.GetSecond() + currentEdge.GetDataEdge() < scaleEndVertex.GetSecond()){
+                            
+                            scaleEndVertex.GetSecond() = scaleStartVertex.GetSecond() + currentEdge.GetDataEdge();
+
+                            //и записываем в словарь предков, то что предком для второй вершины является первая вершина
+
+                            if(dictionaryAncestor.Contains(idEndVertex)){
+
+                                dictionaryAncestor.Get(idEndVertex) = idStartVertex;
+                            }
+                            else{
+                                dictionaryAncestor.Add(idEndVertex, idStartVertex);
+                            }
+                        }
+
+                        //если нашли лучший путь для первой вершины,
+                        //то заменяем ее вес на вес второй вершины + расстояние от второй до первой
+                        if(scaleEndVertex.GetSecond() + currentEdge.GetDataEdge() < scaleStartVertex.GetSecond()){
+                            
+                            scaleStartVertex.GetSecond() = scaleEndVertex.GetSecond() + currentEdge.GetDataEdge();
+
+                            //и записываем в словарь предков, то что предком для первой вершины является вторая вершина
+
+                            if(dictionaryAncestor.Contains(idStartVertex)){
+
+                                dictionaryAncestor.Get(idStartVertex) = idEndVertex;
+                            }
+                            else{
+                                dictionaryAncestor.Add(idStartVertex, idEndVertex);
+                            }
+                        }
+
+                        
                     }
 
+                    //если расстояние до второй вершины бесконечность, а до первой нет  
+                    //помним при этом что ребро не ориентированно 
+                    if(scaleStartVertex.GetFirst() == 1 && scaleEndVertex.GetFirst() == 0){
+
+                        scaleEndVertex.GetSecond() = scaleStartVertex.GetSecond() + currentEdge.GetDataEdge();
+
+                        //и записываем в словарь предков, то что предком для второй вершины является первая вершина
+                        dictionaryAncestor.Add(idEndVertex, idStartVertex);
+
+                        //записываем что расстояние от исходной вершины до текущей не равно бесконечности,
+                        // то есть что путь существует
+                        scaleEndVertex.GetFirst() = 1;
+                    }
+
+
+
+                    //если расстояние до первой вершины бесконечность, а до второй расстояние известно  
+                    //помним при этом что ребро не ориентированно 
+                    if(scaleEndVertex.GetFirst() == 1 && scaleStartVertex.GetFirst() == 0){
+
+                        scaleStartVertex.GetSecond() = scaleEndVertex.GetSecond() + currentEdge.GetDataEdge();
+
+                        //и записываем в словарь предков, то что предком для первой вершины является вторая вершина
+                        dictionaryAncestor.Add(idStartVertex, idEndVertex);
+
+                        //записываем что расстояние от исходной вершины до текущей не равно бесконечности,
+                        // то есть что путь существует
+                        scaleStartVertex.GetFirst() = 1;
+                    }
+
+                }
+                //если ребро ориентированное, помним, что начало ребра StartVertex а конец ребра это EndVertex
+                else{
+
+                    //если расстояние до второй вершины бесконечность, а до первой нет  
+                    if(scaleStartVertex.GetFirst() == 1 && scaleEndVertex.GetFirst() == 0){
+
+                        scaleEndVertex.GetSecond() = scaleStartVertex.GetSecond() + currentEdge.GetDataEdge();
+
+                        //и записываем в словарь предков, то что предком для второй вершины является первая вершина
+                        dictionaryAncestor.Add(idEndVertex, idStartVertex);
+
+                        //записываем что расстояние от исходной вершины до текущей не равно бесконечности,
+                        // то есть что путь существует
+                        scaleEndVertex.GetFirst() = 1;
+                    }
+
+                    //если расстояние до первой и второй вершин не бесконечность
+                    if(scaleStartVertex.GetFirst() == 1 && scaleEndVertex.GetFirst() == 1){
+
+                        //если нашли лучший путь для второй вершины,
+                        //то заменяем ее вес на вес первой вершины + расстояние от первой до второй 
+                        if(scaleStartVertex.GetSecond() + currentEdge.GetDataEdge() < scaleEndVertex.GetSecond()){
+                            
+                            scaleEndVertex.GetSecond() = scaleStartVertex.GetSecond() + currentEdge.GetDataEdge();
+
+                            //и записываем в словарь предков, то что предком для второй вершины является первая вершина
+
+                            if(dictionaryAncestor.Contains(idEndVertex)){
+
+                                dictionaryAncestor.Get(idEndVertex) = idStartVertex;
+                            }
+                            else{
+                                dictionaryAncestor.Add(idEndVertex, idStartVertex);
+                            }
+                        }
+                        
+                    }
                 }
 
 
@@ -262,6 +405,85 @@ public:
             }
         }
 
+        bool existCycleNegativeLength = 0;
+
+        //еще раз пробегаемся по всем ребрам и смотрим, можно ли уменьшить вес текущего пути
+            typename Dictionary<ID, SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > >::ConstIterator cIt = dictionaryEdge_.ConstBegin();
+            typename Dictionary<ID, SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > >::ConstIterator cItEnd = dictionaryEdge_.ConstEnd();
+
+        for(/*cIt*/; cIt != cItEnd; ++cIt){
+
+                Edge<TypeDataVertex, TypeDataEdge> const & currentEdge = (*cIt).GetSecond().Get();
+
+                Index idStartVertex = currentEdge.GetStartVertexID();
+                Index idEndVertex = currentEdge.GetEndVertexID();
+
+                MyNamespace::Pair<bool, TypeDataEdge>& scaleStartVertex = dictionaryScales.Get(idStartVertex);
+                MyNamespace::Pair<bool, TypeDataEdge>& scaleEndVertex = dictionaryScales.Get(idEndVertex);
+
+                if(currentEdge.Oriented() == 0){
+
+                    //если пути до обеих вершин не равны бесконечности
+                    if(scaleStartVertex.GetFirst() == 1 && scaleEndVertex.GetFirst() == 1){
+
+                        //если нашли лучший путь для второй вершины,
+                        //то заменяем ее вес на вес первой вершины + расстояние от первой до второй 
+                        if(scaleStartVertex.GetSecond() + currentEdge.GetDataEdge() < scaleEndVertex.GetSecond()){
+                            existCycleNegativeLength = 1;
+                        }
+
+                        //если нашли лучший путь для первой вершины,
+                        //то заменяем ее вес на вес второй вершины + расстояние от второй до первой
+                        if(scaleEndVertex.GetSecond() + currentEdge.GetDataEdge() < scaleStartVertex.GetSecond()){
+                            existCycleNegativeLength = 1;
+                        }
+
+                        
+                    }
+
+                    //если расстояние до второй вершины бесконечность, а до первой нет  
+                    //помним при этом что ребро не ориентированно 
+                    if(scaleStartVertex.GetFirst() == 1 && scaleEndVertex.GetFirst() == 0){
+                        existCycleNegativeLength = 1;
+                    }
+
+
+
+                    //если расстояние до первой вершины бесконечность, а до второй расстояние известно  
+                    //помним при этом что ребро не ориентированно 
+                    if(scaleEndVertex.GetFirst() == 1 && scaleStartVertex.GetFirst() == 0){
+                        existCycleNegativeLength = 1;
+                    }
+
+                }
+                //если ребро ориентированное, помним, что начало ребра StartVertex а конец ребра это EndVertex
+                else{
+
+                    //если расстояние до второй вершины бесконечность, а до первой нет  
+                    if(scaleStartVertex.GetFirst() == 1 && scaleEndVertex.GetFirst() == 0){
+                        existCycleNegativeLength = 1;
+                    }
+
+                    //если расстояние до первой и второй вершин не бесконечность
+                    if(scaleStartVertex.GetFirst() == 1 && scaleEndVertex.GetFirst() == 1){
+
+                        //если нашли лучший путь для второй вершины,
+                        //то заменяем ее вес на вес первой вершины + расстояние от первой до второй 
+                        if(scaleStartVertex.GetSecond() + currentEdge.GetDataEdge() < scaleEndVertex.GetSecond()){
+                            existCycleNegativeLength = 1;
+                        }
+                    }
+                }
+        }
+
+        //по теореме если существует путь длины равной количеству вершин,
+        //то этот путь проходит хотя бы через какую то вершину дважды,
+        //что не имеет смысла если нет цикла отрицательной суммарной длины
+        if(existCycleNegativeLength == 1){
+            throw "Exist Cycle Negative Length";
+        }
+
+        return MyNamespace::Pair<Dictionary<Index, Index>, Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > > (dictionaryAncestor, dictionaryScales);
     }
 
     class IteratorVertex{

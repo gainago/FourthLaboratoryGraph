@@ -322,7 +322,7 @@ public:
 
 
     
-    Dictionary(Dictionary<TypeKey, TypeValue> const & other)
+    Dictionary(Dictionary<TypeKey, TypeValue> const & other) : GetHashCode_(other.GetHashCode_)
     {
         typename Dictionary<TypeKey, TypeValue>::ConstIterator cIt = other.ConstBegin();
         typename Dictionary<TypeKey, TypeValue>::ConstIterator cItEnd = other.ConstEnd();
