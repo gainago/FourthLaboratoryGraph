@@ -332,6 +332,22 @@ public:
         }
     }
 
+    void operator=(Dictionary<TypeKey, TypeValue> const & other)
+    {
+        if(this == &other){
+            return;
+        }
+
+        this->array_ = other.array_;
+        this->fillFactor_ = other.fillFactor_;
+        this->GetHashCode_ = other.GetHashCode_;
+        this->increaseFactor_ = other.increaseFactor_;
+        this->size_ = other.size_;
+
+
+
+    }
+
     void Add(TypeKey const & key, TypeValue const & value)
     {
         if(array_.GetCapacity() == 0){

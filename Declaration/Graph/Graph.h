@@ -8,8 +8,8 @@
 #include "Path.h"
 #include "ReturnValue.h"
 #include "LinkedList.h"
-#include "iostream"
-#include "InputOutputIndex.h"
+//#include "iostream"
+//#include "InputOutputIndex.h"
 
 
 //TypeDataVertex, TypeDataEdge
@@ -122,9 +122,9 @@ public:
         return dictionaryEdge_.GetLength();
     }
 
-    MyNamespace::ReturnValue<TypeDataEdge> GetMinimumValueWay(Index idSourceVertex, Index idDestinationIndex)
+    MyNamespace::ReturnValue<TypeDataEdge> GetValueOfMinimumWay(Index idSourceVertex, Index idDestinationIndex)
     {
-        MyNamespace::Pair<Dictionary<Index, Index>, Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > >
+        MyNamespace::Pair<Dictionary<IndexCurrentVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge> >, Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > >
                 pairFromFardBellman = this->FordBellmanAlgorithm(idSourceVertex);
         
         bool isExistWay = (pairFromFardBellman.GetSecond()).Get(idDestinationIndex).GetFirst();
@@ -134,6 +134,44 @@ public:
         
         return MyNamespace::ReturnValue<TypeDataEdge>(isExistWay, travelCost);
 
+    }
+
+    Path<TypeDataVertex, TypeDataEdge> GetMinimumWay(Index idSourceVertex, Index idDestinationIndex)
+    {
+    
+        Dictionary<IndexCurrentVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge> > dictionaryAncestor(GetHashCodeIndex);
+
+        dictionaryAncestor = this->FordBellmanAlgorithm(idSourceVertex).GetFirst();
+
+        Path<TypeDataVertex, TypeDataEdge> path;
+
+
+        //если не содержит значит такого пути нет
+        if(!dictionaryAncestor.Contains(idDestinationIndex)){
+            return path;
+        }
+
+        //распутываем путь с конца к началу
+        Index idCurrentVertex = idDestinationIndex;
+
+        while(true){
+
+            path.listVertices_.Prepend(this->GetSharedPointerVertex( idCurrentVertex));
+
+            if(idCurrentVertex == idSourceVertex){
+                break;
+            }
+            else{
+                path.listEdges_.Prepend(this->GetSharedPointerEdge( dictionaryAncestor.Get(idCurrentVertex).GetSecond()));
+            }
+
+            idCurrentVertex = dictionaryAncestor.Get(idCurrentVertex).GetFirst();
+
+
+
+        }
+
+        return path;
     }
 
     //возвращает вершины между начальной и конечной включая их
@@ -221,7 +259,10 @@ public:
     //не защищен от переполнения TypeDataEdge в пользу минимальных требований в данному типу
     //Обратите внимание что при наличии циклов, суммарно отрицательного веса, 
     //или (что то же самое) при наличии неориентированных ребер отрицательного веса, алгоритм бросит исключение
-    MyNamespace::Pair<Dictionary<Index, Index>, Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > > 
+    typedef Index IndexCurrentVertex;
+    typedef Index IndexPreviousVertex;
+    typedef Index IndexConnectingEdge;
+    MyNamespace::Pair<Dictionary<IndexCurrentVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge> >, Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > > 
                                                         FordBellmanAlgorithm(Index idSourceVertex)
     {
         //Index - имя вершины, Pair.First() == false булевый параметр означающий вес равный бесконечности(устанавливается в самом начале)
@@ -229,7 +270,7 @@ public:
         Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > dictionaryScales(GetHashCodeIndex);
         //когда алгоритм найдет лучший путь до вершины, имя которое это первый параметр
         //он заменит(или создаст) имя второй вершины, на имя текущей в алгоритме
-        Dictionary<Index, Index> dictionaryAncestor(GetHashCodeIndex);
+        Dictionary<IndexCurrentVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge> > dictionaryAncestor(GetHashCodeIndex);
 
         typename Dictionary<ID, SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > >::ConstIterator cItVertex = dictionaryVertex_.ConstBegin();
         typename Dictionary<ID, SharedPtr< Vertex<TypeDataVertex, TypeDataEdge> > >::ConstIterator cItVertexEnd = dictionaryVertex_.ConstEnd();
@@ -252,25 +293,25 @@ public:
             typename Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> >::Iterator itScales = dictionaryScales.Begin();
             typename Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> >::Iterator itScalesEnd = dictionaryScales.End();
 
-            for(/*itScales*/; itScales != itScalesEnd; ++itScales){
-                OutputIndex( (*itScales).GetFirst()); std::cout << "\t";
-            }
+            // for(/*itScales*/; itScales != itScalesEnd; ++itScales){
+            //     OutputIndex( (*itScales).GetFirst()); std::cout << "\t";
+            // }
 
-            std::cout << std::endl;
+            // std::cout << std::endl;
 
-            typename Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> >::Iterator itScales2 = dictionaryScales.Begin();
+            // typename Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> >::Iterator itScales2 = dictionaryScales.Begin();
 
-            for(/*itScales*/; itScales2 != itScalesEnd; ++itScales2){
+            // for(/*itScales*/; itScales2 != itScalesEnd; ++itScales2){
                 
-                if((*itScales2).GetSecond().GetFirst() == 0){
-                    std::cout << "NO\t";
-                }
-                else{
-                    std::cout << (*itScales2).GetSecond().GetSecond() << "\t";
-                }
-            }
+            //     if((*itScales2).GetSecond().GetFirst() == 0){
+            //         std::cout << "NO\t";
+            //     }
+            //     else{
+            //         std::cout << (*itScales2).GetSecond().GetSecond() << "\t";
+            //     }
+            // }
 
-            std::cout << std::endl;
+            // std::cout << std::endl;
 
             
 
@@ -303,10 +344,10 @@ public:
 
                             if(dictionaryAncestor.Contains(idEndVertex)){
 
-                                dictionaryAncestor.Get(idEndVertex) = idStartVertex;
+                                dictionaryAncestor.Get(idEndVertex) = MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge>(idStartVertex, currentEdge.GetID());
                             }
                             else{
-                                dictionaryAncestor.Add(idEndVertex, idStartVertex);
+                                dictionaryAncestor.Add(idEndVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge>(idStartVertex, currentEdge.GetID()));
                             }
                         }
 
@@ -320,10 +361,10 @@ public:
 
                             if(dictionaryAncestor.Contains(idStartVertex)){
 
-                                dictionaryAncestor.Get(idStartVertex) = idEndVertex;
+                                dictionaryAncestor.Get(idStartVertex) = MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge>(idEndVertex, currentEdge.GetID());
                             }
                             else{
-                                dictionaryAncestor.Add(idStartVertex, idEndVertex);
+                                dictionaryAncestor.Add(idStartVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge>(idEndVertex, currentEdge.GetID()));
                             }
                         }
 
@@ -337,7 +378,7 @@ public:
                         scaleEndVertex.GetSecond() = scaleStartVertex.GetSecond() + currentEdge.GetDataEdge();
 
                         //и записываем в словарь предков, то что предком для второй вершины является первая вершина
-                        dictionaryAncestor.Add(idEndVertex, idStartVertex);
+                        dictionaryAncestor.Add(idEndVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge>(idStartVertex, currentEdge.GetID()));
 
                         //записываем что расстояние от исходной вершины до текущей не равно бесконечности,
                         // то есть что путь существует
@@ -353,7 +394,7 @@ public:
                         scaleStartVertex.GetSecond() = scaleEndVertex.GetSecond() + currentEdge.GetDataEdge();
 
                         //и записываем в словарь предков, то что предком для первой вершины является вторая вершина
-                        dictionaryAncestor.Add(idStartVertex, idEndVertex);
+                        dictionaryAncestor.Add(idStartVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge>(idEndVertex, currentEdge.GetID()));
 
                         //записываем что расстояние от исходной вершины до текущей не равно бесконечности,
                         // то есть что путь существует
@@ -370,7 +411,7 @@ public:
                         scaleEndVertex.GetSecond() = scaleStartVertex.GetSecond() + currentEdge.GetDataEdge();
 
                         //и записываем в словарь предков, то что предком для второй вершины является первая вершина
-                        dictionaryAncestor.Add(idEndVertex, idStartVertex);
+                        dictionaryAncestor.Add(idEndVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge>(idStartVertex, currentEdge.GetID()));
 
                         //записываем что расстояние от исходной вершины до текущей не равно бесконечности,
                         // то есть что путь существует
@@ -390,10 +431,10 @@ public:
 
                             if(dictionaryAncestor.Contains(idEndVertex)){
 
-                                dictionaryAncestor.Get(idEndVertex) = idStartVertex;
+                                dictionaryAncestor.Get(idEndVertex) = MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge>(idStartVertex, currentEdge.GetID());
                             }
                             else{
-                                dictionaryAncestor.Add(idEndVertex, idStartVertex);
+                                dictionaryAncestor.Add(idEndVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge>(idStartVertex, currentEdge.GetID()));
                             }
                         }
                         
@@ -483,7 +524,7 @@ public:
             throw "Exist Cycle Negative Length";
         }
 
-        return MyNamespace::Pair<Dictionary<Index, Index>, Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > > (dictionaryAncestor, dictionaryScales);
+        return MyNamespace::Pair<Dictionary<IndexCurrentVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge> >, Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > > (dictionaryAncestor, dictionaryScales);
     }
 
     class IteratorVertex{

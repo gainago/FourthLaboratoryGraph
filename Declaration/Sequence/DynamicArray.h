@@ -42,6 +42,24 @@ public:
         }
     }
 
+    void operator=(const DynamicArray<T> & other)
+    {
+        if(this == &other){
+            return;
+        }
+
+        delete[] this->elements_;
+
+        this->elements_ = new T[other.GetCapacity()];
+
+        for(int i = 0; i < other.GetCapacity(); ++i){
+            this->elements_[i] = other.elements_[i];
+        }
+
+        this->capacity_ = other.capacity_;
+
+    }
+
     DynamicArray(const DynamicArray<T> *dynamicArray) : DynamicArray(dynamicArray->elements_, dynamicArray->capacity_) {}
 
     DynamicArray(const DynamicArray<T> &dynamicArray) : DynamicArray(dynamicArray.elements_, dynamicArray.capacity_) {}

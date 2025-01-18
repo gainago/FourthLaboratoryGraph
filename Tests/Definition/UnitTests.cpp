@@ -920,6 +920,7 @@ void TestGraphBreadthFirstSearch()
     }
 }
 
+//тестируется верное нахождение стоимости пути, алгоритм воссоздания самого пути применялся такой же как в BFS
 void TestFordBellmanAlgorithm()
 {
     {
@@ -938,9 +939,40 @@ void TestFordBellmanAlgorithm()
         graph.AddEdge("Third Edge ID", 0, "Second", "Fourth", 3);
         graph.AddEdge("Fourth Edge ID", 0, "First", "Fifth", 4) ;
         graph.AddEdge("Fifth Edge ID", 0, "First", "Third", 5);
-        graph.AddEdge("Sixth Edge ID", 1, "Second", "Fifth", -7);
+        
 
-        MyNamespace::ReturnValue<int> returnValueWay = graph.GetMinimumValueWay("Second", "Zero");
+        MyNamespace::ReturnValue<int> returnValueWaySecondZero = graph.GetValueOfMinimumWay("Second", "Zero");
+
+        Path<int, int> pathSecondZero = graph.GetMinimumWay("Second", "Zero");
+
+        assert(returnValueWaySecondZero.GetValue() == 1);
+
+        assert(pathSecondZero.listEdges_.GetLength() == 1);
+
+        assert(pathSecondZero.listVertices_.GetLength() == 2);
+
+        //добавляется ориентированное ребро через которое путь быстрее
+        graph.AddEdge("Sixth Edge ID", 1, "Fourth", "First", -1);
+
+        MyNamespace::ReturnValue<int> returnValueWaySecondFirst = graph.GetValueOfMinimumWay("Second", "First");
+
+        assert(returnValueWaySecondFirst.GetValue() == 2);
+
+        //проверка что не пойдет против ориентации ребра
+        MyNamespace::ReturnValue<int> returnValueWayThirdFourth = graph.GetValueOfMinimumWay("Third", "Fourth");
+
+        assert(returnValueWayThirdFourth.GetValue() == 11);
+
+        //добавлен цикл отрицательного веса
+        graph.AddEdge("Seventh Edge ID", 1, "Second", "Fifth", -1);
+        graph.AddEdge("Eighth Edge ID", 1, "Fifth", "Second", -1);
+
+        try{
+            //поскольку есть цикл отрицательного веса функция должна выбрасить исключение
+            MyNamespace::ReturnValue<int> returnValueWayThirdFourth = graph.GetValueOfMinimumWay("Third", "Fourth");
+            assert(0);
+        }
+        catch(...) {}
 
 
     }
