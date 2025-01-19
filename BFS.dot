@@ -1,0 +1,35 @@
+digraph BFS {
+"Fifth Vertex ID"[color=red];
+"Sixth Vertex ID"[color=red];
+"Third Vertex ID";
+"Eighth Vertex ID";
+"Fourth Vertex ID"[color=red];
+"Zero Vertex ID"[color=red];
+"Second Vertex ID"[color=red];
+"Ninth Vertex ID";
+"Tenth Vertex ID";
+"Seventh Vertex ID"[color=red];
+"First Vertex ID"[color=red];
+"Second Vertex ID" -> "Fourth Vertex ID"[label=3];
+"Fourth Vertex ID" -> "Second Vertex ID"[color=red][label=3];
+"Seventh Vertex ID" -> "Eighth Vertex ID"[label=5];
+"Eighth Vertex ID" -> "Seventh Vertex ID"[label=5];
+"First Vertex ID" -> "Fifth Vertex ID"[color=red][label=4];
+"Fifth Vertex ID" -> "First Vertex ID"[label=4];
+"Zero Vertex ID" -> "First Vertex ID"[color=red][label=2];
+"First Vertex ID" -> "Zero Vertex ID"[label=2];
+"Fifth Vertex ID" -> "Seventh Vertex ID"[color=red][label=5];
+"Seventh Vertex ID" -> "Fifth Vertex ID"[label=5];
+"Ninth Vertex ID" -> "Eighth Vertex ID"[label=5];
+"Eighth Vertex ID" -> "Ninth Vertex ID"[label=5];
+"Fifth Vertex ID" -> "Ninth Vertex ID"[label=5];
+"Ninth Vertex ID" -> "Fifth Vertex ID"[label=5];
+"Ninth Vertex ID" -> "Second Vertex ID"[label=5];
+"Second Vertex ID" -> "Ninth Vertex ID"[label=5];
+"Zero Vertex ID" -> "Second Vertex ID"[label=1];
+"Second Vertex ID" -> "Zero Vertex ID"[color=red][label=1];
+"First Vertex ID" -> "Third Vertex ID"[label=5];
+"Third Vertex ID" -> "First Vertex ID"[label=5];
+"Fourth Vertex ID" -> "Sixth Vertex ID"[label=5];
+"Sixth Vertex ID" -> "Fourth Vertex ID"[color=red][label=5];
+}

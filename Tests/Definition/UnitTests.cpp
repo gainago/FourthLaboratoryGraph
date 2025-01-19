@@ -1007,53 +1007,92 @@ void TestGenerateDOTFileDouble()
     //     GenerateDOTFileDouble(graph, MyString("TestAutomaticallyGenerated"));
     // }
 
-    {
+    // {
         
+    //     Graph<double, double> graph;
+
+    //     graph.AddVertex("First", 1.4);
+    //     graph.AddVertex("Second", 2.8);
+    //     graph.AddVertex("Third", 3.2);
+    //     graph.AddVertex("Fourth", 4.4);
+    //     graph.AddVertex("Fifth", 5.1);
+    //     graph.AddVertex("Zero", -0.234);
+
+    //     graph.AddEdge("First Edge ID", 0, "Zero", "Second", 1);
+    //     graph.AddEdge("Second Edge ID", 0, "Zero", "First", 2);
+    //     graph.AddEdge("Third Edge ID", 0, "Second", "Fourth", 3);
+    //     graph.AddEdge("Fourth Edge ID", 0, "First", "Fifth", 4) ;
+    //     graph.AddEdge("Fifth Edge ID", 0, "First", "Third", 5);
+    //     graph.AddEdge("Sixth Edge ID", 1, "Third", "Fifth", -2);
+    //     graph.AddEdge("Seventh Edge ID", 1, "Second", "Second", 1);
+    //     graph.AddEdge("Eight Edge ID", 1, "Second", "Second", 33);
+    //     graph.AddEdge("Nineth Edge ID", 1, "Second", "First", 1.5);
+        
+
+    //     MyNamespace::ReturnValue<double> returnValueWaySecondZero = graph.GetValueOfMinimumWay("Second", "Fifth");
+
+    //     Path<double, double> pathSecondZero = graph.GetMinimumWay("Second", "Fifth");
+
+    //     GenerateDOTFileDouble(graph, MyString("PringBellmanAlgorithm"), pathSecondZero);
+        
+
+    //     // //добавляется ориентированное ребро через которое путь быстрее
+    //     // graph.AddEdge("Sixth Edge ID", 1, "Fourth", "First", -1);
+
+    //     // MyNamespace::ReturnValue<int> returnValueWaySecondFirst = graph.GetValueOfMinimumWay("Second", "First");
+
+    //     // assert(returnValueWaySecondFirst.GetValue() == 2);
+
+    //     // //проверка что не пойдет против ориентации ребра
+    //     // MyNamespace::ReturnValue<int> returnValueWayThirdFourth = graph.GetValueOfMinimumWay("Third", "Fourth");
+
+    //     // assert(returnValueWayThirdFourth.GetValue() == 11);
+
+    //     // //добавлен цикл отрицательного веса
+    //     // graph.AddEdge("Seventh Edge ID", 1, "Second", "Fifth", -1);
+    //     // graph.AddEdge("Eighth Edge ID", 1, "Fifth", "Second", -1);
+
+    //     // try{
+    //     //     //поскольку есть цикл отрицательного веса функция должна выбрасить исключение
+    //     //     MyNamespace::ReturnValue<int> returnValueWayThirdFourth = graph.GetValueOfMinimumWay("Third", "Fourth");
+    //     //     assert(0);
+    //     // }
+    //     // catch(...) {}
+
+    // }
+
+    {
         Graph<double, double> graph;
 
-        graph.AddVertex("First", 1.4);
-        graph.AddVertex("Second", 2.8);
-        graph.AddVertex("Third", 3.2);
-        graph.AddVertex("Fourth", 4.4);
-        graph.AddVertex("Fifth", 5.1);
-        graph.AddVertex("Zero", -0.234);
+        graph.AddVertex("First Vertex ID", 1);
+        graph.AddVertex("Second Vertex ID", 2);
+        graph.AddVertex("Third Vertex ID", 3);
+        graph.AddVertex("Fourth Vertex ID", 4);
+        graph.AddVertex("Fifth Vertex ID", 5);
+        graph.AddVertex("Zero Vertex ID", 0);
+        graph.AddVertex("Sixth Vertex ID", 6);
+        graph.AddVertex("Seventh Vertex ID", 6);
+        graph.AddVertex("Eighth Vertex ID", 6);
+        graph.AddVertex("Ninth Vertex ID", 6);
+        graph.AddVertex("Tenth Vertex ID", 6);
 
-        graph.AddEdge("First Edge ID", 0, "Zero", "Second", 1);
-        graph.AddEdge("Second Edge ID", 0, "Zero", "First", 2);
-        graph.AddEdge("Third Edge ID", 0, "Second", "Fourth", 3);
-        graph.AddEdge("Fourth Edge ID", 0, "First", "Fifth", 4) ;
-        graph.AddEdge("Fifth Edge ID", 0, "First", "Third", 5);
+        graph.AddEdge("First Edge ID", 0, "Zero Vertex ID", "Second Vertex ID", 1);
+        graph.AddEdge("Second Edge ID", 0, "Zero Vertex ID", "First Vertex ID", 2);
+        graph.AddEdge("Third Edge ID", 0, "Second Vertex ID", "Fourth Vertex ID", 3);
+        graph.AddEdge("Fourth Edge ID", 0, "First Vertex ID", "Fifth Vertex ID", 4) ;
+        graph.AddEdge("Fifth Edge ID", 0, "First Vertex ID", "Third Vertex ID", 5);
+        graph.AddEdge("Sixth Edge ID", 0, "Fourth Vertex ID", "Sixth Vertex ID", 5);
+        graph.AddEdge("Seventh Edge ID", 0, "Fifth Vertex ID", "Ninth Vertex ID", 5);
+        graph.AddEdge("Eighth Edge ID", 0, "Seventh Vertex ID", "Eighth Vertex ID", 5);
+        graph.AddEdge("Ninth Edge ID", 0, "Fifth Vertex ID", "Seventh Vertex ID", 5);
+        graph.AddEdge("Tenth Edge ID", 0, "Ninth Vertex ID", "Eighth Vertex ID", 5);
+        graph.AddEdge("Eleventh Edge ID", 0, "Ninth Vertex ID", "Second Vertex ID", 5);
+
         
 
-        MyNamespace::ReturnValue<double> returnValueWaySecondZero = graph.GetValueOfMinimumWay("Second", "Zero");
-
-        Path<double, double> pathSecondZero = graph.GetMinimumWay("Second", "Zero");
-
-        GenerateDOTFileDouble(graph, MyString("PringBellmanAlgorithm"), pathSecondZero);
-        
-
-        // //добавляется ориентированное ребро через которое путь быстрее
-        // graph.AddEdge("Sixth Edge ID", 1, "Fourth", "First", -1);
-
-        // MyNamespace::ReturnValue<int> returnValueWaySecondFirst = graph.GetValueOfMinimumWay("Second", "First");
-
-        // assert(returnValueWaySecondFirst.GetValue() == 2);
-
-        // //проверка что не пойдет против ориентации ребра
-        // MyNamespace::ReturnValue<int> returnValueWayThirdFourth = graph.GetValueOfMinimumWay("Third", "Fourth");
-
-        // assert(returnValueWayThirdFourth.GetValue() == 11);
-
-        // //добавлен цикл отрицательного веса
-        // graph.AddEdge("Seventh Edge ID", 1, "Second", "Fifth", -1);
-        // graph.AddEdge("Eighth Edge ID", 1, "Fifth", "Second", -1);
-
-        // try{
-        //     //поскольку есть цикл отрицательного веса функция должна выбрасить исключение
-        //     MyNamespace::ReturnValue<int> returnValueWayThirdFourth = graph.GetValueOfMinimumWay("Third", "Fourth");
-        //     assert(0);
-        // }
-        // catch(...) {}
+        //MyNamespace::ReturnValue<Path<double, double> > returnValueTenthTenth = graph.BreadthFirstSearch("Seventh Vertex ID", "Third Vertex ID");
+        Path<double, double> pathSecondZero = graph.GetMinimumWay("Sixth Vertex ID", "Seventh Vertex ID");
+        GenerateDOTFileDouble(graph, MyString("BFS"), pathSecondZero);
 
     }
 }

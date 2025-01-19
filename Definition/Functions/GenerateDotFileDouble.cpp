@@ -110,9 +110,48 @@ void GenerateDOTFileDouble(Graph<double, double> const & graph, MyString graphNa
             bool doesNeedColorFirst = 0;
             bool doesNeedColorSecond = 0;
 
-            typename LinkedList<SharedPtr<Edge<double, double> > >::ConstIterator cItEdgePath = path.listEdges_.ConstBegin();
-            typename LinkedList<SharedPtr<Edge<double, double> > >::ConstIterator cItEdgePathEnd = path.listEdges_.ConstEnd(); 
+            typename LinkedList<SharedPtr<Vertex<double, double> > >::ConstIterator cItVertexPath = path.listVertices_.ConstBegin();
+            typename LinkedList<SharedPtr<Vertex<double, double> > >::ConstIterator cItVertexPathNext = path.listVertices_.ConstBegin();
+            typename LinkedList<SharedPtr<Vertex<double, double> > >::ConstIterator cItVErtexPathEnd = path.listVertices_.ConstEnd(); 
 
+            if(cItVertexPathNext != cItVErtexPathEnd){
+                ++cItVertexPathNext;
+            }
+
+            while(cItVertexPathNext != cItVErtexPathEnd){
+
+                if((*cItVertexPath).Get().GetID() == idStartVertex && (*cItVertexPathNext).Get().GetID() == idEndVertex ){
+
+                    doesNeedColorFirst = 1;
+                }
+
+                if((*cItVertexPath).Get().GetID() == idEndVertex && (*cItVertexPathNext).Get().GetID() == idStartVertex ){
+                    
+                    doesNeedColorSecond = 1;
+                }
+
+                ++cItVertexPathNext;
+                ++cItVertexPath;
+            }
+
+            if(doesNeedColorFirst == 1){
+
+                stringToWriteFirstOrientedEdge = stringToWriteFirstOrientedEdge + MyString("[color=red]");
+            }
+
+            if(doesNeedColorSecond == 1){
+
+                stringToWriteSecondOrientedEdge = stringToWriteSecondOrientedEdge + MyString("[color=red]");
+            }
+
+            stringToWriteFirstOrientedEdge = stringToWriteFirstOrientedEdge + MyString("[label=");
+
+            out << stringToWriteFirstOrientedEdge.GetChar() << (*cItEdge).GetDataEdge() << "];\n";
+
+
+            stringToWriteSecondOrientedEdge = stringToWriteSecondOrientedEdge + MyString("[label=");
+
+            out << stringToWriteSecondOrientedEdge.GetChar() << (*cItEdge).GetDataEdge() << "];\n";
 
 
         }

@@ -1,13 +1,22 @@
 digraph PringBellmanAlgorithm {
-"Fifth";
+"Fifth"[color=red];
 "Fourth";
 "Second"[color=red];
-"First";
-"Zero"[color=red];
-"Third";
-"Zero" -> "Second"[color=red][label=1];
+"First"[color=red];
+"Zero";
+"Third"[color=red];
+"Zero" -> "Second"[label=1];
+"Second" -> "Zero"[label=1];
 "Second" -> "Fourth"[label=3];
-"First" -> "Third"[label=5];
+"Fourth" -> "Second"[label=3];
+"Second" -> "Second"[label=1];
+"Second" -> "First"[color=red][label=1.5];
+"First" -> "Third"[color=red][label=5];
+"Third" -> "First"[label=5];
 "First" -> "Fifth"[label=4];
+"Fifth" -> "First"[label=4];
+"Second" -> "Second"[label=33];
+"Third" -> "Fifth"[color=red][label=-2];
 "Zero" -> "First"[label=2];
+"First" -> "Zero"[label=2];
 }
