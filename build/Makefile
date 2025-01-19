@@ -192,6 +192,30 @@ Definition/Functions/Abs.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/Definition/Functions/Abs.cpp.s
 .PHONY : Definition/Functions/Abs.cpp.s
 
+Definition/Functions/GenerateDotFileDouble.o: Definition/Functions/GenerateDotFileDouble.cpp.o
+.PHONY : Definition/Functions/GenerateDotFileDouble.o
+
+# target to build an object file
+Definition/Functions/GenerateDotFileDouble.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/Definition/Functions/GenerateDotFileDouble.cpp.o
+.PHONY : Definition/Functions/GenerateDotFileDouble.cpp.o
+
+Definition/Functions/GenerateDotFileDouble.i: Definition/Functions/GenerateDotFileDouble.cpp.i
+.PHONY : Definition/Functions/GenerateDotFileDouble.i
+
+# target to preprocess a source file
+Definition/Functions/GenerateDotFileDouble.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/Definition/Functions/GenerateDotFileDouble.cpp.i
+.PHONY : Definition/Functions/GenerateDotFileDouble.cpp.i
+
+Definition/Functions/GenerateDotFileDouble.s: Definition/Functions/GenerateDotFileDouble.cpp.s
+.PHONY : Definition/Functions/GenerateDotFileDouble.s
+
+# target to generate assembly for a file
+Definition/Functions/GenerateDotFileDouble.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libFunctions.dir/build.make CMakeFiles/libFunctions.dir/Definition/Functions/GenerateDotFileDouble.cpp.s
+.PHONY : Definition/Functions/GenerateDotFileDouble.cpp.s
+
 Definition/GetHashCodes/GetHashCode.o: Definition/GetHashCodes/GetHashCode.cpp.o
 .PHONY : Definition/GetHashCodes/GetHashCode.o
 
@@ -423,6 +447,9 @@ help:
 	@echo "... Definition/Functions/Abs.o"
 	@echo "... Definition/Functions/Abs.i"
 	@echo "... Definition/Functions/Abs.s"
+	@echo "... Definition/Functions/GenerateDotFileDouble.o"
+	@echo "... Definition/Functions/GenerateDotFileDouble.i"
+	@echo "... Definition/Functions/GenerateDotFileDouble.s"
 	@echo "... Definition/GetHashCodes/GetHashCode.o"
 	@echo "... Definition/GetHashCodes/GetHashCode.i"
 	@echo "... Definition/GetHashCodes/GetHashCode.s"

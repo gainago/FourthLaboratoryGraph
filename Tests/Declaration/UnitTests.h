@@ -23,4 +23,6 @@ void TestGraphBreadthFirstSearch();
 
 void TestFordBellmanAlgorithm();
 
+void TestGenerateDOTFileDouble();
+
 #endif //UNIT_TESTS_H

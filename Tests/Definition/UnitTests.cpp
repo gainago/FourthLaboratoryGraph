@@ -10,6 +10,8 @@
 #include "ReturnValue.h"
 #include "PrintPath.h"
 
+#include "GenerateDotFileDouble.h"
+
 void TestGraphConstructor()
 {
 //built-in data types
@@ -880,12 +882,14 @@ void TestGraphBreadthFirstSearch()
 
         assert(returnValueTenthTenth.IsCorrect());
         assert(returnValueTenthTenth.GetValue().listVertices_.GetLength() == 1);
+        assert(returnValueTenthTenth.GetValue().listEdges_.GetLength() == 0);
         //------------------------------------
 
         MyNamespace::ReturnValue<Path<int, int> > returnValueZeroSixth = graph.BreadthFirstSearch("Zero Vertex ID", "Sixth Vertex ID");
 
         assert(returnValueZeroSixth.IsCorrect());
         assert(returnValueZeroSixth.GetValue().listVertices_.GetLength() == 4);
+        assert(returnValueZeroSixth.GetValue().listEdges_.GetLength() == 3);
 
         //PrintPath<int, int>(returnValue.GetValue());
         //------------------------------------
@@ -894,6 +898,7 @@ void TestGraphBreadthFirstSearch()
 
         assert(returnValueFourthFirst.IsCorrect());
         assert(returnValueFourthFirst.GetValue().listVertices_.GetLength() == 4);
+        assert(returnValueFourthFirst.GetValue().listEdges_.GetLength() == 3);
 
         //Add oriented Vertex from "Fourth Vertex ID" to "First Vertex ID"
         graph.AddEdge("Eleventh Edge ID", 1, "Fourth Vertex ID", "First Vertex ID", 0);
@@ -901,6 +906,7 @@ void TestGraphBreadthFirstSearch()
 
         assert(returnValueFourthFirst2.IsCorrect());
         assert(returnValueFourthFirst2.GetValue().listVertices_.GetLength() == 2); // because now we have less way
+        assert(returnValueFourthFirst2.GetValue().listEdges_.GetLength() == 1);
         //------------------------------------
 
         MyNamespace::ReturnValue<Path<int, int> > returnValueFirstFourth = graph.BreadthFirstSearch("First Vertex ID", "Fourth Vertex ID");
@@ -909,6 +915,7 @@ void TestGraphBreadthFirstSearch()
 
         //this way contains four vertices because Eleventh Edge is oriented end search can not go through this
         assert(returnValueFirstFourth.GetValue().listVertices_.GetLength() == 4);
+        assert(returnValueFirstFourth.GetValue().listEdges_.GetLength() == 3);
 
         try{
             MyNamespace::ReturnValue<Path<int, int> > returnValueTvelvethFourth 
@@ -974,6 +981,79 @@ void TestFordBellmanAlgorithm()
         }
         catch(...) {}
 
+    }
+
+    
+}
+
+void TestGenerateDOTFileDouble()
+{
+    // {
+    //      Graph<double, double> graph;
+
+    //     graph.AddVertex("First", 1);
+    //     graph.AddVertex("Second", 2);
+    //     graph.AddVertex("Third", 3);
+    //     graph.AddVertex("Fourth", 4);
+    //     graph.AddVertex("Fifth", 5);
+    //     graph.AddVertex("Zero", 0);
+
+    //     graph.AddEdge("First Edge ID", 0, "Zero", "Second", 1);
+    //     graph.AddEdge("Second Edge ID", 0, "Zero", "First", 2);
+    //     graph.AddEdge("Third Edge ID", 0, "Second", "Fourth", 3);
+    //     graph.AddEdge("Fourth Edge ID", 0, "First", "Fifth", 4) ;
+    //     graph.AddEdge("Fifth Edge ID", 0, "First", "Third", 5);
+
+    //     GenerateDOTFileDouble(graph, MyString("TestAutomaticallyGenerated"));
+    // }
+
+    {
+        
+        Graph<double, double> graph;
+
+        graph.AddVertex("First", 1.4);
+        graph.AddVertex("Second", 2.8);
+        graph.AddVertex("Third", 3.2);
+        graph.AddVertex("Fourth", 4.4);
+        graph.AddVertex("Fifth", 5.1);
+        graph.AddVertex("Zero", -0.234);
+
+        graph.AddEdge("First Edge ID", 0, "Zero", "Second", 1);
+        graph.AddEdge("Second Edge ID", 0, "Zero", "First", 2);
+        graph.AddEdge("Third Edge ID", 0, "Second", "Fourth", 3);
+        graph.AddEdge("Fourth Edge ID", 0, "First", "Fifth", 4) ;
+        graph.AddEdge("Fifth Edge ID", 0, "First", "Third", 5);
+        
+
+        MyNamespace::ReturnValue<double> returnValueWaySecondZero = graph.GetValueOfMinimumWay("Second", "Zero");
+
+        Path<double, double> pathSecondZero = graph.GetMinimumWay("Second", "Zero");
+
+        GenerateDOTFileDouble(graph, MyString("PringBellmanAlgorithm"), pathSecondZero);
+        
+
+        // //добавляется ориентированное ребро через которое путь быстрее
+        // graph.AddEdge("Sixth Edge ID", 1, "Fourth", "First", -1);
+
+        // MyNamespace::ReturnValue<int> returnValueWaySecondFirst = graph.GetValueOfMinimumWay("Second", "First");
+
+        // assert(returnValueWaySecondFirst.GetValue() == 2);
+
+        // //проверка что не пойдет против ориентации ребра
+        // MyNamespace::ReturnValue<int> returnValueWayThirdFourth = graph.GetValueOfMinimumWay("Third", "Fourth");
+
+        // assert(returnValueWayThirdFourth.GetValue() == 11);
+
+        // //добавлен цикл отрицательного веса
+        // graph.AddEdge("Seventh Edge ID", 1, "Second", "Fifth", -1);
+        // graph.AddEdge("Eighth Edge ID", 1, "Fifth", "Second", -1);
+
+        // try{
+        //     //поскольку есть цикл отрицательного веса функция должна выбрасить исключение
+        //     MyNamespace::ReturnValue<int> returnValueWayThirdFourth = graph.GetValueOfMinimumWay("Third", "Fourth");
+        //     assert(0);
+        // }
+        // catch(...) {}
 
     }
 }

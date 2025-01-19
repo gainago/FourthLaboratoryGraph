@@ -181,7 +181,7 @@ public:
         Dictionary<ID, bool> dictionaryVisitedVertices(GetHashCodeIndex);
 
         //key = ID vertex destination, value = ID vertex previous destination; it helps us take a path
-        Dictionary<ID, ID> dictionaryPreviousVertex(GetHashCodeIndex); 
+       Dictionary<IndexCurrentVertex, IndexPreviousVertex> dictionaryPreviousVertex(GetHashCodeIndex); 
         LinkedList<ID> queue;
 
         if(idVertexStart == idVertexEnd){
@@ -218,7 +218,8 @@ public:
                 if(!dictionaryVisitedVertices.Contains(idCurrentAdjacentVertex)){
                     queue.Append(idCurrentAdjacentVertex);
                     dictionaryVisitedVertices.Add(idCurrentAdjacentVertex, 1);
-                    dictionaryPreviousVertex.Add(idCurrentAdjacentVertex, idCurrentVertex);
+
+                    dictionaryPreviousVertex.Add(idCurrentAdjacentVertex,  idCurrentVertex);
 
                 }
 
@@ -230,19 +231,32 @@ public:
             return MyNamespace::ReturnValue< Path<TypeDataVertex, TypeDataEdge> >(0, Path<TypeDataVertex, TypeDataEdge>());
         }
 
-        ID idPreviousVertex = idVertexEnd;
+        
+        ID idCurrentVertex = idVertexEnd;
+        
+       
 
         Path<TypeDataVertex, TypeDataEdge> path;
 
         while(true){
 
-            path.listVertices_.Prepend(this->GetSharedPointerVertex(idPreviousVertex));
+            path.listVertices_.Prepend(this->GetSharedPointerVertex(idCurrentVertex));
 
-            if(idPreviousVertex == idVertexStart){
+            if(idCurrentVertex == idVertexStart){
                 break;
             }
 
-            idPreviousVertex = dictionaryPreviousVertex.Get(idPreviousVertex);
+            ID idPreviousVertex = dictionaryPreviousVertex.Get(idCurrentVertex);
+
+            LinkedList<SharedPtr<Edge<TypeDataVertex, TypeDataEdge> > > listEdges = 
+                                    this->GetEdgesBetweenAdjacentVertices(idPreviousVertex, idCurrentVertex);
+            SharedPtr<Edge<TypeDataVertex, TypeDataEdge> > pMinEdge = this->FindMininumEdge(listEdges);
+
+            path.listEdges_.Prepend(pMinEdge);
+
+            idCurrentVertex = idPreviousVertex;
+
+            
 
             
         }
@@ -254,14 +268,15 @@ public:
     }
 
 
+    
+    typedef Index IndexCurrentVertex;
+    typedef Index IndexPreviousVertex;
+    typedef Index IndexConnectingEdge;
     //возвращает пару из словаря, позволяющего получить наилучший путь, и словаря показывающего наименьшую стоимость пути
     //вычисление проводится относительно вершины с индексом idSourceVertex
     //не защищен от переполнения TypeDataEdge в пользу минимальных требований в данному типу
     //Обратите внимание что при наличии циклов, суммарно отрицательного веса, 
     //или (что то же самое) при наличии неориентированных ребер отрицательного веса, алгоритм бросит исключение
-    typedef Index IndexCurrentVertex;
-    typedef Index IndexPreviousVertex;
-    typedef Index IndexConnectingEdge;
     MyNamespace::Pair<Dictionary<IndexCurrentVertex, MyNamespace::Pair<IndexPreviousVertex, IndexConnectingEdge> >, Dictionary<Index, MyNamespace::Pair<bool, TypeDataEdge> > > 
                                                         FordBellmanAlgorithm(Index idSourceVertex)
     {
@@ -597,14 +612,54 @@ public:
 
     };
 
-    ConstIteratorVertex ConstBegin() const
+    ConstIteratorVertex ConstBeginVertex() const
     {
         return dictionaryVertex_.ConstBegin();
     }
 
-    ConstIteratorVertex ConstEnd() const
+    ConstIteratorVertex ConstEndVertex() const
     {
         return dictionaryVertex_.ConstEnd();
+    }
+
+    class ConstIteratorEdge{
+    private:
+        typename Dictionary<ID, SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > >::ConstIterator it_;
+    public:
+        ConstIteratorEdge(typename Dictionary<ID, SharedPtr< Edge<TypeDataVertex, TypeDataEdge> > >::ConstIterator it) 
+            : it_(it) {}
+        ConstIteratorEdge(ConstIteratorEdge const & other) : it_(other.it_) {}
+
+        void operator++()
+        {
+            ++it_;
+        }
+
+        Edge<TypeDataVertex, TypeDataEdge> const & operator*() const
+        {
+            return ((*it_).GetSecond()).Get();
+        }
+
+        bool operator==(ConstIteratorEdge const & other) const
+        {
+            return this->it_ == other.it_;
+        }
+
+        bool operator!=(ConstIteratorEdge const & other) const
+        {
+            return !(*this == other);
+        }
+
+    };
+
+    ConstIteratorEdge ConstBeginEdge() const
+    {
+        return dictionaryEdge_.ConstBegin();
+    }
+
+    ConstIteratorEdge ConstEndEdge() const
+    {
+        return dictionaryEdge_.ConstEnd();
     }
 
 //private:

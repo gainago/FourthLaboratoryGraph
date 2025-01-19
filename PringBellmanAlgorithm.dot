@@ -1,0 +1,13 @@
+digraph PringBellmanAlgorithm {
+"Fifth";
+"Fourth";
+"Second"[color=red];
+"First";
+"Zero"[color=red];
+"Third";
+"Zero" -> "Second"[color=red][label=1];
+"Second" -> "Fourth"[label=3];
+"First" -> "Third"[label=5];
+"First" -> "Fifth"[label=4];
+"Zero" -> "First"[label=2];
+}

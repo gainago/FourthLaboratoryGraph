@@ -40,6 +40,8 @@ public:
 
     double MyStringToDouble() const;
 
+    //MyString DoubleToMyString(double const & value) const;
+
     MyString(const MyString& other);
 
     MyString& operator=(const MyString& other);
